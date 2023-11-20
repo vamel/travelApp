@@ -5,7 +5,7 @@ export interface Attraction {
     name: string;
     description: string;
     imagesUrl: string[];
-    ticketTypes: TicketType[];
-    holiday: Date[];
-    openingTimes: OpeningHours[];
+    // ticketTypes: TicketType[];
+    // holiday: Date[];
+    // openingTimes: OpeningHours[];
 }
