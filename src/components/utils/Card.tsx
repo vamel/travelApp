@@ -1,4 +1,4 @@
-import { View, Text, Image } from "react-native";
+import { View, Text, ImageBackground } from "react-native";
 import cardStyles from "./styles/Card";
 import { useEffect, useState } from "react";
 import { storage } from "../../firebase/config";
@@ -15,15 +15,16 @@ const Card = (props: CardProps) => {
     useEffect(() => {
         async function getImage() {
             const gsReference = ref(storage, props.imageUrl);
-            await getDownloadURL(gsReference).then(result => setImageUrl(result));
+            await getDownloadURL(gsReference).then(result => setImageUrl(() => result));
         }
         getImage();
     }, []);
 
     return (
         <View style={cardStyles.container}>
-            <Image source={{uri: imageUrl}}/>
-            <Text>{props.message}</Text>
+            <ImageBackground source={{ uri: imageUrl }} style={cardStyles.image} resizeMode={"cover"}>
+                <Text style={cardStyles.coverText}>{props.message}</Text>
+            </ImageBackground>
         </View>
     );
 }

@@ -1,12 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Image, View } from 'react-native';
 import AttractionList from './src/components/main/AttractionList';
 
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <StatusBar style="light" />
+      <StatusBar style="light" hidden={true}/>
       <AttractionList/>
     </View>
   );

@@ -4,7 +4,7 @@ import { TicketType } from "./TicketType";
 export interface Attraction {
     name: string;
     description: string;
-    imagesUrl: string[];
+    images_url: string[];
     // ticketTypes: TicketType[];
     // holiday: Date[];
     // openingTimes: OpeningHours[];

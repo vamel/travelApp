@@ -4,13 +4,25 @@ const cardStyles = StyleSheet.create(
     {
         container: {
             margin: 8,
-            padding: 8,
-            width: '75%',
             height: 250,
-            flexDirection: 'column',
-            borderColor: 'silver',
-            borderWidth: 1,
-            borderRadius: 10
+            borderColor: 'black',
+            borderWidth: 3,
+            borderRadius: 10,
+        },
+        coverText: {
+            color: 'white',
+            fontSize: 20,
+            lineHeight: 42,
+            fontWeight: 'bold',
+            textAlign: 'center',
+            backgroundColor: '#00000090'
+        },
+        image: {
+            width: 325,
+            height: 245,
+            borderRadius: 5,
+            overflow: 'hidden',
+            justifyContent: 'flex-end'
         }
     }
 )
