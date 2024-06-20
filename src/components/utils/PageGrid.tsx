@@ -25,17 +25,17 @@ const PageGrid = (props: PageGridProps) => {
 
     return (
       <View style={PageGridStyles.main}>
-        <View>
+        <View style={PageGridStyles.imageContainer}>
           <Image source={{ uri: imageUrl }} style={PageGridStyles.image}/>
         </View>
-        <ScrollView>
+        <ScrollView style={PageGridStyles.scrollView}>
           {
             fieldValues.map(field => {
               return <View style={PageGridStyles.grid}>
-                <View style={PageGridStyles.textView}>
+                <View style={PageGridStyles.labelTextView}>
                   <Text style={PageGridStyles.labelText}>{`${field}: `}</Text>
                 </View>
-                <View style={PageGridStyles.textView}>
+                <View style={PageGridStyles.valueTextView}>
                   <Text style={PageGridStyles.valueText}>{props.details[field]}</Text>
                 </View>
               </View>
@@ -49,30 +49,38 @@ const PageGrid = (props: PageGridProps) => {
 const PageGridStyles = StyleSheet.create(
   {
     main: {
-      marginTop: 10
+      marginTop: 10,
+      marginLeft: 10,
+      marginRight: 10
+    },
+    imageContainer: {
+        alignItems: 'stretch'
     },
     image: {
-      flex: 3,
-      width: 325,
       height: 245,
       borderRadius: 5,
       overflow: 'hidden',
-      justifyContent: 'flex-end'
+    },
+    scrollView: {
+      margin: 10
     },
     grid: {
       flexDirection: 'row',
+      alignItems: 'center',
     },
-    textView: {
-      flex: 1,
-      margin: 10
+    labelTextView: {
+      flex: 2,
+    },
+    valueTextView: {
+      flex: 4,
     },
     labelText: {
       textTransform: 'capitalize',
       textAlign: 'center',
-      fontWeight: 'bold'
+      fontWeight: 'bold',
     },
     valueText: {
-      textAlign: 'center'
+      textAlign: 'center',
     }
   }
 )

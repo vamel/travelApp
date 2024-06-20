@@ -1,22 +1,31 @@
 import { StatusBar } from 'expo-status-bar';
-import { FlatList, StyleSheet, Image, View } from 'react-native';
+import { useFonts } from "expo-font";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import AttractionList from './src/components/main/AttractionList';
-
+import AttractionPage from "./src/components/attraction/AttractionPage";
+import LoginPage from "./src/components/main/LoginPage";
+import WelcomePage from "./src/components/main/WelcomePage";
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <StatusBar style="light" hidden={true}/>
-      <AttractionList/>
-    </View>
-  );
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  const Stack = createNativeStackNavigator();
+  let [fontsLoaded] = useFonts({
+    'Roboto': require('./src/assets/fonts/Roboto/Roboto-Regular.ttf')
+  });
+
+  // @ts-ignore
+  return (
+      <>
+      <StatusBar style={"dark"}/>
+      <NavigationContainer>
+              <Stack.Navigator initialRouteName={"LoginPage"}>
+                  <Stack.Screen name={"LoginPage"} component={LoginPage}/>
+                  <Stack.Screen name={"AttractionList"} component={AttractionList}/>
+                  <Stack.Screen name={"WelcomePage"} component={WelcomePage}/>
+                  <Stack.Screen name={"AttractionPage"} component={AttractionPage}/>
+              </Stack.Navigator>
+      </NavigationContainer>
+      </>
+  );
+};
