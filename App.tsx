@@ -20,9 +20,9 @@ export default function App() {
       <StatusBar style={"dark"}/>
       <NavigationContainer>
               <Stack.Navigator initialRouteName={"LoginPage"}>
-                  <Stack.Screen name={"LoginPage"} component={LoginPage}/>
-                  <Stack.Screen name={"AttractionList"} component={AttractionList}/>
-                  <Stack.Screen name={"WelcomePage"} component={WelcomePage}/>
+                  <Stack.Screen name={"LoginPage"} component={LoginPage} options={{title: "Login Page"}}/>
+                  <Stack.Screen name={"WelcomePage"} component={WelcomePage} options={{title: "Home"}}/>
+                  <Stack.Screen name={"AttractionList"} component={AttractionList} options={{title: "Attraction List"}}/>
                   <Stack.Screen name={"AttractionPage"} component={AttractionPage}/>
               </Stack.Navigator>
       </NavigationContainer>
