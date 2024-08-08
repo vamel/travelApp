@@ -1,5 +1,5 @@
 import { View, Text, ImageBackground } from "react-native";
-import cardStyles from "./styles/Card";
+import cardStyles from "../../styles/utils/CardStyles";
 import { useEffect, useState } from "react";
 import { storage } from "../../firebase/config";
 import { getDownloadURL, ref } from "firebase/storage";

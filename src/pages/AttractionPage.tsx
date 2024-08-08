@@ -1,9 +1,9 @@
-import { Attraction } from "../../models/interfaces/Attraction";
+import { Attraction } from "../models/interfaces/Attraction";
 import {ScrollView, StyleSheet, View, Text, Image, Button, Modal} from "react-native";
 import { useEffect, useState, useLayoutEffect } from "react";
 import { getDownloadURL, ref } from "firebase/storage";
-import { storage } from "../../firebase/config";
-import IconButton from "../utils/styles/IconButton";
+import { storage } from "../firebase/config";
+import IconButton from "../components/utils/IconButton";
 
 const AttractionPage = ({navigation, route}) => {
     const [attraction, setAttraction] = useState<Attraction>(new Attraction("", "", []));
