@@ -1,5 +1,5 @@
 import { Attraction } from "../models/interfaces/Attraction";
-import {ScrollView, StyleSheet, View, Text, Image, Button, Modal} from "react-native";
+import { ScrollView, StyleSheet, View, Text, Image } from "react-native";
 import { useEffect, useState, useLayoutEffect } from "react";
 import { getDownloadURL, ref } from "firebase/storage";
 import { storage } from "../firebase/config";

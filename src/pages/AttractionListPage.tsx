@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-import {View, StyleSheet, FlatList, Pressable} from "react-native";
+import {View, FlatList, Pressable} from "react-native";
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../firebase/config";
-import { Attraction } from "../../models/interfaces/Attraction";
-import AttractionCard from "./AttractionCard";
+import { db } from "../firebase/config";
+import { Attraction } from "../models/interfaces/Attraction";
+import AttractionCard from "../components/main/AttractionCard";
+import attractionListPageStyles from "../styles/pages/AttractionListPageStyles";
 
-const AttractionList = (props) => {
+const AttractionListPage = (props) => {
     const [attractions, setAttractions] = useState([]);
 
     useEffect(() => {
@@ -36,8 +37,8 @@ const AttractionList = (props) => {
     }
 
     return (
-        <View style={attractionListStyles.list}>
-            <View style={attractionListStyles.items}>
+        <View style={attractionListPageStyles.list}>
+            <View style={attractionListPageStyles.items}>
                 <FlatList
                     data={attractions}
                     keyExtractor={(item: Attraction) => item.name}
@@ -48,23 +49,4 @@ const AttractionList = (props) => {
     );
 }
 
-const attractionListStyles = StyleSheet.create(
-    {
-        list: {
-            flex: 1,
-            alignItems: 'stretch',
-            justifyContent: 'center',
-            flexDirection: 'column',
-            textAlign: 'center',
-        },
-
-        items: {
-            padding: 0,
-            alignItems: 'stretch',
-            flexDirection: 'column',
-            flex: 10,
-        }
-    }
-)
-
-export default AttractionList;
+export default AttractionListPage;

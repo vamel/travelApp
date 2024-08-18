@@ -11,7 +11,7 @@ const loginPageStyles = StyleSheet.create(
         },
         title: {
             marginBottom: 24,
-            fontSize: 24,
+            fontSize: 28,
             fontWeight: "bold"
         },
         inputContainer: {
@@ -53,8 +53,39 @@ const loginPageStyles = StyleSheet.create(
         },
         registerPromptLink: {
             marginLeft: 8,
-            color: COLORS.register.orange,
+            color: COLORS.universal.orange500,
             fontWeight: "800"
+        },
+        forgottenPasswordText: {
+            width: 250,
+            color: COLORS.register.gray700,
+            fontSize: 16,
+            textAlign: "center"
+        },
+        emailRecoveredText: {
+            width: 300,
+            marginTop: 8,
+            color: COLORS.register.gray900,
+            fontWeight: "bold"
+        },
+        goBackToLogInContainer: {
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
+            marginTop: 60
+        },
+        goBackToLogInText: {
+            marginLeft: 4,
+            color: COLORS.register.gray800,
+            fontWeight: "bold",
+            textAlign: "center"
+        },
+        recoveryGoBackContainer: {
+            marginTop: 20
+        },
+        recoveryPromptContainer: {
+            marginTop: 60,
+            flexDirection: "row",
         }
     }
 )

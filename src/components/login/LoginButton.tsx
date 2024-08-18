@@ -25,7 +25,7 @@ const loginButtonStyles = StyleSheet.create({
         padding: 10,
         width: 300,
         borderRadius: 20,
-        backgroundColor: COLORS.register.orange,
+        backgroundColor: COLORS.universal.orange500,
         elevation: 4,
         alignItems: "center",
     },

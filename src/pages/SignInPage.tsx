@@ -1,16 +1,14 @@
-import {Pressable, Text, TextInput, TouchableWithoutFeedback, View} from "react-native";
+import {Text, TextInput, TouchableWithoutFeedback, View} from "react-native";
 import { useState } from "react";
 import loginPageStyles from "../styles/pages/LoginPageStyles";
 import LoginButton from "../components/login/LoginButton";
 
-const LoginPage = (props) => {
+const SignInPage = ({navigation}) => {
     const [loginInput, setLoginInput] = useState('');
     const [passwordInput, setPasswordInput] = useState('');
 
-    const navigation = props.navigation;
-
     const handleLoginPress = () => {
-        navigation.navigate("AttractionList");
+        navigation.navigate("TabNavigation");
     }
 
     const handleRegisterPress = () => {
@@ -18,7 +16,7 @@ const LoginPage = (props) => {
     }
 
     const handlePasswordForgottenPress = () => {
-        console.log("I FORGOR");
+        navigation.navigate("ResetPasswordPage");
     }
 
 
@@ -63,4 +61,4 @@ const LoginPage = (props) => {
     );
 }
 
-export default LoginPage;
+export default SignInPage;

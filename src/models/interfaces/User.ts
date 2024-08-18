@@ -1,4 +1,4 @@
-import { Language } from "../enums/language";
+import { Language } from "../enums/Language";
 
 export interface User {
     name: string;

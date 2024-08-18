@@ -3,7 +3,7 @@ import { View, ScrollView, Image, StyleSheet, Text } from "react-native";
 import { storage } from "../../firebase/config";
 import { getDownloadURL, ref } from "firebase/storage";
 import { Attraction } from "../../models/interfaces/Attraction";
-import { AttractionField } from "../../models/enums/attractionField";
+import { AttractionField } from "../../models/enums/AttractionField";
 
 const fieldValues = Object.values(AttractionField);
 
