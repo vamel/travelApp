@@ -1,20 +1,23 @@
 import { Attraction } from "../models/interfaces/Attraction";
-import { ScrollView, StyleSheet, View, Text, Image } from "react-native";
+import {ScrollView, View, Text, Image, SafeAreaView} from "react-native";
 import { useEffect, useState, useLayoutEffect } from "react";
 import { getDownloadURL, ref } from "firebase/storage";
 import { storage } from "../firebase/config";
 import IconButton from "../components/utils/IconButton";
+import {attractionPageStyles} from "../styles/pages/AttractionPageStyles";
 
 const AttractionPage = ({navigation, route}) => {
     const [attraction, setAttraction] = useState<Attraction>(new Attraction("", "", []));
     const [imageUrl, setImageUrl] = useState('');
     const [isFavourite, setIsFavourite] = useState(false);
+    const [isAccessibleForDisabledPeople, setIsAvailableForDisabledPeople] = useState(false);
 
     useEffect(() => {
         const getAttraction = () => {
             const receivedData = route.params.attractionData;
             const data: Attraction = new Attraction(receivedData.name, receivedData.description, receivedData.images_url);
             setAttraction(data);
+            console.log(data);
         }
         getAttraction();
 
@@ -44,56 +47,52 @@ const AttractionPage = ({navigation, route}) => {
         })
     }, [navigation, attraction, isFavourite]);
 
+    const getAvailability = () => {
+        const availabilityText = isAccessibleForDisabledPeople ?
+            "Accessible for disabled people." :
+            "Not accessible for disabled people."
+        const styles = isAccessibleForDisabledPeople ? attractionPageStyles.availableText : attractionPageStyles.notAvailableText;
+        return <Text style={styles}>{availabilityText}</Text>
+    }
+
 
     return (
-        <View style={attractionPageStyles.attractionPage}>
-            <View style={attractionPageStyles.imageContainer}>
-                <Image source={{ uri: imageUrl }} style={attractionPageStyles.image}/>
-            </View>
-            <View style={attractionPageStyles.attractionDetailsContainer}>
-                <ScrollView>
-                    <View>
-                        <Text style={attractionPageStyles.text}>NAME</Text>
-                        <Text style={attractionPageStyles.text}>{attraction.name}</Text>
-                    </View>
-                    <View>
-                        <Text style={attractionPageStyles.text}>DESCRIPTION</Text>
-                        <Text style={attractionPageStyles.text}>{attraction.description}</Text>
-                    </View>
-                </ScrollView>
-            </View>
-        </View>
+        <SafeAreaView style={attractionPageStyles.attractionPage}>
+            <ScrollView
+                showsVerticalScrollIndicator={false}
+            >
+                <View>
+                    <Text style={attractionPageStyles.title}>
+                        {attraction.name}
+                    </Text>
+                </View>
+                <View style={attractionPageStyles.imageContainer}>
+                    <Image source={{ uri: imageUrl }} style={attractionPageStyles.image}/>
+                </View>
+                <View style={attractionPageStyles.detailsContainer}>
+                    {getAvailability()}
+                    <Text style={attractionPageStyles.detailsTitle}>Description:</Text>
+                    <Text style={attractionPageStyles.detailsText}>
+                        {attraction.description}
+                    </Text>
+                </View>
+                <View style={attractionPageStyles.detailsContainer}>
+                    <Text style={attractionPageStyles.detailsTitle}>Opening Hours:</Text>
+                    <Text style={attractionPageStyles.openingHoursText}>Monday: Closed</Text>
+                    <Text style={attractionPageStyles.openingHoursText}>Tuesday: 10:00-17:00</Text>
+                    <Text style={attractionPageStyles.openingHoursText}>Wednesday: 10:00-17:00</Text>
+                    <Text style={attractionPageStyles.openingHoursText}>Thursday: 10:00-17:00</Text>
+                    <Text style={attractionPageStyles.openingHoursText}>Friday: 10:00-17:00</Text>
+                    <Text style={attractionPageStyles.openingHoursText}>Saturday: 10:00-18:00</Text>
+                    <Text style={attractionPageStyles.openingHoursText}>Sunday: 10:00-16:00</Text>
+                </View>
+                <View style={attractionPageStyles.detailsContainer}>
+                    <Text style={attractionPageStyles.detailsTitle}>Location:</Text>
+                    <Text>Placeholder for a map</Text>
+                </View>
+            </ScrollView>
+        </SafeAreaView>
     );
 }
-
-const attractionPageStyles = StyleSheet.create(
-    {
-        attractionPage: {
-            flex: 1,
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexDirection: 'column',
-            textAlign: 'center',
-        },
-        imageContainer: {
-            alignItems: 'stretch',
-            marginTop: 5,
-            marginLeft: 5,
-            marginRight: 5,
-        },
-        image: {
-            height: 245,
-            width: 300,
-            borderRadius: 5,
-            overflow: 'hidden'
-        },
-        attractionDetailsContainer: {
-            flex: 1
-        },
-        text: {
-
-        }
-    }
-)
 
 export default AttractionPage;

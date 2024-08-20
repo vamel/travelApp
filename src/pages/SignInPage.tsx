@@ -1,7 +1,8 @@
-import {Text, TextInput, TouchableWithoutFeedback, View} from "react-native";
+import {Text, TouchableWithoutFeedback, View} from "react-native";
 import { useState } from "react";
 import loginPageStyles from "../styles/pages/LoginPageStyles";
 import LoginButton from "../components/login/LoginButton";
+import LoginInput from "../components/login/LoginInput";
 
 const SignInPage = ({navigation}) => {
     const [loginInput, setLoginInput] = useState('');
@@ -12,28 +13,19 @@ const SignInPage = ({navigation}) => {
     }
 
     const handleRegisterPress = () => {
-        console.log("REGISTER PLACEHOLDER");
+        navigation.navigate("RegisterPage");
     }
 
     const handlePasswordForgottenPress = () => {
         navigation.navigate("ResetPasswordPage");
     }
 
-
     return(
         <View style={loginPageStyles.container}>
             <Text style={loginPageStyles.title}>Sign in to TravelApp</Text>
                 <View style={loginPageStyles.inputContainer}>
-                    <TextInput
-                        placeholder={"Login"}
-                        onChangeText={setLoginInput}
-                        value={loginInput}
-                        style={loginPageStyles.textInput}/>
-                    <TextInput
-                        placeholder={"Password"}
-                        onChangeText={setPasswordInput}
-                        value={passwordInput}
-                        style={loginPageStyles.textInput}/>
+                    <LoginInput placeholder={"Login"} onTextChange={setLoginInput} value={loginInput} />
+                    <LoginInput placeholder={"Password"} onTextChange={setPasswordInput} value={passwordInput} />
                     <View style={loginPageStyles.buttonContainers}>
                         <LoginButton
                             onPress={handleLoginPress}

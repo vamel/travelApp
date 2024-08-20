@@ -1,5 +1,5 @@
-import { Pressable, StyleSheet, View, Text } from "react-native";
-import COLORS from "../../styles/utils/Colors";
+import { Pressable, View, Text } from "react-native";
+import {loginButtonStyles} from "../../styles/components/LoginButtonStyles";
 
 function LoginButton({title, onPress}) {
     return(
@@ -15,22 +15,4 @@ function LoginButton({title, onPress}) {
 
 export default LoginButton;
 
-const loginButtonStyles = StyleSheet.create({
-    container: {
-        marginBottom: 8,
-        justifyContent: "center",
-        alignItems: "center"
-    },
-    button: {
-        padding: 10,
-        width: 300,
-        borderRadius: 20,
-        backgroundColor: COLORS.universal.orange500,
-        elevation: 4,
-        alignItems: "center",
-    },
-    text: {
-        fontSize: 16,
-        color: COLORS.universal.white
-    }
-})
+

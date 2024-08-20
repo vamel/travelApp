@@ -18,6 +18,13 @@ const COLORS = {
         gray800: "#6e6d6d",
         gray900: "#5e5e5e"
     },
+    attraction: {
+        orange100: "#E3885F",
+        orange300: "#e37446",
+        orange800: "#e54f0f",
+        green300: "#07a82b",
+        red500: "#9a002f"
+    },
     emergency: {
         orange100: "#E3885F",
         orange300: "#e37446"

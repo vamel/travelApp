@@ -15,6 +15,7 @@ const EmergencyNumbersPage = () => {
                 data={COUNTRY_CODES}
                 renderItem={({item}) => <EmergencyNumberCard countryCode={item} size={36} data={EMERGENCY_NUMBERS[item]}/>}
                 keyExtractor={item => item}
+                contentContainerStyle={emergencyNumbersPageStyles.listContainer}
             />
         </View>
     );

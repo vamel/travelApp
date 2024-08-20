@@ -10,11 +10,15 @@ const emergencyNumbersPageStyles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center"
     },
+    listContainer: {
+        paddingTop: 10,
+        paddingBottom: 20
+    },
     collapsedCard: {
         flexDirection: "row",
         width: 0.9 * deviceWidth,
         height: 70,
-        marginBottom: 20,
+        marginBottom: 10,
         paddingHorizontal: 20,
         backgroundColor: COLORS.emergency.orange100,
         borderWidth: 2,
@@ -39,7 +43,7 @@ const emergencyNumbersPageStyles = StyleSheet.create({
         alignItems: "center"
     },
     expandedCardContainer: {
-        marginBottom: 20,
+        marginBottom: 10,
         width: 0.9 * deviceWidth,
         height: 200,
         borderWidth: 2,

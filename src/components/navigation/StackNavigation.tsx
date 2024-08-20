@@ -7,6 +7,7 @@ import TabNavigation from "./TabNavigation";
 import WelcomePage from "../../pages/WelcomePage";
 import AttractionPage from "../../pages/AttractionPage";
 import EmergencyNumbersPage from "../../pages/EmergencyNumbersPage";
+import RegisterPage from "../../pages/RegisterPage";
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +20,11 @@ const StackNavigation = () => {
                     name={"SignInPage"}
                     component={SignInPage}
                     options={{title: "Login"}}
+                />
+                <Stack.Screen
+                    name={"RegisterPage"}
+                    component={RegisterPage}
+                    options={{title: "Create an account"}}
                 />
                 <Stack.Screen
                     name={"ResetPasswordPage"}

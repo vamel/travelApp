@@ -1,7 +1,8 @@
-import {View, StyleSheet, Image, Text} from "react-native";
+import {View, Image, Text} from "react-native";
 import {useEffect, useState} from "react";
 import {getDownloadURL, ref} from "firebase/storage";
 import {storage} from "../../firebase/config";
+import attractionCardStyles from "../../styles/components/AttractionCardStyles";
 
 interface IAttractionCard {
     imageUrl: string,
@@ -26,44 +27,10 @@ const AttractionCard = (props: IAttractionCard) => {
             </View>
             <View style={attractionCardStyles.textContainer}>
                 <Text style={attractionCardStyles.text}>{props.name}</Text>
+                <Text style={attractionCardStyles.distanceText}>X m away</Text>
             </View>
         </View>
     );
 }
-
-const attractionCardStyles = StyleSheet.create(
-    {
-        attractionCard: {
-            marginTop: 10,
-            marginLeft: 20,
-            marginRight: 20,
-            marginBottom: 10,
-            paddingBottom: 5,
-            borderRadius: 5,
-            backgroundColor: "#e3dddc",
-        },
-        imageContainer: {
-            alignItems: 'stretch',
-            marginTop: 5,
-            marginLeft: 5,
-            marginRight: 5,
-        },
-        image: {
-            height: 245,
-            borderRadius: 5,
-            overflow: 'hidden'
-        },
-        textContainer: {
-            marginTop: 5,
-            marginLeft: 5,
-            marginRight: 5,
-        },
-        text: {
-            fontSize: 30,
-            fontFamily: "Roboto",
-            textAlign: "center"
-        }
-    }
-)
 
 export default AttractionCard;
