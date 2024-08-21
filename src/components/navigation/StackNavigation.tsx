@@ -8,6 +8,7 @@ import WelcomePage from "../../pages/WelcomePage";
 import AttractionPage from "../../pages/AttractionPage";
 import EmergencyNumbersPage from "../../pages/EmergencyNumbersPage";
 import RegisterPage from "../../pages/RegisterPage";
+import EventPage from "../../pages/EventPage";
 
 const Stack = createNativeStackNavigator();
 
@@ -48,6 +49,10 @@ const StackNavigation = () => {
                 <Stack.Screen
                     name={"AttractionPage"}
                     component={AttractionPage}
+                />
+                <Stack.Screen
+                    name={"EventPage"}
+                    component={EventPage}
                 />
                 <Stack.Screen
                     name={"EmergencyNumbersPage"}

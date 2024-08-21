@@ -25,6 +25,11 @@ const COLORS = {
         green300: "#07a82b",
         red500: "#9a002f"
     },
+    event: {
+        orange100: "#E3885F",
+        orange300: "#e37446",
+        blue700: "#0844af",
+    },
     emergency: {
         orange100: "#E3885F",
         orange300: "#e37446"

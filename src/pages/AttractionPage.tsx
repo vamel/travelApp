@@ -10,14 +10,13 @@ const AttractionPage = ({navigation, route}) => {
     const [attraction, setAttraction] = useState<Attraction>(new Attraction("", "", []));
     const [imageUrl, setImageUrl] = useState('');
     const [isFavourite, setIsFavourite] = useState(false);
-    const [isAccessibleForDisabledPeople, setIsAvailableForDisabledPeople] = useState(false);
+    const isAccessibleForDisabledPeople = false;
 
     useEffect(() => {
         const getAttraction = () => {
             const receivedData = route.params.attractionData;
             const data: Attraction = new Attraction(receivedData.name, receivedData.description, receivedData.images_url);
             setAttraction(data);
-            console.log(data);
         }
         getAttraction();
 
@@ -85,6 +84,10 @@ const AttractionPage = ({navigation, route}) => {
                     <Text style={attractionPageStyles.openingHoursText}>Friday: 10:00-17:00</Text>
                     <Text style={attractionPageStyles.openingHoursText}>Saturday: 10:00-18:00</Text>
                     <Text style={attractionPageStyles.openingHoursText}>Sunday: 10:00-16:00</Text>
+                </View>
+                <View style={attractionPageStyles.detailsContainer}>
+                    <Text style={attractionPageStyles.detailsTitle}>Ticket prices:</Text>
+                    <Text>Normal ticket - 20 zł</Text>
                 </View>
                 <View style={attractionPageStyles.detailsContainer}>
                     <Text style={attractionPageStyles.detailsTitle}>Location:</Text>

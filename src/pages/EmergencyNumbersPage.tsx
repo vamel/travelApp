@@ -8,7 +8,7 @@ const EmergencyNumbersPage = () => {
 
     return(
         <View style={emergencyNumbersPageStyles.container}>
-            <HelplineButton/>
+            <HelplineButton />
             <FlatList
                 initialNumToRender={15}
                 showsVerticalScrollIndicator={false}

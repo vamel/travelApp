@@ -7,7 +7,7 @@ import AttractionCard from "../components/attraction/AttractionCard";
 import attractionListPageStyles from "../styles/pages/AttractionListPageStyles";
 import attractionCardStyles from "../styles/components/AttractionCardStyles";
 
-const AttractionListPage = (props) => {
+const AttractionListPage = ({navigation}) => {
     const [attractions, setAttractions] = useState([]);
 
     useEffect(() => {
@@ -21,7 +21,7 @@ const AttractionListPage = (props) => {
 
     const renderAttractionCard = (attraction) => {
         const handleCardPress = () => {
-            props.navigation.navigate("AttractionPage",
+            navigation.navigate("AttractionPage",
                 {
                     attractionData: attraction
                 })
