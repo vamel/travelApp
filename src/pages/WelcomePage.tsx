@@ -11,16 +11,16 @@ const WelcomePage = () => {
 
     useEffect(() => {
         const getData = async () => {
-            const docRef = doc(db, "cities", "warsaw");
-            const docSnap = await getDoc(docRef);
-            const cityData = docSnap.data();
-            //@ts-ignore
-            const gsReference = ref(storage, cityData.imageUri);
-            await getDownloadURL(gsReference).then(result => {
-                //@ts-ignore
-                const city = new City(cityData.name, result, cityData.trivia);
-                setCityData(city);
-            });
+            // const docRef = doc(db, "cities", "warsaw");
+            // const docSnap = await getDoc(docRef);
+            // const cityData = docSnap.data();
+            // //@ts-ignore
+            // const gsReference = ref(storage, cityData.imageUri);
+            // await getDownloadURL(gsReference).then(result => {
+            //     //@ts-ignore
+            //     const city = new City(cityData.name, result, cityData.trivia);
+            //     setCityData(city);
+            // });
         }
         getData();
     }, []);
