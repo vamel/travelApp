@@ -3,7 +3,7 @@ import {ScrollView, View, Text, Image, SafeAreaView} from "react-native";
 import { useEffect, useState, useLayoutEffect } from "react";
 import { getDownloadURL, ref } from "firebase/storage";
 import { storage } from "../firebase/config";
-import IconButton from "../components/utils/IconButton";
+import IconButton from "../components/main/IconButton";
 import {attractionPageStyles} from "../styles/pages/AttractionPageStyles";
 
 const AttractionPage = ({navigation, route}) => {
@@ -54,8 +54,7 @@ const AttractionPage = ({navigation, route}) => {
         return <Text style={styles}>{availabilityText}</Text>
     }
 
-
-    return (
+    return(
         <SafeAreaView style={attractionPageStyles.attractionPage}>
             <ScrollView
                 showsVerticalScrollIndicator={false}
