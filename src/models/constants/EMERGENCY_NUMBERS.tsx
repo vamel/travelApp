@@ -1,7 +1,7 @@
-import {CountryEmergencyNumber} from "../interfaces/CountryEmergencyNumber";
+import {ICountryEmergencyNumber} from "../interfaces/ICountryEmergencyNumber";
 import {IsoCode} from "../types/IsoCode";
 
-export const EMERGENCY_NUMBERS: CountryEmergencyNumber = {
+export const EMERGENCY_NUMBERS: ICountryEmergencyNumber = {
     "AF": {
             countryName: "Afghanistan",
             ambulance: "112",

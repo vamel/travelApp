@@ -43,6 +43,12 @@ export const eventCardStyles = StyleSheet.create(
             fontSize: 18,
             fontWeight: "bold",
             textAlign: "center"
+        },
+        rippleAndroid: {
+            color: "#CCCCCC"
+        },
+        buttonPressed: {
+            opacity: 0.75
         }
     }
 );
