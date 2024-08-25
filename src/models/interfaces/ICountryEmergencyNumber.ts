@@ -1,6 +1,6 @@
 import {IsoCode} from "../types/IsoCode";
 
-export interface CountryEmergencyNumber {
+export interface ICountryEmergencyNumber {
     [key: IsoCode]: {
         countryName: string,
         ambulance: string,
