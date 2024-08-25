@@ -1,10 +1,10 @@
-import {View, Text, FlatList, SafeAreaView, Pressable} from "react-native";
+import {View, Text, FlatList, SafeAreaView} from "react-native";
 import {useEffect, useState} from "react";
 import {collection, getDocs} from "firebase/firestore";
 import {db} from "../firebase/config";
 import EventCard from "../components/event/EventCard";
 import {eventListPageStyles} from "../styles/pages/EventListPageStyles";
-import {eventCardStyles} from "../styles/components/EventCardStyles";
+import {IEvent} from "../models/interfaces/IEvent";
 
 const EventListPage = ({navigation}) => {
     const [events, setEvents] = useState([]);
@@ -18,28 +18,18 @@ const EventListPage = ({navigation}) => {
         getData();
     }, []);
 
-    const renderEventCard = (event) => {
-        const handleCardPress = () => {
-            navigation.navigate("EventPage",
-                {
-                    eventData: event
-                })
-        };
+    const handleCardPress = (event: IEvent) => {
+        navigation.navigate("EventPage",
+            {
+                name: event.name,
+                description: event.description,
+                date: event.date,
+            }
+        )};
 
+    const renderEventCard = (event) => {
         return (
-            <View style={eventCardStyles.container}>
-                <Pressable
-                    onPress={handleCardPress}
-                    android_ripple={eventListPageStyles.rippleAndroid}
-                    style={({pressed}) => pressed ? eventListPageStyles.buttonPressed : null}
-                >
-                    <EventCard
-                        date={event.date}
-                        location={event.location}
-                        name={event.name}
-                    />
-                </Pressable>
-            </View>
+            <EventCard eventData={event} onPress={handleCardPress}/>
         );
     }
 

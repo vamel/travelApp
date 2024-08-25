@@ -27,12 +27,6 @@ export const eventListPageStyles = StyleSheet.create(
             paddingTop: 10,
             alignItems: 'stretch',
             flexDirection: 'column',
-        },
-        rippleAndroid: {
-            color: "#CCCCCC"
-        },
-        buttonPressed: {
-            opacity: 0.75
-        },
+        }
     }
 );
