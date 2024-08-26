@@ -23,3 +23,9 @@ export const getDateElements = (date) => {
 export const dateToString = (day, month, year) => {
     return `${month} ${getDayOrdinalSuffix(day)} ${year}`;
 }
+
+export const calculateAge = (birthdate) => {
+    const today = new Date() - birthdate;
+    const birthDate = new Date(today) + 1;
+    return Math.abs(birthDate.getUTCFullYear() - 1970);
+}
