@@ -1,5 +1,5 @@
 import {TextInput} from "react-native";
-import {registerPageStyles} from "../../styles/pages/RegisterPageStyles";
+import {registerPageStyles} from "../../styles/pages/registerPageStyles";
 
 interface RegisterInputProps {
     placeholder: string,

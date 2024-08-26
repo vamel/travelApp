@@ -1,6 +1,6 @@
 import {View, Text} from "react-native";
-import {eventDateCardStyles} from "../../styles/components/EventDateCardStyles";
-import {getDateElements, getDayOrdinalSuffix} from "../utils/dateUtils";
+import {eventDateCardStyles} from "../../styles/components/event/eventDateCardStyles";
+import {getDateElements, getDayOrdinalSuffix} from "../../utils/dateUtils";
 
 const EventDateCard = (props) => {
     const [day, month, year] = getDateElements(props.date);

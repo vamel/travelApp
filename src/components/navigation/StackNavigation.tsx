@@ -9,6 +9,8 @@ import AttractionPage from "../../pages/AttractionPage";
 import EmergencyNumbersPage from "../../pages/EmergencyNumbersPage";
 import RegisterPage from "../../pages/RegisterPage";
 import EventPage from "../../pages/EventPage";
+import CreateProfilePage from "../../pages/CreateProfilePage";
+import CompleteRegistrationPage from "../../styles/pages/CompleteRegistrationPage";
 
 const Stack = createNativeStackNavigator();
 
@@ -28,6 +30,16 @@ const StackNavigation = () => {
                     options={{title: "Create an account"}}
                 />
                 <Stack.Screen
+                    name={"CreateProfilePage"}
+                    component={CreateProfilePage}
+                    options={{title: "Create an account"}}
+                />
+                <Stack.Screen
+                    name={"CompleteRegistrationPage"}
+                    component={CompleteRegistrationPage}
+                    options={{title: "Complete registration"}}
+                />
+                <Stack.Screen
                     name={"ResetPasswordPage"}
                     component={ResetPasswordPage}
                     options={{title: "Reset Password"}}
@@ -36,10 +48,6 @@ const StackNavigation = () => {
                     name={"SignOutPage"}
                     component={SignOutPage}
                     options={{title: "Sign Out"}}
-                />
-                <Stack.Screen
-                    name={"TabNavigation"}
-                    component={TabNavigation}
                 />
                 <Stack.Screen
                     name={"WelcomePage"}
@@ -58,6 +66,10 @@ const StackNavigation = () => {
                     name={"EmergencyNumbersPage"}
                     component={EmergencyNumbersPage}
                     options={{title: "Emergency Numbers"}}
+                />
+                <Stack.Screen
+                    name={"TabNavigation"}
+                    component={TabNavigation}
                 />
             </Stack.Navigator>
         </NavigationContainer>

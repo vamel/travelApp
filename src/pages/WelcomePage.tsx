@@ -4,7 +4,7 @@ import {db, storage} from "../firebase/config";
 import {getDoc, doc} from "firebase/firestore";
 import {getDownloadURL, ref} from "firebase/storage";
 import {City} from "../models/classes/City";
-import {welcomePageStyles} from "../styles/pages/WelcomePageStyles";
+import {welcomePageStyles} from "../styles/pages/welcomePageStyles";
 
 const WelcomePage = () => {
     const [cityData, setCityData] = useState<City>(null);

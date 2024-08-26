@@ -1,17 +1,18 @@
 import {Pressable, Text, View} from "react-native";
-import {profileButtonStyles} from "../../styles/components/ProfileButtonStyles";
+import {profileButtonStyles} from "../../styles/components/userprofile/profileButtonStyles";
 import {Ionicons} from "@expo/vector-icons";
 import COLORS from "../../styles/utils/Colors";
+import {getColorValue} from "../../utils/colorUtils";
 
-interface IProfileButton {
+interface IProfileButtonProps {
     icon: string,
     color: string,
     text: string,
     onPress: () => void
 }
 
-const ProfileButton = (props: IProfileButton) => {
-    const color = props.color === "orange" ? COLORS.universal.orange500 : COLORS.universal.purple500;
+const ProfileButton = (props: IProfileButtonProps) => {
+    const color = getColorValue(props.color);
 
     return(
         <Pressable

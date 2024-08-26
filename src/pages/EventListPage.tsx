@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import {collection, getDocs} from "firebase/firestore";
 import {db} from "../firebase/config";
 import EventCard from "../components/event/EventCard";
-import {eventListPageStyles} from "../styles/pages/EventListPageStyles";
+import {eventListPageStyles} from "../styles/pages/eventListPageStyles";
 import {IEvent} from "../models/interfaces/IEvent";
 
 const EventListPage = ({navigation}) => {

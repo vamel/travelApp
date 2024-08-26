@@ -1,5 +1,5 @@
 import { Pressable, View, Text } from "react-native";
-import {loginButtonStyles} from "../../styles/components/LoginButtonStyles";
+import {loginButtonStyles} from "../../styles/components/login/loginButtonStyles";
 
 function LoginButton({title, onPress}) {
     return(

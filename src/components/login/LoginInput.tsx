@@ -1,4 +1,4 @@
-import loginPageStyles from "../../styles/pages/LoginPageStyles";
+import singInPageStyles from "../../styles/pages/singInPageStyles";
 import {TextInput} from "react-native";
 
 interface LoginInputProps {
@@ -13,7 +13,7 @@ const LoginInput = (props: LoginInputProps) => {
             placeholder={props.placeholder}
             onChangeText={props.onTextChange}
             value={props.value}
-            style={loginPageStyles.textInput}
+            style={singInPageStyles.textInput}
         />
     );
 }

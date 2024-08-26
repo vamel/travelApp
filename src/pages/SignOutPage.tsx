@@ -1,6 +1,6 @@
 import {View, Text} from "react-native";
 import LoginButton from "../components/login/LoginButton";
-import loginPageStyles from "../styles/pages/LoginPageStyles";
+import singInPageStyles from "../styles/pages/singInPageStyles";
 
 const SignOutPage = ({navigation}) => {
     const handleSignOutPress = () => {
@@ -8,8 +8,8 @@ const SignOutPage = ({navigation}) => {
     }
 
     return(
-        <View style={loginPageStyles.container}>
-            <Text style={[loginPageStyles.title, {marginBottom: 60}]}>Signed out successfully!</Text>
+        <View style={singInPageStyles.container}>
+            <Text style={[singInPageStyles.title, {marginBottom: 60}]}>Signed out successfully!</Text>
             <LoginButton
                 onPress={handleSignOutPress}
                 title={"Go back to sign in"}

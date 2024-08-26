@@ -1,33 +1,27 @@
 import {Dimensions, Platform, StyleSheet} from "react-native";
-import COLORS from "../utils/Colors";
+import COLORS from "../../utils/Colors";
 
 const deviceWidth = Dimensions.get("window").width;
 
-const attractionCardStyles = StyleSheet.create(
+export const eventCardStyles = StyleSheet.create(
     {
         container: {
             marginHorizontal: 10,
             marginBottom: 10,
             borderWidth: 2,
             borderRadius: 5,
-            backgroundColor: COLORS.attraction.orange100,
-            borderColor: COLORS.attraction.orange300,
+            backgroundColor: COLORS.event.orange100,
+            borderColor: COLORS.event.orange300,
             overflow: Platform.OS === "android" ? "hidden" : "visible",
         },
-        attractionCard: {
+        eventCard: {
             flex: 1,
             height: 180,
             width: deviceWidth - 20,
+            paddingLeft: 10,
             flexDirection: "row",
             justifyContent: "space-around",
             alignItems: "center",
-        },
-        imageContainer: {
-            alignItems: 'stretch',
-        },
-        image: {
-            height: 180,
-            width: 140,
         },
         textContainer: {
             flex: 1,
@@ -35,20 +29,26 @@ const attractionCardStyles = StyleSheet.create(
             justifyContent: "center",
             alignItems: "center"
         },
-        text: {
+        titleText: {
             marginHorizontal: 5,
             color: COLORS.universal.white,
             fontSize: 28,
             fontWeight: "bold",
             textAlign: "center"
         },
-        distanceText: {
-            marginTop: 8,
-            color: COLORS.universal.white,
-            fontSize: 16,
+        locationText: {
+            marginTop: 12,
+            marginHorizontal: 5,
+            color: COLORS.event.blue700,
+            fontSize: 18,
+            fontWeight: "bold",
             textAlign: "center"
+        },
+        rippleAndroid: {
+            color: "#CCCCCC"
+        },
+        buttonPressed: {
+            opacity: 0.75
         }
     }
-)
-
-export default attractionCardStyles;
+);

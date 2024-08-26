@@ -29,47 +29,17 @@ export const userPageStyles = StyleSheet.create(
             alignItems: "center"
         },
         userNameText: {
+            marginTop: 4,
             marginBottom: 10,
             textAlign: "center",
             fontWeight: "bold",
-            fontSize: 20,
+            fontSize: 24,
             color: COLORS.universal.orange500
         },
-        userBio: {
-            marginBottom: 20,
-            fontSize: 16,
-            textAlign: "center",
-            color: COLORS.universal.white
-        },
-        userDetailsContainer: {
-            flex: 1,
-            marginHorizontal: 20,
-            padding: 10,
+        signOutContainer: {
             justifyContent: "center",
             alignItems: "center",
-            borderRadius: 5,
-            backgroundColor: COLORS.universal.orange500
-        },
-        userInfoFieldContainer: {
-            flexDirection: "row",
-            width: "100%",
-            paddingVertical: 8,
-            justifyContent: "flex-start",
-            borderBottomWidth: 2,
-            borderBottomColor: COLORS.universal.white
-        },
-        userInfoFieldTitle: {
-            width: 80,
-            paddingLeft: 4,
-            fontWeight: "bold",
-            fontSize: 20,
-            color: COLORS.universal.white
-        },
-        userInfoFieldValue: {
-            width: 200,
-            fontSize: 20,
-            textAlign: "right",
-            color: COLORS.universal.white
+            marginBottom: 20
         }
     }
 );

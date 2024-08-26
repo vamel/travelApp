@@ -2,7 +2,7 @@ import {View, Image, Text} from "react-native";
 import {useEffect, useState} from "react";
 import {getDownloadURL, ref} from "firebase/storage";
 import {storage} from "../../firebase/config";
-import attractionCardStyles from "../../styles/components/AttractionCardStyles";
+import attractionCardStyles from "../../styles/components/attraction/attractionCardStyles";
 
 interface IAttractionCard {
     imageUrl: string,

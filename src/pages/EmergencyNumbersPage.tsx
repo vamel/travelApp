@@ -1,5 +1,5 @@
 import {FlatList, View} from "react-native";
-import emergencyNumbersPageStyles from "../styles/pages/EmergencyNumbersPageStyles";
+import emergencyNumbersPageStyles from "../styles/pages/emergencyNumbersPageStyles";
 import EmergencyNumberCard from "../components/helpline/EmergencyNumberCard";
 import {EMERGENCY_NUMBERS, COUNTRY_CODES} from "../models/constants/EMERGENCY_NUMBERS";
 import HelplineButton from "../components/helpline/HelplineButton";

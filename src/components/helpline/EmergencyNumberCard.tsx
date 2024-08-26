@@ -1,6 +1,6 @@
 import {View} from "react-native";
 import {useState} from "react";
-import emergencyNumbersPageStyles from "../../styles/pages/EmergencyNumbersPageStyles";
+import emergencyNumbersPageStyles from "../../styles/pages/emergencyNumbersPageStyles";
 import EmergencyNumberCardHeader from "./EmergencyNumberCardHeader";
 import {IsoCode} from "../../models/types/IsoCode";
 import EmergencyNumberCardBody from "./EmergencyNumberCardBody";

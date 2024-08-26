@@ -4,7 +4,7 @@ import { useEffect, useState, useLayoutEffect } from "react";
 import { getDownloadURL, ref } from "firebase/storage";
 import { storage } from "../firebase/config";
 import IconButton from "../components/main/IconButton";
-import {attractionPageStyles} from "../styles/pages/AttractionPageStyles";
+import {attractionPageStyles} from "../styles/pages/attractionPageStyles";
 
 const AttractionPage = ({navigation, route}) => {
     const [attraction, setAttraction] = useState<Attraction>(new Attraction("", "", []));

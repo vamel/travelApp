@@ -1,6 +1,6 @@
 import {View, Text, Pressable} from "react-native";
 import EventDateCard from "./EventDateCard";
-import {eventCardStyles} from "../../styles/components/EventCardStyles";
+import {eventCardStyles} from "../../styles/components/event/eventCardStyles";
 import {IEvent} from "../../models/interfaces/IEvent";
 
 interface IEventCardProps {

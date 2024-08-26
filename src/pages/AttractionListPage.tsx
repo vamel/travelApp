@@ -4,8 +4,8 @@ import {collection, getDocs} from "firebase/firestore";
 import {db} from "../firebase/config";
 import {Attraction } from "../models/interfaces/Attraction";
 import AttractionCard from "../components/attraction/AttractionCard";
-import attractionListPageStyles from "../styles/pages/AttractionListPageStyles";
-import attractionCardStyles from "../styles/components/AttractionCardStyles";
+import attractionListPageStyles from "../styles/pages/attractionListPageStyles";
+import attractionCardStyles from "../styles/components/attraction/attractionCardStyles";
 
 const AttractionListPage = ({navigation}) => {
     const [attractions, setAttractions] = useState([]);

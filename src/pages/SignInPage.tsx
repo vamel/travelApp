@@ -1,6 +1,6 @@
 import {Text, TouchableWithoutFeedback, View} from "react-native";
 import { useState } from "react";
-import loginPageStyles from "../styles/pages/LoginPageStyles";
+import singInPageStyles from "../styles/pages/singInPageStyles";
 import LoginButton from "../components/login/LoginButton";
 import LoginInput from "../components/login/LoginInput";
 
@@ -21,30 +21,30 @@ const SignInPage = ({navigation}) => {
     }
 
     return(
-        <View style={loginPageStyles.container}>
-            <Text style={loginPageStyles.title}>Sign in to TravelApp</Text>
-                <View style={loginPageStyles.inputContainer}>
+        <View style={singInPageStyles.container}>
+            <Text style={singInPageStyles.title}>Sign in to TravelApp</Text>
+                <View style={singInPageStyles.inputContainer}>
                     <LoginInput placeholder={"Login"} onTextChange={setLoginInput} value={loginInput} />
                     <LoginInput placeholder={"Password"} onTextChange={setPasswordInput} value={passwordInput} />
-                    <View style={loginPageStyles.buttonContainers}>
+                    <View style={singInPageStyles.buttonContainers}>
                         <LoginButton
                             onPress={handleLoginPress}
                             title={"Sign in"}
                             backgroundColor={"#E3885F"}
                             textColor={"white"}/>
                     </View>
-                    <View style={loginPageStyles.forgotPassword}>
+                    <View style={singInPageStyles.forgotPassword}>
                         <TouchableWithoutFeedback accessibilityRole={"link"} onPress={handlePasswordForgottenPress}>
                             <View>
-                                <Text style={loginPageStyles.forgotPasswordText}>Forgot Password?</Text>
+                                <Text style={singInPageStyles.forgotPasswordText}>Forgot Password?</Text>
                             </View>
                         </TouchableWithoutFeedback>
                     </View>
-                    <View style={loginPageStyles.registerPromptContainer}>
-                        <Text style={loginPageStyles.registerPromptText}>Don't have an account?</Text>
+                    <View style={singInPageStyles.registerPromptContainer}>
+                        <Text style={singInPageStyles.registerPromptText}>Don't have an account?</Text>
                             <TouchableWithoutFeedback accessibilityRole={"link"} onPress={handleRegisterPress}>
                                 <View>
-                                    <Text style={loginPageStyles.registerPromptLink}>Sign up now!</Text>
+                                    <Text style={singInPageStyles.registerPromptLink}>Sign up now!</Text>
                                 </View>
                             </TouchableWithoutFeedback>
                     </View>

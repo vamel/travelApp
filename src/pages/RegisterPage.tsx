@@ -1,5 +1,5 @@
 import {Text, TouchableWithoutFeedback, View} from "react-native";
-import {registerPageStyles} from "../styles/pages/RegisterPageStyles";
+import {registerPageStyles} from "../styles/pages/registerPageStyles";
 import RegisterInput from "../components/register/RegisterInput";
 import {useState} from "react";
 import RegisterButton from "../components/register/RegisterButton";
@@ -14,7 +14,7 @@ const RegisterPage = ({navigation}) => {
     }
 
     const handleCreateAccount = () => {
-        console.log("ACCOUNT CREATED!");
+        navigation.navigate("CreateProfilePage");
     }
 
     return(

@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import COLORS from "../utils/Colors";
 
-const loginPageStyles = StyleSheet.create(
+const singInPageStyles = StyleSheet.create(
     {
         container: {
             flex: 1,
@@ -90,4 +90,4 @@ const loginPageStyles = StyleSheet.create(
     }
 )
 
-export default loginPageStyles;
+export default singInPageStyles;

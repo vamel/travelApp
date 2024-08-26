@@ -1,7 +1,7 @@
-import {userPageStyles} from "../../styles/pages/UserPageStyles";
 import {Text, View} from "react-native";
 import ProfileButton from "./ProfileButton";
 import {useNavigation} from "@react-navigation/native";
+import {userDashboardStyles} from "../../styles/components/userprofile/userDashboardStyles";
 
 const UserDashboard = () => {
     const navigation = useNavigation();
@@ -12,8 +12,8 @@ const UserDashboard = () => {
     }
 
     return(
-        <View style={userPageStyles.userDashboardContainer}>
-            <Text style={userPageStyles.userNameText}>User</Text>
+        <View style={userDashboardStyles.userDashboardContainer}>
+            <Text style={userDashboardStyles.userNameText}>User</Text>
             <ProfileButton
                 icon={"build-sharp"}
                 color={"orange"}

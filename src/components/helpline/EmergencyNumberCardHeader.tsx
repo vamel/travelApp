@@ -1,6 +1,6 @@
 import CountryFlag from "react-native-country-flag";
 import {Pressable, Text, View} from "react-native";
-import emergencyNumbersPageStyles from "../../styles/pages/EmergencyNumbersPageStyles";
+import emergencyNumbersPageStyles from "../../styles/pages/emergencyNumbersPageStyles";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import COLORS from "../../styles/utils/Colors";
 import {IsoCode} from "../../models/types/IsoCode";

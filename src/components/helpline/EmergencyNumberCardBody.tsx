@@ -1,4 +1,4 @@
-import emergencyNumbersPageStyles from "../../styles/pages/EmergencyNumbersPageStyles";
+import emergencyNumbersPageStyles from "../../styles/pages/emergencyNumbersPageStyles";
 import {Text, View} from "react-native";
 
 interface IEmergencyNumberCardBodyProps {

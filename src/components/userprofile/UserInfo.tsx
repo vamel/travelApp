@@ -1,12 +1,22 @@
 import {View, Text} from "react-native";
-import {userPageStyles} from "../../styles/pages/UserPageStyles";
 import UserInfoField from "./UserInfoField";
+import {userInfoStyles} from "../../styles/components/userprofile/userInfoStyles";
+import UserItemList from "./UserItemList";
 
 const UserInfo = () => {
+    const fields = ["Name", "From", "Age", "Favourite city", "Facebook", "Instagram", "X"];
+
     return(
-        <View style={userPageStyles.userDetailsContainer}>
-            <Text style={userPageStyles.userBio}>Bio</Text>
-            <UserInfoField text={"Field"} value={"value"}/>
+        <View style={userInfoStyles.userDetailsContainer}>
+            <Text style={userInfoStyles.userBio}>Bio</Text>
+            {fields.map((field) => {
+                return (<>
+                    <UserInfoField text={field} value={"value"}/>
+                </>);
+            })}
+            <UserItemList items={["Shopping", "Museums", "Restaurants"]} title={"Interests"} />
+            <UserItemList items={["english", "german", "french"]} title={"Languages spoken"} />
+            <UserItemList items={["England", "Germany", "France"]} title={"Visited countries"} />
         </View>
     );
 }

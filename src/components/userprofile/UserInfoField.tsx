@@ -1,16 +1,16 @@
 import {View, Text} from "react-native";
-import {userPageStyles} from "../../styles/pages/UserPageStyles";
+import {userInfoFieldStyles} from "../../styles/components/userprofile/userInfoFieldStyles";
 
-interface IUserInfoField {
+interface IUserInfoFieldProps {
     text: string,
     value: string
 }
 
-const UserInfoField = (props: IUserInfoField) => {
+const UserInfoField = (props: IUserInfoFieldProps) => {
     return(
-        <View style={userPageStyles.userInfoFieldContainer}>
-            <Text style={userPageStyles.userInfoFieldTitle}>{props.text}</Text>
-            <Text style={userPageStyles.userInfoFieldValue}>{props.value}</Text>
+        <View style={userInfoFieldStyles.userInfoFieldContainer}>
+            <Text style={userInfoFieldStyles.userInfoFieldTitle}>{props.text}</Text>
+            <Text style={userInfoFieldStyles.userInfoFieldValue}>{props.value}</Text>
         </View>
     );
 }

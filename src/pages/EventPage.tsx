@@ -1,7 +1,7 @@
 import {View, Text, SafeAreaView, ScrollView} from "react-native";
 import {useEffect, useState} from "react";
-import {attractionPageStyles} from "../styles/pages/AttractionPageStyles";
-import {dateToString, getDateElements} from "../components/utils/dateUtils";
+import {attractionPageStyles} from "../styles/pages/attractionPageStyles";
+import {dateToString, getDateElements} from "../utils/dateUtils";
 
 const EventPage = ({route}) => {
     const [eventData, setEventData] = useState(null);
@@ -19,7 +19,6 @@ const EventPage = ({route}) => {
         setDateString(dateString);
         //@ts-ignore
         setEventData(receivedData);
-        console.log(eventData);
     }, [receivedData.name]);
 
     if (!eventData) {
