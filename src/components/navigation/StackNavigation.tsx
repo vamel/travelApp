@@ -10,7 +10,9 @@ import EmergencyNumbersPage from "../../pages/EmergencyNumbersPage";
 import RegisterPage from "../../pages/RegisterPage";
 import EventPage from "../../pages/EventPage";
 import CreateProfilePage from "../../pages/CreateProfilePage";
-import CompleteRegistrationPage from "../../styles/pages/CompleteRegistrationPage";
+import CompleteRegistrationPage from "../../pages/CompleteRegistrationPage";
+import InvitationListPage from "../../pages/InvitationListPage.tsx";
+import InvitationPage from "../../pages/InvitationPage";
 
 const Stack = createNativeStackNavigator();
 
@@ -66,6 +68,16 @@ const StackNavigation = () => {
                     name={"EmergencyNumbersPage"}
                     component={EmergencyNumbersPage}
                     options={{title: "Emergency Numbers"}}
+                />
+                <Stack.Screen
+                    name={"InvitationListPage"}
+                    component={InvitationListPage}
+                    options={{title: "Invitation List Page"}}
+                />
+                <Stack.Screen
+                    name={"InvitationPage"}
+                    component={InvitationPage}
+                    options={{title: "Invitation Page"}}
                 />
                 <Stack.Screen
                     name={"TabNavigation"}

@@ -1,13 +1,13 @@
-import singInPageStyles from "../../styles/pages/singInPageStyles";
 import {TextInput} from "react-native";
+import singInPageStyles from "../../styles/pages/singInPageStyles";
 
-interface ILoginInputProps {
+interface  IPasswordInputProps {
     placeholder: string,
     onTextChange: (string) => void,
     value: string
 }
 
-const LoginInput = (props: ILoginInputProps) => {
+const PasswordInput = (props: IPasswordInputProps) => {
     return(
         <TextInput
             placeholder={props.placeholder}
@@ -15,8 +15,9 @@ const LoginInput = (props: ILoginInputProps) => {
             value={props.value}
             style={singInPageStyles.textInput}
             autoCapitalize={"none"}
+            secureTextEntry={true}
         />
     );
 }
 
-export default LoginInput;
+export default PasswordInput;

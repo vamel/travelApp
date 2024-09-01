@@ -10,9 +10,7 @@ const UserInfo = () => {
         <View style={userInfoStyles.userDetailsContainer}>
             <Text style={userInfoStyles.userBio}>Bio</Text>
             {fields.map((field) => {
-                return (<>
-                    <UserInfoField text={field} value={"value"}/>
-                </>);
+                return (<UserInfoField text={field} value={"value"} key={field} />);
             })}
             <UserItemList items={["Shopping", "Museums", "Restaurants"]} title={"Interests"} />
             <UserItemList items={["english", "german", "french"]} title={"Languages spoken"} />

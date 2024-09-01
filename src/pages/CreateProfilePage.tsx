@@ -8,13 +8,15 @@ import UserBioInput from "../components/register/UserBioInput";
 import CreateProfileInput from "../components/register/CreateProfileInput";
 import RegisterButton from "../components/register/RegisterButton";
 import RegisterDatePicker from "../components/register/RegisterDatePicker";
+import {User} from "../models/classes/User";
+import {putUser} from "../firebase/createUser";
 
-const CreateProfilePage = ({navigation}) => {
+const CreateProfilePage = ({navigation, route}) => {
     const [userName, setUserName] = useState("");
     const [userFirstName, setUserFirstName] = useState("");
     const [userBirthdate, setUserBirthdate] = useState(new Date());
-    const [hobbies, setHobbies] = useState([]);
-    const [languages, setLanguages] = useState([]);
+    const [userHobbies, setUserHobbies] = useState([]);
+    const [userLanguages, setUserLanguages] = useState([]);
     const [userBio, setUserBio] = useState("");
     const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
 
@@ -36,18 +38,18 @@ const CreateProfilePage = ({navigation}) => {
     }
 
     const onHobbyChoice = (hobbyChosen) => {
-        if (hobbies.includes(hobbyChosen)) {
-            setHobbies((prevHobbies) => prevHobbies.filter((hobby) => hobby !== hobbyChosen));
+        if (userHobbies.includes(hobbyChosen)) {
+            setUserHobbies((prevHobbies) => prevHobbies.filter((hobby) => hobby !== hobbyChosen));
         } else {
-            setHobbies((prevHobbies) => [...prevHobbies, hobbyChosen]);
+            setUserHobbies((prevHobbies) => [...prevHobbies, hobbyChosen]);
         }
     }
 
     const onLanguageChoice = (languageChosen) => {
-        if (languages.includes(languageChosen)) {
-            setLanguages((prevLanguages) => prevLanguages.filter((language) => language !== languageChosen));
+        if (userLanguages.includes(languageChosen)) {
+            setUserLanguages((prevLanguages) => prevLanguages.filter((language) => language !== languageChosen));
         } else {
-            setLanguages((prevLanguages) => [...prevLanguages, languageChosen]);
+            setUserLanguages((prevLanguages) => [...prevLanguages, languageChosen]);
         }
     }
 
@@ -56,6 +58,9 @@ const CreateProfilePage = ({navigation}) => {
     }
 
     const onSubmit = () => {
+        const createdUser = new User(route.params.uid, userName, userBio, userFirstName, route.params.email,
+            userBirthdate, userHobbies, userLanguages);
+        putUser(createdUser);
         navigation.navigate("CompleteRegistrationPage");
     }
 
@@ -93,7 +98,7 @@ const CreateProfilePage = ({navigation}) => {
                         onChoice={onHobbyChoice}
                     />
                     <RegisterItemList
-                        title={"Choose you spoken languages"}
+                        title={"Choose your spoken languages"}
                         items={Object.values(Language)}
                         onChoice={onLanguageChoice}
                     />

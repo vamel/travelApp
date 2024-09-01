@@ -3,6 +3,8 @@ import {registerPageStyles} from "../styles/pages/registerPageStyles";
 import RegisterInput from "../components/register/RegisterInput";
 import {useState} from "react";
 import RegisterButton from "../components/register/RegisterButton";
+import {handleSingUp} from "../firebase/auth";
+import { passwordStrength } from 'check-password-strength'
 
 const RegisterPage = ({navigation}) => {
     const [enteredEmailAddress, setEnteredEmailAddress] = useState("");
@@ -13,8 +15,18 @@ const RegisterPage = ({navigation}) => {
         navigation.goBack();
     }
 
-    const handleCreateAccount = () => {
-        navigation.navigate("CreateProfilePage");
+    const handleCreateAccount = async () => {
+        if (enteredPassword !== enteredConfirmPassword) {
+            console.log("Passwords must match");
+        } else if (passwordStrength(enteredPassword).id < 2) {
+            console.log("Password too weak");
+        } else {
+            const uid = await handleSingUp(enteredEmailAddress, enteredPassword);
+            navigation.navigate("CreateProfilePage", {
+                uid: uid,
+                email: enteredEmailAddress
+            });
+        }
     }
 
     return(

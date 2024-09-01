@@ -1,6 +1,9 @@
 export enum Hobby {
     TRAVELLING = "Travelling",
     FOOTBALL = "Football",
+    TENNIS = "Tennis",
+    BASKETBALL = "Basketball",
+    VOLLEYBALL = "Volleyball",
     HISTORY = "History",
     BOARD_GAMES = "Board games",
     CLUBBING = "Clubbing",
@@ -12,5 +15,6 @@ export enum Hobby {
     ART = "Art",
     BOOKS = "Books",
     CAFES = "Cafes",
-    DANCING = "Dancing"
+    DANCING = "Dancing",
+    FISHING = "Fishing"
 }

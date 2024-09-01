@@ -6,6 +6,11 @@ import {userDashboardStyles} from "../../styles/components/userprofile/userDashb
 const UserDashboard = () => {
     const navigation = useNavigation();
 
+    const handleInvitationsButtonPress = () => {
+        // @ts-ignore
+        navigation.navigate("InvitationListPage");
+    }
+
     const handleEmergencyNumbersButtonPress = () => {
         // @ts-ignore
         navigation.navigate("EmergencyNumbersPage");
@@ -23,7 +28,7 @@ const UserDashboard = () => {
             <ProfileButton
                 icon={"mail"}
                 color={"orange"}
-                onPress={handleEmergencyNumbersButtonPress}
+                onPress={handleInvitationsButtonPress}
                 text={"Invitations"}
             />
             <ProfileButton

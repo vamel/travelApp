@@ -1,6 +1,6 @@
 import {Text, View} from "react-native";
-import RegisterButton from "../../components/register/RegisterButton";
-import {completeRegistrationPageStyles} from "./completeRegistrationPageStyles";
+import RegisterButton from "../components/register/RegisterButton";
+import {completeRegistrationPageStyles} from "../styles/pages/completeRegistrationPageStyles";
 
 const CompleteRegistrationPage = ({navigation}) => {
     const handleButtonPress = () => {

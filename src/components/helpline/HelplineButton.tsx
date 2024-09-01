@@ -1,6 +1,6 @@
 import {useNavigation} from "@react-navigation/native";
-import {Dimensions, Pressable, StyleSheet, Text, View} from "react-native";
-import COLORS from "../../styles/utils/Colors";
+import {Pressable, Text, View} from "react-native";
+import {helplineButtonStyles} from "../../styles/components/helpline/helplineButtonStyles";
 
 const HelplineButton = () => {
     const navigation = useNavigation();
@@ -22,24 +22,3 @@ const HelplineButton = () => {
 
 export default HelplineButton;
 
-const deviceWidth = Dimensions.get("window").width
-
-const helplineButtonStyles = StyleSheet.create({
-    container: {
-        marginVertical: 30,
-        justifyContent: "center",
-        alignItems: "center"
-    },
-    button: {
-        padding: 10,
-        width: 0.9 * deviceWidth,
-        borderRadius: 20,
-        backgroundColor: COLORS.universal.purple500,
-        elevation: 4,
-        alignItems: "center",
-    },
-    text: {
-        fontSize: 16,
-        color: COLORS.universal.white
-    }
-})
