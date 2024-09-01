@@ -1,35 +1,23 @@
-import {Text, TouchableWithoutFeedback, View} from "react-native";
-import {useContext, useState} from "react";
+import {Text, TouchableWithoutFeedback, View, Alert} from "react-native";
+import {useState} from "react";
 import singInPageStyles from "../styles/pages/singInPageStyles";
 import LoginButton from "../components/login/LoginButton";
 import LoginInput from "../components/login/LoginInput";
 import PasswordInput from "../components/login/PasswordInput";
-import {signInWithEmailAndPassword} from "firebase/auth";
-import {auth} from "../firebase/config";
-import {AuthContext} from "../store/user/auth-context";
 import COLORS from "../styles/utils/Colors";
+import {handleSignIn} from "../firebase/auth";
 
 const SignInPage = ({navigation}) => {
     const [emailInput, setEmailInput] = useState('');
     const [passwordInput, setPasswordInput] = useState('');
 
-    const authCtx = useContext(AuthContext);
-
-    const handleLoginPress = () => {
-        signInWithEmailAndPassword(auth, emailInput, passwordInput)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                //@ts-ignore
-                const token = user.stsTokenManager.accessToken;
-                //@ts-ignore
-                const uid = auth.currentUser.uid;
-                authCtx.authenticate(token, uid);
-                navigation.navigate("TabNavigation");
-            }).catch((err) => {
-            const errorCode = err.code;
-            const errorMsg = err.message;
-            console.log(errorCode, errorMsg);
-        });
+    const handleLoginPress = async () => {
+        try {
+            await handleSignIn(emailInput, passwordInput);
+            navigation.navigate("TabNavigation");
+        } catch(err) {
+            Alert.alert("Invalid credentials");
+        }
     }
 
     const handleContinueWithoutAccountPress = () => {

@@ -1,8 +1,16 @@
-import {StyleSheet} from "react-native";
+import {Platform, StatusBar, StyleSheet} from "react-native";
 import COLORS from "../utils/Colors";
+
+const statusBarHeight = StatusBar.currentHeight;
 
 export const invitationPageStyles = StyleSheet.create(
     {
+        container: {
+            flex: 1,
+            marginTop: Platform.OS === "android" ? 25 + statusBarHeight : 0,
+            justifyContent: "center",
+            alignItems: "center"
+        },
         actionsContainer: {
             marginTop: 10,
             flexDirection: "row",

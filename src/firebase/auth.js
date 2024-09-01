@@ -8,29 +8,30 @@ export const handleSingUp = async (email, password) => {
                 const user = userCredential.user;
                 resolve(user.uid);
             }).catch((err) => {
-            const errorCode = err.code;
-            const errorMsg = err.message;
-            reject(errorMsg);
+            reject(err.message);
         });
     });
 }
 
 export const handleSignIn = (email, password) => {
-    signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            const user = userCredential.user;
-        }).catch((err) => {
-        const errorCode = err.code;
-        const errorMsg = err.message;
-        console.log(errorCode, errorMsg);
+    return new Promise((resolve, reject) => {
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                resolve(user);
+            }).catch((err) => {
+                reject(err.message);
+        });
     });
 }
 
 export const handleSignOut = () => {
-    signOut(auth).then((res) => {
-        console.log(res);
-    }).catch((err) => {
-        const errorCode = err.code;
-        const errorMsg = err.message;
+    return new Promise((resolve, reject) => {
+        signOut(auth).then((res) => {
+            console.log(res);
+            resolve(res);
+        }).catch((err) => {
+            reject(err.message);
+        });
     });
 }

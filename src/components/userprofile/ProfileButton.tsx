@@ -1,7 +1,6 @@
 import {Pressable, Text, View} from "react-native";
 import {profileButtonStyles} from "../../styles/components/userprofile/profileButtonStyles";
 import {Ionicons} from "@expo/vector-icons";
-import COLORS from "../../styles/utils/Colors";
 import {getColorValue} from "../../utils/colorUtils";
 
 interface IProfileButtonProps {
