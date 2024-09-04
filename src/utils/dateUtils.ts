@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export const getDayOrdinalSuffix = (day) => {
     switch (day) {
         case [1, 21, 31].includes(day):
@@ -24,8 +26,6 @@ export const dateToString = (day, month, year) => {
     return `${month} ${getDayOrdinalSuffix(day)} ${year}`;
 }
 
-export const calculateAge = (birthdate) => {
-    const today = new Date() - birthdate;
-    const birthDate = new Date(today) + 1;
-    return Math.abs(birthDate.getUTCFullYear() - 1970);
+export const calculateAge = (birthdate: string) => {
+    return moment().diff(birthdate, 'years');
 }

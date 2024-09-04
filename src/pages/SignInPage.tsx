@@ -1,19 +1,23 @@
 import {Text, TouchableWithoutFeedback, View, Alert} from "react-native";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import singInPageStyles from "../styles/pages/singInPageStyles";
 import LoginButton from "../components/login/LoginButton";
 import LoginInput from "../components/login/LoginInput";
 import PasswordInput from "../components/login/PasswordInput";
 import COLORS from "../styles/utils/Colors";
 import {handleSignIn} from "../firebase/auth";
+import {AuthContext} from "../store/user/auth-context";
 
 const SignInPage = ({navigation}) => {
     const [emailInput, setEmailInput] = useState('');
     const [passwordInput, setPasswordInput] = useState('');
 
+    const authCtx = useContext(AuthContext);
+
     const handleLoginPress = async () => {
         try {
-            await handleSignIn(emailInput, passwordInput);
+            const userData = await handleSignIn(emailInput, passwordInput);
+            authCtx.authenticate(userData.accessToken, userData.uid)
             navigation.navigate("TabNavigation");
         } catch(err) {
             Alert.alert("Invalid credentials");

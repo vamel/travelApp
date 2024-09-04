@@ -2,13 +2,11 @@ import {Text, TextInput, View} from "react-native";
 import ProfileButton from "../userprofile/ProfileButton";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import {registerDatePickerStyles} from "../../styles/components/register/registerDatePickerStyles";
-import {createProfileInputStyles} from "../../styles/components/register/createProfileInputStyles";
-import {dateToString, getDateElements} from "../../utils/dateUtils";
 
 interface IRegisterDatePickerProps {
     onButtonPress: () => void,
     isDatePickerOpen: boolean,
-    userBirthdate: Date,
+    userBirthdate: string,
     onUserBirthdateChange: (event: any, selectedDate: any) => void
 }
 
@@ -24,13 +22,13 @@ const RegisterDatePicker = (props: IRegisterDatePickerProps) => {
                     text={"Pick date"}
                 />
                 <TextInput
-                    placeholder={props.userBirthdate.toLocaleDateString()}
+                    placeholder={props.userBirthdate}
                     editable={false}
                     style={registerDatePickerStyles.dateInput}
                 />
             </View>
             {props.isDatePickerOpen && (<DateTimePicker
-                value={props.userBirthdate}
+                value={new Date (props.userBirthdate)}
                 mode={"date"}
                 onChange={props.onUserBirthdateChange}
                 minimumDate={new Date(1900, 0, 1)}

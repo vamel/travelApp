@@ -1,6 +1,7 @@
 import {createContext, useState} from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import firebase from "firebase/compat";
+import * as SecureStore from 'expo-secure-store';
 import User = firebase.User;
 
 export const AuthContext = createContext(
@@ -18,19 +19,18 @@ function AuthContextProvider({children}) {
     const [authToken, setAuthToken] = useState("");
     const [userUid, setUserUid] = useState("");
 
-    function authenticate(token, uid) {
+    const authenticate = (token, uid) => {
         setAuthToken(token);
         setUserUid(uid);
-        AsyncStorage.setItem("token", token);
+        SecureStore.setItemAsync("token", token);
         AsyncStorage.setItem("uid", uid);
     }
 
-    function logout() {
+    const logout = () => {
         setAuthToken(null);
         setUserUid(null);
-        AsyncStorage.removeItem("token");
+        SecureStore.deleteItemAsync("token");
         AsyncStorage.removeItem("uid");
-        AsyncStorage.getItem("uid").then((res) => console.log(res));
     }
 
     const value = {

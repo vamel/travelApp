@@ -14,7 +14,7 @@ import {putUser} from "../firebase/createUser";
 const CreateProfilePage = ({navigation, route}) => {
     const [userName, setUserName] = useState("");
     const [userFirstName, setUserFirstName] = useState("");
-    const [userBirthdate, setUserBirthdate] = useState(new Date());
+    const [userBirthdate, setUserBirthdate] = useState("");
     const [userHobbies, setUserHobbies] = useState([]);
     const [userLanguages, setUserLanguages] = useState([]);
     const [userBio, setUserBio] = useState("");
@@ -58,8 +58,8 @@ const CreateProfilePage = ({navigation, route}) => {
     }
 
     const onSubmit = () => {
-        const createdUser = new User(route.params.uid, userName, userBio, userFirstName, route.params.email,
-            userBirthdate, userHobbies, userLanguages);
+        const createdUser = new User(route.params.uid, userName, userBio, "" ,userFirstName, "", route.params.email,
+            userBirthdate, userHobbies, userLanguages, []);
         putUser(createdUser);
         navigation.navigate("CompleteRegistrationPage");
     }
