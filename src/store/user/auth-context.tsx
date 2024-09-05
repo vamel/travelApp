@@ -9,15 +9,16 @@ export const AuthContext = createContext(
         token: "",
         isAuthenticated: false,
         uid: "",
+        location: "Warsaw",
         authenticate: (token: string, uid: string) => {},
-        register: (userData: User) => {},
         logout: () => {}
     }
 );
 
-function AuthContextProvider({children}) {
+const AuthContextProvider = ({children}) => {
     const [authToken, setAuthToken] = useState("");
     const [userUid, setUserUid] = useState("");
+    const [location, setLocation] = useState("");
 
     const authenticate = (token, uid) => {
         setAuthToken(token);
@@ -37,6 +38,7 @@ function AuthContextProvider({children}) {
         token: authToken,
         uid: userUid,
         isAuthenticated: !!authToken,
+        location: "Warsaw",
         authenticate: authenticate,
         logout: logout
     }

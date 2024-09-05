@@ -17,8 +17,8 @@ export const attractionPageStyles = StyleSheet.create(
             alignItems: "center"
         },
         image: {
-            height: 245,
-            width: 300,
+            height: 300,
+            width: 350,
             borderRadius: 5,
             overflow: "hidden"
         },

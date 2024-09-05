@@ -11,6 +11,7 @@ export class User {
                 favourite_city: string,
                 email: string,
                 birthdate: string,
+                instagram: string,
                 hobbies: Hobby[],
                 languages: Language[],
                 countries: Country[]) {
@@ -22,6 +23,7 @@ export class User {
         this.favourite_city = favourite_city;
         this.email = email;
         this.birthdate = birthdate;
+        this.instagram = instagram;
         this.hobbies = hobbies;
         this.languages = languages;
         this.countries = countries;
@@ -35,6 +37,7 @@ export class User {
     favourite_city: string;
     email: string;
     birthdate: string;
+    instagram: string;
     hobbies: Hobby[];
     languages: Language[];
     countries: Country[];

@@ -3,7 +3,11 @@ import ProfileButton from "./ProfileButton";
 import {useNavigation} from "@react-navigation/native";
 import {userDashboardStyles} from "../../styles/components/userprofile/userDashboardStyles";
 
-const UserDashboard = () => {
+interface IUserDashboardProps {
+    username: string;
+}
+
+const UserDashboard = (props: IUserDashboardProps) => {
     const navigation = useNavigation();
 
     const handleInvitationsButtonPress = () => {
@@ -18,7 +22,7 @@ const UserDashboard = () => {
 
     return(
         <View style={userDashboardStyles.userDashboardContainer}>
-            <Text style={userDashboardStyles.userNameText}>User</Text>
+            <Text style={userDashboardStyles.userNameText}>{props.username}</Text>
             <ProfileButton
                 icon={"build-sharp"}
                 color={"orange"}

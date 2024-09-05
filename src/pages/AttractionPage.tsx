@@ -65,7 +65,7 @@ const AttractionPage = ({navigation, route}) => {
                     </Text>
                 </View>
                 <View style={attractionPageStyles.imageContainer}>
-                    <Image source={{ uri: imageUrl }} style={attractionPageStyles.image}/>
+                    <Image source={{ uri: imageUrl ? imageUrl : undefined }} style={attractionPageStyles.image}/>
                 </View>
                 <View style={attractionPageStyles.detailsContainer}>
                     {getAvailability()}

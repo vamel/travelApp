@@ -7,6 +7,7 @@ const attractionListPageStyles = StyleSheet.create(
     {
         container: {
             flex: 1,
+            flexGrow: 1,
             marginTop: Platform.OS === "android" ? 25 + statusBarHeight : 0,
             flexDirection: 'column',
             justifyContent: 'flex-start',
@@ -20,13 +21,16 @@ const attractionListPageStyles = StyleSheet.create(
             color: COLORS.attraction.orange300
         },
         listContainer: {
+            // flex: 1,
+            flexGrow: 1,
             paddingTop: 10,
             paddingBottom: 40
         },
         items: {
-            paddingTop: 10,
             alignItems: 'stretch',
             flexDirection: 'column',
+            paddingBottom: 80,
+            paddingTop: 10,
         },
         rippleAndroid: {
             color: "#CCCCCC"

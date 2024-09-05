@@ -7,6 +7,10 @@ interface IUserInfoFieldProps {
 }
 
 const UserInfoField = (props: IUserInfoFieldProps) => {
+    if (!props.value) {
+        return null;
+    }
+
     return(
         <View style={userInfoFieldStyles.userInfoFieldContainer}>
             <Text style={userInfoFieldStyles.userInfoFieldTitle}>{props.text}</Text>

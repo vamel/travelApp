@@ -9,24 +9,25 @@ import {collection, query, where, documentId, getDocs, limit} from "firebase/fir
 import {db} from "../firebase/config";
 import * as SplashScreen from 'expo-splash-screen';
 import {User} from "../models/classes/User";
+import OtherUserDashboard from "../components/usersnearby/OtherUserDashboard";
 
 SplashScreen.preventAutoHideAsync();
 
-const UserPage = ({navigation}) => {
+const UserPage = ({navigation, route}) => {
     const [userUid, setUserUid] = useState("");
     const [userData, setUserData] = useState<User>(null);
     const authCtx = useContext(AuthContext);
 
     useEffect(() => {
-        setUserUid(authCtx.uid);
+        setUserUid(route.params.userUid);
         const getUserData = async () => {
             const userRef = collection(db, "users");
-            const q = query(userRef, where(documentId(), "==", authCtx.uid), limit(1));
+            const q = query(userRef, where(documentId(), "==", route.params.userUid), limit(1));
             const querySnapshot = await getDocs(q);
             const userData = querySnapshot.docs[0].data();
             const user = new User(authCtx.uid, userData.username, userData.bio,
-                userData.country_of_origin, userData.firstName, userData.favourite_city,
-                userData.email, userData.birthdate, userData.hobbies, userData.languages, userData.countries);
+                userData.country_of_origin, userData.firstname, userData.favourite_city, userData.email,
+                userData.birthdate, userData.instagram, userData.hobbies, userData.languages, userData.countries);
             setUserData(user);
         }
         getUserData();
@@ -47,12 +48,20 @@ const UserPage = ({navigation}) => {
         navigation.navigate("SignInPage");
     }
 
+    const renderDashboard = () => {
+        if (route.params.userUid === authCtx.uid) {
+            return <UserDashboard username={userData.username} />;
+        } else {
+            return <OtherUserDashboard username={userData.username} />;
+        }
+    }
+
     return(
         <SafeAreaView style={userPageStyles.container} onLayout={onLayoutRootView}>
             <ScrollView>
                 <View style={userPageStyles.mainInfoContainer}>
                     <Image source={require("../assets/images/user-placeholder.png")} style={userPageStyles.profilePicture} />
-                    <UserDashboard />
+                    {renderDashboard()}
                 </View>
                 <UserInfo userInfo={userData} />
                 <View style={userPageStyles.signOutContainer}>

@@ -4,12 +4,20 @@ export enum Country {
     POLAND = "Poland",
     ITALY = "Italy",
     FRANCE = "France",
+    NETHERLANDS = "Netherlands",
+    BELGIUM = "Belgium",
+    SERBIA = "Serbia",
+    BULGARIA = "Bulgaria",
+    TURKEY = "Turkey",
     AUSTRALIA = "Australia",
-    USA = "USA",
     CANADA = "Canada",
-    BRAZIL = "Brazil",
+    USA = "USA",
     MEXICO = "Mexico",
+    BRAZIL = "Brazil",
     ARGENTINA = "Argentina",
     CHINA = "China",
-    TURKEY = "Turkey"
+    JAPAN = "Japan",
+    SOUTH_KOREA = "South Korea",
+    MONGOLIA = "Mongolia",
+    MALAYSIA = "Malaysia"
 }

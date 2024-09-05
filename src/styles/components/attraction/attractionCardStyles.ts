@@ -7,7 +7,7 @@ const attractionCardStyles = StyleSheet.create(
     {
         container: {
             marginHorizontal: 10,
-            marginBottom: 10,
+            marginBottom: 15,
             borderWidth: 2,
             borderRadius: 5,
             backgroundColor: COLORS.attraction.orange100,
@@ -27,16 +27,16 @@ const attractionCardStyles = StyleSheet.create(
         },
         image: {
             height: 180,
-            width: 140,
+            width: 180,
         },
         textContainer: {
             flex: 1,
+            marginHorizontal: 10,
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center"
         },
         text: {
-            marginHorizontal: 5,
             color: COLORS.universal.white,
             fontSize: 28,
             fontWeight: "bold",

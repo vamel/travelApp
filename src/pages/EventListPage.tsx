@@ -1,22 +1,14 @@
 import {View, Text, FlatList, SafeAreaView} from "react-native";
-import {useEffect, useState} from "react";
-import {collection, getDocs} from "firebase/firestore";
-import {db} from "../firebase/config";
+import {useContext} from "react";
 import EventCard from "../components/event/EventCard";
 import {eventListPageStyles} from "../styles/pages/eventListPageStyles";
 import {IEvent} from "../models/interfaces/IEvent";
+import {EventContext} from "../store/events/event-context";
+import {AuthContext} from "../store/user/auth-context";
 
 const EventListPage = ({navigation}) => {
-    const [events, setEvents] = useState([]);
-
-    useEffect(() => {
-        const getData = async () => {
-            const eventsSnapshot = await getDocs(collection(db, "events"));
-            const eventsList: any = eventsSnapshot.docs.map(doc => doc.data());
-            setEvents(eventsList);
-        }
-        getData();
-    }, []);
+    const evtCtx = useContext(EventContext);
+    const authCtx = useContext(AuthContext);
 
     const handleCardPress = (event: IEvent) => {
         navigation.navigate("EventPage",
@@ -27,6 +19,10 @@ const EventListPage = ({navigation}) => {
             }
         )};
 
+    const fetchMoreData = () => {
+        evtCtx.fetchMore();
+    }
+
     const renderEventCard = (event) => {
         return (
             <EventCard eventData={event} onPress={handleCardPress}/>
@@ -35,14 +31,16 @@ const EventListPage = ({navigation}) => {
 
     return(
         <SafeAreaView style={eventListPageStyles.container}>
-            <Text style={eventListPageStyles.titleText}>Events in Warsaw</Text>
+            <Text style={eventListPageStyles.titleText}>{`Events in ${authCtx.location}`}</Text>
             <View style={[eventListPageStyles.items]}>
                 <FlatList
                     initialNumToRender={10}
-                    data={events}
+                    data={evtCtx.eventList}
                     keyExtractor={(item) => item.name}
                     renderItem={({ item }: {item}) => renderEventCard(item)}
                     contentContainerStyle={eventListPageStyles.listContainer}
+                    onEndReachedThreshold={0.35}
+                    onEndReached={fetchMoreData}
                 />
             </View>
         </SafeAreaView>

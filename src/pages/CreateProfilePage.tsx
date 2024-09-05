@@ -10,13 +10,18 @@ import RegisterButton from "../components/register/RegisterButton";
 import RegisterDatePicker from "../components/register/RegisterDatePicker";
 import {User} from "../models/classes/User";
 import {putUser} from "../firebase/createUser";
+import {Country} from "../models/enums/Country";
 
 const CreateProfilePage = ({navigation, route}) => {
     const [userName, setUserName] = useState("");
     const [userFirstName, setUserFirstName] = useState("");
-    const [userBirthdate, setUserBirthdate] = useState("");
+    const [userBirthdate, setUserBirthdate] = useState(new Date());
+    const [userFavouriteCity, setUserFavouriteCity] = useState("");
+    const [userPlaceOfOrigin, setUserPlaceOfOrigin] = useState("");
+    const [userInstagram, setUserInstagram] = useState("");
     const [userHobbies, setUserHobbies] = useState([]);
     const [userLanguages, setUserLanguages] = useState([]);
+    const [userCountries, setUserCountries] = useState([]);
     const [userBio, setUserBio] = useState("");
     const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
 
@@ -26,6 +31,18 @@ const CreateProfilePage = ({navigation, route}) => {
 
     const onUserFirstNameChange = (firstNameText: string) => {
         setUserFirstName(firstNameText);
+    }
+
+    const onUserOriginChange = (placeOfOriginText: string) => {
+        setUserPlaceOfOrigin(placeOfOriginText);
+    }
+
+    const onUserFavouriteCityChange = (favouriteCityText: string) => {
+        setUserFavouriteCity(favouriteCityText);
+    }
+
+    const onUserInstagramChange = (instagram: string) => {
+        setUserInstagram(instagram);
     }
 
     const handleButtonClick = () => {
@@ -53,13 +70,23 @@ const CreateProfilePage = ({navigation, route}) => {
         }
     }
 
+    const onCountryChoice = (countryChosen) => {
+        if (userCountries.includes(countryChosen)) {
+            setUserCountries((prevCountries) => prevCountries.filter((country) => country !== countryChosen));
+        } else {
+            setUserCountries((prevCountries) => [...prevCountries, countryChosen]);
+        }
+    }
+
     const onBioChange = (bioText: string) => {
         setUserBio(bioText);
     }
 
     const onSubmit = () => {
-        const createdUser = new User(route.params.uid, userName, userBio, "" ,userFirstName, "", route.params.email,
-            userBirthdate, userHobbies, userLanguages, []);
+        const createdUser = new User(
+            route.params.uid, userName, userBio, userPlaceOfOrigin ,
+            userFirstName, userFavouriteCity, route.params.email,
+            userBirthdate.toDateString(), userInstagram, userHobbies, userLanguages, userCountries);
         putUser(createdUser);
         navigation.navigate("CompleteRegistrationPage");
     }
@@ -85,6 +112,27 @@ const CreateProfilePage = ({navigation, route}) => {
                     maxLength={20}
                     keyboardType={"default"}
                 />
+                <CreateProfileInput
+                    title={"Where are you from?"}
+                    onChangeText={onUserOriginChange}
+                    placeholder={"Place of origin"}
+                    maxLength={30}
+                    keyboardType={"default"}
+                />
+                <CreateProfileInput
+                    title={"Which city is your favourite?"}
+                    onChangeText={onUserFavouriteCityChange}
+                    placeholder={"City's name"}
+                    maxLength={30}
+                    keyboardType={"default"}
+                />
+                <CreateProfileInput
+                    title={"Do you have instagram?"}
+                    onChangeText={onUserInstagramChange}
+                    placeholder={"Username on instagram"}
+                    maxLength={30}
+                    keyboardType={"default"}
+                />
                 <RegisterDatePicker
                     isDatePickerOpen={isDatePickerOpen}
                     onUserBirthdateChange={onUserBirthdateChange}
@@ -94,13 +142,18 @@ const CreateProfilePage = ({navigation, route}) => {
                 <View>
                     <RegisterItemList
                         title={"What are your hobbies?"}
-                        items={Object.values(Hobby)}
+                        items={Object.values(Hobby).sort()}
                         onChoice={onHobbyChoice}
                     />
                     <RegisterItemList
                         title={"Choose your spoken languages"}
-                        items={Object.values(Language)}
+                        items={Object.values(Language).sort()}
                         onChoice={onLanguageChoice}
+                    />
+                    <RegisterItemList
+                        title={"Where have you been already?"}
+                        items={Object.values(Country).sort()}
+                        onChoice={onCountryChoice}
                     />
                 </View>
                 <UserBioInput onChangeText={onBioChange}/>

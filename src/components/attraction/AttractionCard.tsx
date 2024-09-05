@@ -23,7 +23,7 @@ const AttractionCard = (props: IAttractionCard) => {
     return(
         <View style={attractionCardStyles.attractionCard}>
             <View style={attractionCardStyles.imageContainer}>
-                <Image source={{ uri: imageUrl }} style={attractionCardStyles.image}/>
+                <Image source={{ uri: imageUrl !== "" ? imageUrl : undefined }} style={attractionCardStyles.image}/>
             </View>
             <View style={attractionCardStyles.textContainer}>
                 <Text style={attractionCardStyles.text}>{props.name}</Text>

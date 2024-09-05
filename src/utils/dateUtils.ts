@@ -15,7 +15,7 @@ export const getDayOrdinalSuffix = (day) => {
 
 export const getDateElements = (date) => {
     const displayDate = date.toDate();
-    const day = displayDate.getDay();
+    const day = displayDate.getDate();
     const month = displayDate.toLocaleDateString("en-GB", {month: "short"});
     const year = displayDate.getFullYear();
 
@@ -27,5 +27,5 @@ export const dateToString = (day, month, year) => {
 }
 
 export const calculateAge = (birthdate: string) => {
-    return moment().diff(birthdate, 'years');
+    return moment().diff(new Date(birthdate), 'years');
 }
