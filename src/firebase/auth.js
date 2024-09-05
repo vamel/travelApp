@@ -28,7 +28,6 @@ export const handleSignIn = (email, password) => {
 export const handleSignOut = () => {
     return new Promise((resolve, reject) => {
         signOut(auth).then((res) => {
-            console.log(res);
             resolve(res);
         }).catch((err) => {
             reject(err.message);

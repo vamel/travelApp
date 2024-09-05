@@ -7,8 +7,6 @@ export const putUser = async (userData: User) => {
     const userDataSent = {
         ...userDetails,
         profile_picture_url: "",
-        favourites: [],
-        last_location: "string",
         invitations_sent: [],
         invitations_received: [],
         users_blocked: [],

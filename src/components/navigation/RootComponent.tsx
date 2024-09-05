@@ -19,6 +19,7 @@ const RootComponent = () => {
 
             if (storedToken) {
                 authCtx.authenticate(storedToken, storedUid as string);
+                authCtx.getData(storedUid as string);
             }
             setIsTryingLogIn(false);
         }

@@ -37,6 +37,7 @@ export const userPageStyles = StyleSheet.create(
             color: COLORS.universal.orange500
         },
         signOutContainer: {
+            flexDirection: "row",
             justifyContent: "center",
             alignItems: "center",
             marginBottom: 20

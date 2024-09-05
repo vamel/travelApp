@@ -45,11 +45,6 @@ const StackNavigation = () => {
                     options={{title: "Reset Password"}}
                 />
                 <Stack.Screen
-                    name={"SignOutPage"}
-                    component={SignOutPage}
-                    options={{title: "Sign Out"}}
-                />
-                <Stack.Screen
                     name={"WelcomePage"}
                     component={WelcomePage}
                     options={{title: "Home"}}
@@ -66,16 +61,6 @@ const StackNavigation = () => {
                     name={"EmergencyNumbersPage"}
                     component={EmergencyNumbersPage}
                     options={{title: "Emergency Numbers"}}
-                />
-                <Stack.Screen
-                    name={"InvitationListPage"}
-                    component={InvitationListPage}
-                    options={{title: "Invitation List Page"}}
-                />
-                <Stack.Screen
-                    name={"InvitationPage"}
-                    component={InvitationPage}
-                    options={{title: "Invitation Page"}}
                 />
                 <Stack.Screen
                     name={"TabNavigation"}

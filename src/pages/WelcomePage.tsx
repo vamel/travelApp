@@ -8,21 +8,25 @@ import {welcomePageStyles} from "../styles/pages/welcomePageStyles";
 import * as SplashScreen from "expo-splash-screen";
 import {AttractionContext} from "../store/attractions/attracion-context";
 import {EventContext} from "../store/events/event-context";
+import {AuthContext} from "../store/user/auth-context";
 
 SplashScreen.preventAutoHideAsync();
 
 const WelcomePage = () => {
     const [cityData, setCityData] = useState<City>(null);
+    const authCtx = useContext(AuthContext);
     const attrCtx = useContext(AttractionContext);
     const evtCtx = useContext(EventContext);
 
     useEffect(() => {
         const getData = async () => {
-            const docRef = doc(db, "cities", "warsaw");
+            //@ts-ignore
+            const last_location = authCtx.user ? authCtx.user.last_location : "warsaw"
+            const docRef = doc(db, "cities", last_location);
             const docSnap = await getDoc(docRef);
             const cityData = docSnap.data();
-            attrCtx.fetchData("warsaw");
-            evtCtx.fetchData("warsaw");
+            attrCtx.fetchData(last_location);
+            evtCtx.fetchData(last_location);
             //@ts-ignore
             const gsReference = ref(storage, cityData.imageUri);
             await getDownloadURL(gsReference).then(result => {
@@ -32,7 +36,7 @@ const WelcomePage = () => {
             });
         }
         getData();
-    }, []);
+    }, [authCtx.user]);
 
     const onLayoutRootView = useCallback(async () => {
         if (cityData) {
@@ -50,7 +54,7 @@ const WelcomePage = () => {
                 Currently exploring <Text style={welcomePageStyles.cityName}>{cityData.name}</Text>!
             </Text>
             <View style={welcomePageStyles.imageContainer}>
-                <Image source={{uri: cityData.imageUri}} style={welcomePageStyles.image} />
+                <Image source={{uri: cityData.imageUri ? cityData.imageUri : undefined}} style={welcomePageStyles.image} />
             </View>
             <Text style={welcomePageStyles.triviaTitle}>Did you know?</Text>
             <Text style={welcomePageStyles.triviaText}>{cityData.trivia}</Text>

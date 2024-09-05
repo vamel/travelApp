@@ -11,13 +11,13 @@ import {AuthContext} from "../store/user/auth-context";
 const SignInPage = ({navigation}) => {
     const [emailInput, setEmailInput] = useState('');
     const [passwordInput, setPasswordInput] = useState('');
-
     const authCtx = useContext(AuthContext);
 
     const handleLoginPress = async () => {
         try {
             const userData = await handleSignIn(emailInput, passwordInput);
             authCtx.authenticate(userData.accessToken, userData.uid)
+            authCtx.getData(userData.uid);
             navigation.navigate("TabNavigation");
         } catch(err) {
             Alert.alert("Invalid credentials");

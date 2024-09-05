@@ -85,8 +85,8 @@ const CreateProfilePage = ({navigation, route}) => {
     const onSubmit = () => {
         const createdUser = new User(
             route.params.uid, userName, userBio, userPlaceOfOrigin ,
-            userFirstName, userFavouriteCity, route.params.email,
-            userBirthdate.toDateString(), userInstagram, userHobbies, userLanguages, userCountries);
+            userFirstName, userFavouriteCity, [], route.params.email,
+            userBirthdate.toDateString(), userInstagram, userHobbies, userLanguages, userCountries, "");
         putUser(createdUser);
         navigation.navigate("CompleteRegistrationPage");
     }

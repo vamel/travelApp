@@ -20,18 +20,22 @@ const UserPage = ({navigation, route}) => {
 
     useEffect(() => {
         setUserUid(route.params.userUid);
-        const getUserData = async () => {
-            const userRef = collection(db, "users");
-            const q = query(userRef, where(documentId(), "==", route.params.userUid), limit(1));
-            const querySnapshot = await getDocs(q);
-            const userData = querySnapshot.docs[0].data();
-            const user = new User(authCtx.uid, userData.username, userData.bio,
-                userData.country_of_origin, userData.firstname, userData.favourite_city, userData.email,
-                userData.birthdate, userData.instagram, userData.hobbies, userData.languages, userData.countries);
-            setUserData(user);
+        if (route.params.userUid === authCtx.uid) {
+            setUserData(authCtx.user);
+        } else {
+            const getUserData = async () => {
+                const userRef = collection(db, "users");
+                const q = query(userRef, where(documentId(), "==", route.params.userUid), limit(1));
+                const querySnapshot = await getDocs(q);
+                const userData = querySnapshot.docs[0].data();
+                const user = new User(authCtx.uid, userData.username, userData.bio,
+                    userData.place_of_origin, userData.firstname, userData.favourite_city, [], userData.email,
+                    userData.birthdate, userData.instagram, userData.hobbies, userData.languages, userData.countries, "");
+                setUserData(user);
+            }
+            getUserData();
         }
-        getUserData();
-    }, [userUid])
+    }, [route.params.userUid])
 
     const onLayoutRootView = useCallback(async () => {
         if (userData) {
@@ -56,6 +60,28 @@ const UserPage = ({navigation, route}) => {
         }
     }
 
+    const renderProfileOptions = () => {
+        if (route.params.userUid === authCtx.uid) {
+            return(
+                <View style={userPageStyles.signOutContainer}>
+                    <ProfileButton
+                        icon={"exit-sharp"}
+                        color={"red"}
+                        onPress={handleSignOutButton}
+                        text={"Sign out"}
+                    />
+                    <ProfileButton
+                        icon={"trash"}
+                        color={"red"}
+                        onPress={() => console.log("deleted account")}
+                        text={"Delete account"}
+                    />
+                </View>
+            );
+        }
+        return null;
+    }
+
     return(
         <SafeAreaView style={userPageStyles.container} onLayout={onLayoutRootView}>
             <ScrollView>
@@ -64,14 +90,7 @@ const UserPage = ({navigation, route}) => {
                     {renderDashboard()}
                 </View>
                 <UserInfo userInfo={userData} />
-                <View style={userPageStyles.signOutContainer}>
-                    <ProfileButton
-                        icon={"exit-sharp"}
-                        color={"red"}
-                        onPress={handleSignOutButton}
-                        text={"Sign out"}
-                    />
-                </View>
+                {renderProfileOptions()}
             </ScrollView>
         </SafeAreaView>
     );

@@ -5,6 +5,7 @@ import {eventListPageStyles} from "../styles/pages/eventListPageStyles";
 import {IEvent} from "../models/interfaces/IEvent";
 import {EventContext} from "../store/events/event-context";
 import {AuthContext} from "../store/user/auth-context";
+import {toTitle} from "../utils/stringUtils";
 
 const EventListPage = ({navigation}) => {
     const evtCtx = useContext(EventContext);
@@ -31,7 +32,7 @@ const EventListPage = ({navigation}) => {
 
     return(
         <SafeAreaView style={eventListPageStyles.container}>
-            <Text style={eventListPageStyles.titleText}>{`Events in ${authCtx.location}`}</Text>
+            <Text style={eventListPageStyles.titleText}>{`Events in ${toTitle(authCtx.user.last_location)}`}</Text>
             <View style={[eventListPageStyles.items]}>
                 <FlatList
                     initialNumToRender={10}

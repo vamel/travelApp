@@ -1,46 +1,58 @@
 import {createContext, useState} from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import firebase from "firebase/compat";
 import * as SecureStore from 'expo-secure-store';
-import User = firebase.User;
+import {doc, getDoc} from "firebase/firestore";
+import {db} from "../../firebase/config";
+import {parseUserData} from "../../firebase/parseUserData";
+import {User} from "../../models/classes/User";
 
 export const AuthContext = createContext(
     {
         token: "",
         isAuthenticated: false,
         uid: "",
-        location: "Warsaw",
+        user: null,
         authenticate: (token: string, uid: string) => {},
-        logout: () => {}
+        logout: () => {},
+        getData: (uid: string) => {}
     }
 );
 
 const AuthContextProvider = ({children}) => {
     const [authToken, setAuthToken] = useState("");
     const [userUid, setUserUid] = useState("");
-    const [location, setLocation] = useState("");
+    const [user, setUser] = useState<User>(null);
 
     const authenticate = (token, uid) => {
-        setAuthToken(token);
-        setUserUid(uid);
-        SecureStore.setItemAsync("token", token);
         AsyncStorage.setItem("uid", uid);
+        SecureStore.setItemAsync("token", token);
+        setUserUid(uid);
+        setAuthToken(token);
     }
 
     const logout = () => {
         setAuthToken(null);
-        setUserUid(null);
+        setUserUid("");
+        setUser(null);
         SecureStore.deleteItemAsync("token");
         AsyncStorage.removeItem("uid");
+    }
+
+    const getData = async (uid: string) => {
+        const userRef = doc(db, "users", uid);
+        const userSnapshot = await getDoc(userRef);
+        const userData = userSnapshot.data();
+        setUser(parseUserData(userData));
     }
 
     const value = {
         token: authToken,
         uid: userUid,
         isAuthenticated: !!authToken,
-        location: "Warsaw",
+        user: user,
         authenticate: authenticate,
-        logout: logout
+        logout: logout,
+        getData: getData
     }
 
     //@ts-ignore
