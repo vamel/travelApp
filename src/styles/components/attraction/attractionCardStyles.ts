@@ -3,7 +3,7 @@ import COLORS from "../../utils/Colors";
 
 const deviceWidth = Dimensions.get("window").width;
 
-const cardStyles = StyleSheet.create(
+export const attractionCardStyles = StyleSheet.create(
     {
         container: {
             marginHorizontal: 10,
@@ -49,6 +49,4 @@ const cardStyles = StyleSheet.create(
             textAlign: "center"
         }
     }
-)
-
-export default cardStyles;
+);

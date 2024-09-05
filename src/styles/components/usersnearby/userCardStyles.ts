@@ -16,18 +16,20 @@ export const userCardStyles = StyleSheet.create(
         },
         userCard: {
             flex: 1,
-            height: 180,
+            height: 100,
             width: deviceWidth - 20,
             flexDirection: "row",
             justifyContent: "space-around",
             alignItems: "center",
         },
         imageContainer: {
+            paddingHorizontal: 10,
             alignItems: 'stretch',
         },
         image: {
-            height: 180,
-            width: 180,
+            height: 80,
+            width: 80,
+            borderRadius: 40
         },
         textContainer: {
             flex: 1,

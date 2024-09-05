@@ -12,6 +12,8 @@ import EmergencyNumbersPage from "../../pages/EmergencyNumbersPage";
 import InvitationListPage from "../../pages/InvitationListPage";
 import InvitationPage from "../../pages/InvitationPage";
 import TabNavigation from "./TabNavigation";
+import FavouritesPage from "../../pages/FavouritesPage";
+import OtherUserPage from "../../pages/OtherUserPage";
 
 const Stack = createNativeStackNavigator();
 
@@ -59,6 +61,10 @@ const AuthenticatedStackNavigation = () => {
                     options={{title: "Sign Out"}}
                 />
                 <Stack.Screen
+                    name={"OtherUserPage"}
+                    component={OtherUserPage}
+                />
+                <Stack.Screen
                     name={"AttractionPage"}
                     component={AttractionPage}
                 />
@@ -70,6 +76,11 @@ const AuthenticatedStackNavigation = () => {
                     name={"EmergencyNumbersPage"}
                     component={EmergencyNumbersPage}
                     options={{title: "Emergency Numbers"}}
+                />
+                <Stack.Screen
+                    name={"FavouritesPage"}
+                    component={FavouritesPage}
+                    options={{title: "Favourite attractions"}}
                 />
                 <Stack.Screen
                     name={"InvitationListPage"}

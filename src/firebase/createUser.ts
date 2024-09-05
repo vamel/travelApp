@@ -7,10 +7,10 @@ export const putUser = async (userData: User) => {
     const userDataSent = {
         ...userDetails,
         profile_picture_url: "",
-        invitations_sent: [],
-        invitations_received: [],
-        users_blocked: [],
-        blocked_by: []
+        invitations_sent: ["1"],
+        invitations_received: ["1"],
+        users_blocked: ["1"],
+        blocked_by: ["1"]
     };
     await setDoc(doc(db, "users", uid), userDataSent);
 }

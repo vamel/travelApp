@@ -2,7 +2,7 @@ import {View, Image, Text} from "react-native";
 import {useEffect, useState} from "react";
 import {getDownloadURL, ref} from "firebase/storage";
 import {storage} from "../../firebase/config";
-import cardStyles from "../../styles/components/attraction/cardStyles";
+import {attractionCardStyles} from "../../styles/components/attraction/attractionCardStyles";
 
 interface IAttractionCard {
     imageUrl: string,
@@ -21,13 +21,13 @@ const AttractionCard = (props: IAttractionCard) => {
     }, []);
 
     return(
-        <View style={cardStyles.attractionCard}>
-            <View style={cardStyles.imageContainer}>
-                <Image source={{ uri: imageUrl !== "" ? imageUrl : undefined }} style={cardStyles.image}/>
+        <View style={attractionCardStyles.attractionCard}>
+            <View style={attractionCardStyles.imageContainer}>
+                <Image source={{ uri: imageUrl !== "" ? imageUrl : undefined }} style={attractionCardStyles.image}/>
             </View>
-            <View style={cardStyles.textContainer}>
-                <Text style={cardStyles.text}>{props.name}</Text>
-                <Text style={cardStyles.distanceText}>X m away</Text>
+            <View style={attractionCardStyles.textContainer}>
+                <Text style={attractionCardStyles.text}>{props.name}</Text>
+                <Text style={attractionCardStyles.distanceText}>X m away</Text>
             </View>
         </View>
     );

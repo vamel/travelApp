@@ -1,7 +1,10 @@
 import {View, Text, SafeAreaView, ScrollView} from "react-native";
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {attractionPageStyles} from "../styles/pages/attractionPageStyles";
 import {dateToString, getDateElements} from "../utils/dateUtils";
+import * as SplashScreen from 'expo-splash-screen';
+
+SplashScreen.preventAutoHideAsync();
 
 const EventPage = ({route}) => {
     const [eventData, setEventData] = useState(null);
@@ -21,18 +24,18 @@ const EventPage = ({route}) => {
         setEventData(receivedData);
     }, [receivedData.name]);
 
+    const onLayoutRootView = useCallback(async () => {
+        if (eventData) {
+            await SplashScreen.hideAsync();
+        }
+    }, [eventData]);
+
     if (!eventData) {
-        return(
-            <View>
-                <Text>
-                    Loading...
-                </Text>
-            </View>
-        );
+        return null;
     }
 
     return(
-        <SafeAreaView style={attractionPageStyles.attractionPage}>
+        <SafeAreaView style={attractionPageStyles.attractionPage} onLayout={onLayoutRootView}>
             <ScrollView
                 showsVerticalScrollIndicator={false}
             >

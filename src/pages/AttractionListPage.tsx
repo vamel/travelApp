@@ -1,13 +1,15 @@
 import {useContext, useEffect, useState} from "react";
 import {FlatList, Pressable, SafeAreaView, Text, View} from "react-native";
-import {Attraction} from "../models/interfaces/Attraction";
+// import {Attraction} from "../models/interfaces/Attraction";
+import {Attraction} from "../models/classes/Attraction";
 import AttractionCard from "../components/attraction/AttractionCard";
 import attractionListPageStyles from "../styles/pages/attractionListPageStyles";
-import cardStyles from "../styles/components/attraction/cardStyles";
 import AttractionSearchBar from "../components/attraction/AttractionSearchBar";
 import {toTitle} from "../utils/stringUtils";
 import {AttractionContext} from "../store/attractions/attracion-context";
 import {AuthContext} from "../store/user/auth-context";
+import {UserDTO} from "../models/classes/UserDTO";
+import {attractionCardStyles} from "../styles/components/attraction/attractionCardStyles";
 
 const AttractionListPage = ({navigation}) => {
     const [cityName, setCityName] = useState<string>("");
@@ -15,10 +17,11 @@ const AttractionListPage = ({navigation}) => {
 
     const authCtx = useContext(AuthContext);
     const attrCtx = useContext(AttractionContext);
+    const currentUser: UserDTO = authCtx.user!
 
     useEffect(() => {
-        setCityName(authCtx.user.last_location)
-        attrCtx.fetchData(authCtx.user.last_location);
+        setCityName(currentUser.last_location)
+        attrCtx.fetchData(currentUser.last_location);
     }, []);
 
     const onSearchInputChange = (searchedCityName: string) => {
@@ -38,11 +41,11 @@ const AttractionListPage = ({navigation}) => {
             navigation.navigate("AttractionPage",
                 {
                     attractionData: attraction
-                })
+                });
         };
 
         return (
-            <View style={cardStyles.container} key={attraction.name}>
+            <View style={attractionCardStyles.container} key={attraction.name}>
                 <Pressable
                     onPress={handleCardPress}
                     android_ripple={attractionListPageStyles.rippleAndroid}

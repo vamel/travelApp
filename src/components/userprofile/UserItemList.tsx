@@ -8,6 +8,10 @@ interface IUserItemListProps {
 }
 
 const UserItemList = (props: IUserItemListProps) => {
+    if (!props.items) {
+        return null;
+    }
+
     return(
         <View style={userItemListStyles.languageContainer}>
             <Text style={userItemListStyles.title}>{props.title}</Text>

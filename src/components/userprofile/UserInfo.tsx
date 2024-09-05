@@ -14,7 +14,7 @@ const UserInfo = (props: IUserInfoProps) => {
         <View style={userInfoStyles.userDetailsContainer}>
             <Text style={userInfoStyles.userBio}>{props.userInfo.bio}</Text>
             <UserInfoField text={"Name"} value={props.userInfo.firstname} />
-            <UserInfoField text={"From"} value={props.userInfo.country_of_origin} />
+            <UserInfoField text={"From"} value={props.userInfo.place_of_origin} />
             <UserInfoField text={"Age"} value={`${calculateAge(props.userInfo.birthdate)}`} />
             <UserInfoField text={"Favourite city"} value={props.userInfo.favourite_city} />
             <UserInfoField text={"Facebook"} value={""} />

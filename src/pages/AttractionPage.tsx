@@ -1,16 +1,19 @@
 import { Attraction } from "../models/interfaces/Attraction";
 import {ScrollView, View, Text, Image, SafeAreaView} from "react-native";
-import { useEffect, useState, useLayoutEffect } from "react";
+import {useEffect, useState, useLayoutEffect, useContext} from "react";
 import { getDownloadURL, ref } from "firebase/storage";
 import { storage } from "../firebase/config";
 import IconButton from "../components/main/IconButton";
 import {attractionPageStyles} from "../styles/pages/attractionPageStyles";
+import {AuthContext} from "../store/user/auth-context";
 
 const AttractionPage = ({navigation, route}) => {
     const [attraction, setAttraction] = useState<Attraction>(new Attraction("", "", []));
     const [imageUrl, setImageUrl] = useState('');
     const [isFavourite, setIsFavourite] = useState(false);
     const isAccessibleForDisabledPeople = false;
+
+    const authCtx = useContext(AuthContext);
 
     useEffect(() => {
         const getAttraction = () => {
@@ -27,7 +30,7 @@ const AttractionPage = ({navigation, route}) => {
         getImage();
     }, []);
 
-    const headerButtonPressHandler = () => {
+    const handleFavouritePress = () => {
         setIsFavourite((isFavourite) => !isFavourite);
         alert("Added to favourites");
     }
@@ -38,7 +41,7 @@ const AttractionPage = ({navigation, route}) => {
             headerRight: () => {
                 return (
                 <IconButton
-                    onPress={headerButtonPressHandler}
+                    onPress={handleFavouritePress}
                     icon={"star"}
                     color={isFavourite ? "gold" : "grey"}/>
                 );

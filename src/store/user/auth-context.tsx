@@ -3,8 +3,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as SecureStore from 'expo-secure-store';
 import {doc, getDoc} from "firebase/firestore";
 import {db} from "../../firebase/config";
-import {parseUserData} from "../../firebase/parseUserData";
-import {User} from "../../models/classes/User";
+import {getFullUserData} from "../../firebase/parseUserData";
+import {UserDTO} from "../../models/classes/UserDTO";
 
 export const AuthContext = createContext(
     {
@@ -21,13 +21,13 @@ export const AuthContext = createContext(
 const AuthContextProvider = ({children}) => {
     const [authToken, setAuthToken] = useState("");
     const [userUid, setUserUid] = useState("");
-    const [user, setUser] = useState<User>(null);
+    const [user, setUser] = useState<UserDTO>();
 
     const authenticate = (token, uid) => {
         AsyncStorage.setItem("uid", uid);
         SecureStore.setItemAsync("token", token);
-        setUserUid(uid);
         setAuthToken(token);
+        setUserUid(uid);
     }
 
     const logout = () => {
@@ -42,7 +42,7 @@ const AuthContextProvider = ({children}) => {
         const userRef = doc(db, "users", uid);
         const userSnapshot = await getDoc(userRef);
         const userData = userSnapshot.data();
-        setUser(parseUserData(userData));
+        setUser(getFullUserData(userData));
     }
 
     const value = {

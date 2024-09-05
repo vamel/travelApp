@@ -12,6 +12,7 @@ import CreateProfilePage from "../../pages/CreateProfilePage";
 import CompleteRegistrationPage from "../../pages/CompleteRegistrationPage";
 import InvitationListPage from "../../pages/InvitationListPage.tsx";
 import InvitationPage from "../../pages/InvitationPage";
+import OtherUserPage from "../../pages/OtherUserPage";
 
 const Stack = createNativeStackNavigator();
 

@@ -7,6 +7,7 @@ export const nearbyUsersPageStyles = StyleSheet.create(
     {
         container: {
             flex: 1,
+            flexGrow: 1,
             marginTop: Platform.OS === "android" ? 25 + statusBarHeight : 0,
             flexDirection: 'column',
             justifyContent: 'flex-start',
@@ -19,5 +20,16 @@ export const nearbyUsersPageStyles = StyleSheet.create(
             textAlign: "center",
             color: COLORS.universal.orange500
         },
+        listContainer: {
+            flexGrow: 1,
+            paddingTop: 10,
+            paddingBottom: 40
+        },
+        rippleAndroid: {
+            color: "#CCCCCC"
+        },
+        buttonPressed: {
+            opacity: 0.75
+        }
     }
 );

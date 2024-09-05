@@ -21,7 +21,6 @@ const attractionListPageStyles = StyleSheet.create(
             color: COLORS.attraction.orange300
         },
         listContainer: {
-            // flex: 1,
             flexGrow: 1,
             paddingTop: 10,
             paddingBottom: 40

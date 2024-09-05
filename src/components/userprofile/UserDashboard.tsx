@@ -24,10 +24,10 @@ const UserDashboard = (props: IUserDashboardProps) => {
         <View style={userDashboardStyles.userDashboardContainer}>
             <Text style={userDashboardStyles.userNameText}>{props.username}</Text>
             <ProfileButton
-                icon={"build-sharp"}
+                icon={"star-sharp"}
                 color={"orange"}
                 onPress={handleEmergencyNumbersButtonPress}
-                text={"Edit profile"}
+                text={"Favourites"}
             />
             <ProfileButton
                 icon={"mail"}

@@ -7,7 +7,7 @@ import COLORS from "../../styles/utils/Colors";
 import UserPage from "../../pages/UserPage";
 import {useContext} from "react";
 import {AuthContext} from "../../store/user/auth-context";
-import NearbyUsersPage from "../../pages/NearbyUsersPage";
+import UsersNearbyPage from "../../pages/UsersNearbyPage";
 
 const Tab = createBottomTabNavigator();
 
@@ -27,8 +27,8 @@ const TabNavigation = () => {
                     title: "Home",
                     tabBarIcon: ({color, size}) => (<MaterialIcons name="home" size={size} color={color} />)}}/>
             <Tab.Screen
-                name={"UsersNearby"}
-                component={NearbyUsersPage}
+                name={"UsersNearbyPage"}
+                component={UsersNearbyPage}
                 options={{
                     title: "Users Nearby",
                     tabBarIcon: ({color, size}) => (<MaterialIcons name="people" size={size} color={color} />)}}/>
@@ -47,8 +47,6 @@ const TabNavigation = () => {
             <Tab.Screen
                 name={"UserPage"}
                 component={UserPage}
-                initialParams={{userUid: authCtx.uid}}
-                // initialParams={{userUid: "WtwfdoUORhRQlig7GFJ0sceU5BH2"}}
                 options={{
                     title: "Profile",
                     tabBarIcon: ({color, size}) => (<MaterialIcons name="person" size={size} color={color} />)}}/>
