@@ -10,6 +10,11 @@ interface IUserDashboardProps {
 const UserDashboard = (props: IUserDashboardProps) => {
     const navigation = useNavigation();
 
+    const handleFavouritesButtonPress = () => {
+        // @ts-ignore
+        navigation.navigate("FavouritesPage");
+    }
+
     const handleInvitationsButtonPress = () => {
         // @ts-ignore
         navigation.navigate("InvitationListPage");
@@ -26,7 +31,7 @@ const UserDashboard = (props: IUserDashboardProps) => {
             <ProfileButton
                 icon={"star-sharp"}
                 color={"orange"}
-                onPress={handleEmergencyNumbersButtonPress}
+                onPress={handleFavouritesButtonPress}
                 text={"Favourites"}
             />
             <ProfileButton

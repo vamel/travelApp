@@ -22,8 +22,6 @@ const UsersNearbyPage = ({navigation}) => {
         const getData = async () => {
             const userRef = collection(db, "users");
             const q = query(userRef, where("last_location", "==", currentUser.last_location),
-                // where(documentId(), "not-in", currentUser.users_blocked),
-                // where(documentId(), "not-in", currentUser.blocked_by),
                 where(documentId(), "!=", authCtx.uid), limit(5), orderBy(documentId()));
             const querySnapshot = await getDocs(q);
             const receivedUsers = querySnapshot.docs.map((doc) => {

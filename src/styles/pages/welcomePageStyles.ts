@@ -18,7 +18,7 @@ export const welcomePageStyles = StyleSheet.create(
             color: COLORS.universal.orange500
         },
         imageContainer: {
-            marginTop: 10,
+            marginTop: 20,
             marginHorizontal: 10,
             alignItems: 'stretch',
             overflow: "hidden"
@@ -26,12 +26,14 @@ export const welcomePageStyles = StyleSheet.create(
         image: {
             height: 500,
             width: 300,
+            borderRadius: 5,
             resizeMode: "cover"
         },
         triviaTitle: {
             marginTop: 10,
             fontWeight: "bold",
-            fontSize: 16
+            fontSize: 18,
+            color: COLORS.universal.orange500
         },
         triviaText: {
             marginTop: 4,

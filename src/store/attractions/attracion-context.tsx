@@ -26,7 +26,9 @@ const AttractionContextProvider = ({children}) => {
         if (querySnapshot.empty) {
             return;
         }
-        const receivedAttractionList = querySnapshot.docs.map(doc => doc.data());
+        const receivedAttractionList = querySnapshot.docs.map((doc) => {
+            return {id: doc.id, ...doc.data()}
+        });
         setAttractionList(receivedAttractionList);
         setLastId(querySnapshot.docs.pop().id);
     }
@@ -35,7 +37,7 @@ const AttractionContextProvider = ({children}) => {
         const attrRef = collection(db, "attractions");
         const q = query(attrRef,
             where("city", "==", currentCity),
-            limit(2), orderBy(documentId()), startAfter(lastId));
+            limit(5), orderBy(documentId()), startAfter(lastId));
         const querySnapshot = await getDocs(q);
         if (querySnapshot.empty) {
             return;

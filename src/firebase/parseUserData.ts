@@ -8,7 +8,7 @@ export const parseUserData = (userData) => {
             userData.favourite_city,userData.favourites ,userData.email, userData.birthdate,
             userData.instagram, userData.hobbies, userData.languages, userData.countries, userData.last_location);
     } catch(err) {
-        return null;
+        return null as User;
     }
 }
 

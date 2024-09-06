@@ -1,24 +1,33 @@
-import { Attraction } from "../models/interfaces/Attraction";
 import {ScrollView, View, Text, Image, SafeAreaView} from "react-native";
-import {useEffect, useState, useLayoutEffect, useContext} from "react";
-import { getDownloadURL, ref } from "firebase/storage";
-import { storage } from "../firebase/config";
+import {useEffect, useState, useContext, useCallback} from "react";
+import {getDownloadURL, ref} from "firebase/storage";
+import {doc, updateDoc, arrayUnion, arrayRemove} from "firebase/firestore";
+import {db, storage} from "../firebase/config";
 import IconButton from "../components/main/IconButton";
 import {attractionPageStyles} from "../styles/pages/attractionPageStyles";
 import {AuthContext} from "../store/user/auth-context";
+import {UserDTO} from "../models/classes/UserDTO";
+import OpeningHoursInfo from "../components/attraction/OpeningHoursInfo";
+import {Attraction} from "../models/classes/Attraction";
+import {parseAttractionData, parseCoords, parseOpeningHours, parseTicketPrices} from "../firebase/parseAttractionData";
+import * as SplashScreen from "expo-splash-screen";
+import TicketPricesInfo from "../components/attraction/TicketPricesInfo";
+import Map from "../components/utils/Map";
 
-const AttractionPage = ({navigation, route}) => {
-    const [attraction, setAttraction] = useState<Attraction>(new Attraction("", "", []));
+SplashScreen.preventAutoHideAsync();
+
+const AttractionPage = ({route}) => {
+    const [attraction, setAttraction] = useState<Attraction>(null);
     const [imageUrl, setImageUrl] = useState('');
     const [isFavourite, setIsFavourite] = useState(false);
-    const isAccessibleForDisabledPeople = false;
 
     const authCtx = useContext(AuthContext);
+    const currentUser: UserDTO = authCtx.user!;
 
     useEffect(() => {
         const getAttraction = () => {
             const receivedData = route.params.attractionData;
-            const data: Attraction = new Attraction(receivedData.name, receivedData.description, receivedData.images_url);
+            const data: Attraction = parseAttractionData(receivedData);
             setAttraction(data);
         }
         getAttraction();
@@ -28,44 +37,59 @@ const AttractionPage = ({navigation, route}) => {
             await getDownloadURL(gsReference).then(result => setImageUrl(() => result));
         }
         getImage();
+
+        if (currentUser.favourites.includes(route.params.attractionData.uid)) {
+            setIsFavourite(true);
+        }
     }, []);
 
-    const handleFavouritePress = () => {
-        setIsFavourite((isFavourite) => !isFavourite);
-        alert("Added to favourites");
+    const onLayoutRootView = useCallback(async () => {
+        if (attraction) {
+            await SplashScreen.hideAsync();
+        }
+    }, [attraction]);
+
+    if (!attraction) {
+        return null;
     }
 
-    useLayoutEffect(() => {
-        navigation.setOptions({
-            title: attraction.name,
-            headerRight: () => {
-                return (
-                <IconButton
-                    onPress={handleFavouritePress}
-                    icon={"star"}
-                    color={isFavourite ? "gold" : "grey"}/>
-                );
-            }
-        })
-    }, [navigation, attraction, isFavourite]);
+    const handleFavouritePress = async () => {
+        const userRef = doc(db, "users", authCtx.uid);
+        setIsFavourite((isFavourite) => !isFavourite);
+        if (isFavourite) {
+            currentUser.favourites = currentUser.favourites.filter((id) => id !== route.params.attractionData.uid);
+            await updateDoc(userRef, {
+                favourites: arrayRemove(route.params.attractionData.id)
+            });
+        } else {
+            currentUser.favourites.push(route.params.attractionData.uid);
+            await updateDoc(userRef, {
+                favourites: arrayUnion(route.params.attractionData.uid)
+            });
+        }
+    }
 
     const getAvailability = () => {
-        const availabilityText = isAccessibleForDisabledPeople ?
+        const availabilityText = attraction.is_accessible_for_disabled ?
             "Accessible for disabled people." :
             "Not accessible for disabled people."
-        const styles = isAccessibleForDisabledPeople ? attractionPageStyles.availableText : attractionPageStyles.notAvailableText;
+        const styles = attraction.is_accessible_for_disabled ? attractionPageStyles.availableText : attractionPageStyles.notAvailableText;
         return <Text style={styles}>{availabilityText}</Text>
     }
 
     return(
-        <SafeAreaView style={attractionPageStyles.attractionPage}>
+        <SafeAreaView style={attractionPageStyles.attractionPage} onLayout={onLayoutRootView}>
             <ScrollView
                 showsVerticalScrollIndicator={false}
             >
-                <View>
+                <View style={attractionPageStyles.mainTitleContainer}>
                     <Text style={attractionPageStyles.title}>
                         {attraction.name}
                     </Text>
+                    <IconButton
+                        onPress={handleFavouritePress}
+                        icon={"star"}
+                        color={isFavourite ? "gold" : "grey"}/>
                 </View>
                 <View style={attractionPageStyles.imageContainer}>
                     <Image source={{ uri: imageUrl ? imageUrl : undefined }} style={attractionPageStyles.image}/>
@@ -77,24 +101,9 @@ const AttractionPage = ({navigation, route}) => {
                         {attraction.description}
                     </Text>
                 </View>
-                <View style={attractionPageStyles.detailsContainer}>
-                    <Text style={attractionPageStyles.detailsTitle}>Opening Hours:</Text>
-                    <Text style={attractionPageStyles.openingHoursText}>Monday: Closed</Text>
-                    <Text style={attractionPageStyles.openingHoursText}>Tuesday: 10:00-17:00</Text>
-                    <Text style={attractionPageStyles.openingHoursText}>Wednesday: 10:00-17:00</Text>
-                    <Text style={attractionPageStyles.openingHoursText}>Thursday: 10:00-17:00</Text>
-                    <Text style={attractionPageStyles.openingHoursText}>Friday: 10:00-17:00</Text>
-                    <Text style={attractionPageStyles.openingHoursText}>Saturday: 10:00-18:00</Text>
-                    <Text style={attractionPageStyles.openingHoursText}>Sunday: 10:00-16:00</Text>
-                </View>
-                <View style={attractionPageStyles.detailsContainer}>
-                    <Text style={attractionPageStyles.detailsTitle}>Ticket prices:</Text>
-                    <Text>Normal ticket - 20 zł</Text>
-                </View>
-                <View style={attractionPageStyles.detailsContainer}>
-                    <Text style={attractionPageStyles.detailsTitle}>Location:</Text>
-                    <Text>Placeholder for a map</Text>
-                </View>
+                <OpeningHoursInfo openingHours={parseOpeningHours(attraction.opening_hours)} />
+                <TicketPricesInfo ticketPrices={parseTicketPrices(attraction.ticket_prices)} />
+                <Map coordinates={parseCoords(attraction.coords)} />
             </ScrollView>
         </SafeAreaView>
     );

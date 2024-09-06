@@ -27,7 +27,7 @@ const AttractionCard = (props: IAttractionCard) => {
             </View>
             <View style={attractionCardStyles.textContainer}>
                 <Text style={attractionCardStyles.text}>{props.name}</Text>
-                <Text style={attractionCardStyles.distanceText}>X m away</Text>
+                {/*<Text style={attractionCardStyles.distanceText}>X m away</Text>*/}
             </View>
         </View>
     );

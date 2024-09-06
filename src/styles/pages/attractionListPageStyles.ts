@@ -31,6 +31,9 @@ const attractionListPageStyles = StyleSheet.create(
             paddingBottom: 80,
             paddingTop: 10,
         },
+        favouritePageButtonContainer: {
+            marginTop: 10
+        },
         rippleAndroid: {
             color: "#CCCCCC"
         },

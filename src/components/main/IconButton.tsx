@@ -9,8 +9,9 @@ interface IIconButton {
 
 const IconButton = (props: IIconButton) => {
     return(
-        <Pressable onPress={props.onPress} style={({pressed}) => pressed && iconButtonStyles.pressed}>
-            <Ionicons name={props.icon} size={24} color={props.color}/>
+        <Pressable onPress={props.onPress} style={({pressed}) =>
+            [iconButtonStyles.container, pressed && iconButtonStyles.pressed]}>
+            <Ionicons name={props.icon} size={36} color={props.color}/>
         </Pressable>
     );
 }
@@ -19,6 +20,9 @@ export default IconButton;
 
 const iconButtonStyles = StyleSheet.create(
     {
+        container: {
+            marginBottom: 20,
+        },
         pressed: {
             opacity: 0.7
         }

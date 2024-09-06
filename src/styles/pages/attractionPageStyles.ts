@@ -12,9 +12,17 @@ export const attractionPageStyles = StyleSheet.create(
             justifyContent: "center",
             alignItems: "center",
         },
+        mainTitleContainer: {
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+        },
         imageContainer: {
             justifyContent: "center",
             alignItems: "center"
+        },
+        iconButton: {
+            marginBottom: 20,
         },
         image: {
             height: 300,
@@ -35,7 +43,11 @@ export const attractionPageStyles = StyleSheet.create(
         },
         detailsContainer: {
             marginTop: 15,
-            marginHorizontal: 30
+            marginHorizontal: 30,
+        },
+        mapContainer: {
+            marginVertical: 15,
+            marginHorizontal: 30,
         },
         detailsTitle: {
             marginBottom: 8,

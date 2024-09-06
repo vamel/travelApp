@@ -1,6 +1,5 @@
 import {useContext, useEffect, useState} from "react";
 import {FlatList, Pressable, SafeAreaView, Text, View} from "react-native";
-// import {Attraction} from "../models/interfaces/Attraction";
 import {Attraction} from "../models/classes/Attraction";
 import AttractionCard from "../components/attraction/AttractionCard";
 import attractionListPageStyles from "../styles/pages/attractionListPageStyles";
@@ -69,7 +68,7 @@ const AttractionListPage = ({navigation}) => {
                     initialNumToRender={10}
                     data={attrCtx.attractionList}
                     keyExtractor={(item: Attraction) => item.name}
-                    renderItem={({ item }: {item: Attraction}) => renderAttractionCard(item)}
+                    renderItem={(item) => renderAttractionCard(item.item)}
                     contentContainerStyle={attractionListPageStyles.listContainer}
                     onEndReachedThreshold={0.35}
                     onEndReached={fetchMoreData}
