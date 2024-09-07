@@ -5,11 +5,14 @@ import {useState} from "react";
 import RegisterButton from "../components/register/RegisterButton";
 import {handleSingUp} from "../firebase/auth";
 import { passwordStrength } from 'check-password-strength'
+import {Simulate} from "react-dom/test-utils";
+import error = Simulate.error;
 
 const RegisterPage = ({navigation}) => {
     const [enteredEmailAddress, setEnteredEmailAddress] = useState("");
     const [enteredPassword, setEnteredPassword] = useState("");
     const [enteredConfirmPassword, setEnteredConfirmPassword] = useState("");
+    const [errorMsg, setErrorMsg] = useState("");
 
     const handleGoBackPress = () => {
         navigation.goBack();
@@ -17,15 +20,19 @@ const RegisterPage = ({navigation}) => {
 
     const handleCreateAccount = async () => {
         if (enteredPassword !== enteredConfirmPassword) {
-            console.log("Passwords must match");
+            setErrorMsg("Passwords must match");
         } else if (passwordStrength(enteredPassword).id < 2) {
-            console.log("Password too weak");
+            setErrorMsg("Password too weak");
         } else {
-            const uid = await handleSingUp(enteredEmailAddress, enteredPassword);
-            navigation.navigate("CreateProfilePage", {
-                uid: uid,
-                email: enteredEmailAddress
-            });
+            try {
+                const uid = await handleSingUp(enteredEmailAddress, enteredPassword);
+                navigation.navigate("CreateProfilePage", {
+                    uid: uid,
+                    email: enteredEmailAddress
+                });
+            } catch(err) {
+                setErrorMsg("Invalid email address");
+            }
         }
     }
 
@@ -57,6 +64,7 @@ const RegisterPage = ({navigation}) => {
                     value={enteredConfirmPassword}
                     secure={true}
                 />
+                {errorMsg && <Text style={registerPageStyles.errorText}>{errorMsg}</Text>}
                 <RegisterButton onPress={handleCreateAccount} title={"Create an account"} />
                 <View style={registerPageStyles.registerPromptContainer}>
                     <Text style={registerPageStyles.registerPromptText}>Already have an account?</Text>

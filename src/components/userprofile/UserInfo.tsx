@@ -4,6 +4,7 @@ import {userInfoStyles} from "../../styles/components/userprofile/userInfoStyles
 import UserItemList from "./UserItemList";
 import {User} from "../../models/classes/User";
 import {calculateAge} from "../../utils/dateUtils";
+import {toTitle} from "../../utils/stringUtils";
 
 interface IUserInfoProps {
     userInfo: User
@@ -17,6 +18,7 @@ const UserInfo = (props: IUserInfoProps) => {
             <UserInfoField text={"From"} value={props.userInfo.place_of_origin} />
             <UserInfoField text={"Age"} value={`${calculateAge(props.userInfo.birthdate)}`} />
             <UserInfoField text={"Favourite city"} value={props.userInfo.favourite_city} />
+            <UserInfoField text={"Last seen in"} value={toTitle(props.userInfo.last_location)} />
             <UserInfoField text={"Facebook"} value={""} />
             <UserInfoField text={"Instagram"} value={""} />
             <UserInfoField text={"X"} value={""} />

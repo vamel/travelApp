@@ -20,6 +20,11 @@ export const createProfileInputStyles = StyleSheet.create(
             padding: 8,
             borderRadius: 5,
             backgroundColor: COLORS.universal.gray500
+        },
+        errorText: {
+            fontSize: 14,
+            textAlign: "center",
+            color: COLORS.universal.red500
         }
     }
 );

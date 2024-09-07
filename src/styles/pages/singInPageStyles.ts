@@ -86,6 +86,12 @@ const singInPageStyles = StyleSheet.create(
         recoveryPromptContainer: {
             marginTop: 60,
             flexDirection: "row",
+        },
+        errorText: {
+            marginTop: 8,
+            fontSize: 16,
+            textAlign: "center",
+            color: COLORS.universal.red500
         }
     }
 )

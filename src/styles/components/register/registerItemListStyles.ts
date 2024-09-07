@@ -5,6 +5,7 @@ export const registerItemListStyles = StyleSheet.create(
     {
         listContainer: {
             marginTop: 20,
+            marginHorizontal: 10
         },
         title: {
             fontSize: 20,

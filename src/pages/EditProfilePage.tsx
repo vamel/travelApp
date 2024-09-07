@@ -1,55 +1,26 @@
-import {SafeAreaView, ScrollView, Text, View} from "react-native";
-import {createProfilePageStyles} from "../styles/pages/createProfilePageStyles";
-import {Hobby} from "../models/enums/Hobby";
-import RegisterItemList from "../components/register/RegisterItemList";
-import {Language} from "../models/enums/Language";
-import {useState} from "react";
-import UserBioInput from "../components/register/UserBioInput";
-import CreateProfileInput from "../components/register/CreateProfileInput";
-import RegisterButton from "../components/register/RegisterButton";
-import RegisterDatePicker from "../components/register/RegisterDatePicker";
+import {useContext, useState} from "react";
 import {User} from "../models/classes/User";
 import {putUser} from "../firebase/createUser";
-import {Country} from "../models/enums/Country";
+import {SafeAreaView, ScrollView, Text, View} from "react-native";
+import {createProfilePageStyles} from "../styles/pages/createProfilePageStyles";
 import ProfilePictureImagePicker from "../components/register/ProfilePictureImagePicker";
+import RegisterDatePicker from "../components/register/RegisterDatePicker";
+import {Hobby} from "../models/enums/Hobby";
+import {Language} from "../models/enums/Language";
+import {Country} from "../models/enums/Country";
+import UserBioInput from "../components/register/UserBioInput";
+import RegisterButton from "../components/register/RegisterButton";
+import {AuthContext} from "../store/user/auth-context";
+import EditProfileInput from "../components/editprofile/EditProfileInput";
+import EditProfileItemList from "../components/editprofile/EditProfileItemList";
+import EditProfileBio from "../components/editprofile/EditProfileBio";
 
-interface IRegisterData {
-    bio: string;
-    birthdate: string;
-    countries: string[];
-    email: string;
-    favourite_city: string;
-    firstname: string;
-    hobbies: string[];
-    languages: string[];
-    place_of_origin: string;
-    profile_picture_url: string;
-    username: string;
-}
+const EditProfilePage = ({navigation}) => {
+    const authCtx = useContext(AuthContext);
 
-const emptyUser: IRegisterData = {
-    bio: "",
-    birthdate: "",
-    countries: [],
-    email: "",
-    favourite_city: "",
-    firstname: "",
-    hobbies: [],
-    languages: [],
-    place_of_origin: "",
-    profile_picture_url: "",
-    username: ""
-}
-
-const CreateProfilePage = ({navigation, route}) => {
-    const [userBirthdate, setUserBirthdate] = useState(new Date());
-    const [userData, setUserData] = useState<IRegisterData>(emptyUser);
-    const [usernameError, setUsernameError] = useState("");
+    const [userBirthdate, setUserBirthdate] = useState(new Date(authCtx.user.birthdate));
+    const [userData, setUserData] = useState<User>(authCtx.user);
     const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
-
-    const onUserNameChange = (userNameText: string) => {
-        setUserData({...userData, username: userNameText});
-    }
 
     const userProfilePictureChange = (pictureUri: string) => {
         setUserData({...userData, profile_picture_url: pictureUri});
@@ -110,64 +81,45 @@ const CreateProfilePage = ({navigation, route}) => {
     }
 
     const onSubmit = () => {
-        if (userData.username.length < 5) {
-            setUsernameError("Username should be minimum 5 characters long");
-        }
         const createdUser: User = {
-            uid: route.params.uid,
-            email: route.params.email,
-            instagram: "",
-            favourites: [],
-            last_location: "",
-            ...userData} as User;
-        const response = putUser(createdUser);
-        if (!response) {
-            navigation.navigate("CompleteRegistrationPage");
-        }
-        setUsernameError("User with given name already exists");
+            ...userData,
+            uid: authCtx.uid,
+            instagram: ""} as User;
+        putUser(createdUser).then(() => authCtx.getData(authCtx.uid)).then(() => navigation.navigate("UserPage"));
     }
 
     return(
         <SafeAreaView style={createProfilePageStyles.container}>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={createProfilePageStyles.titleContainer}>
-                    <Text style={createProfilePageStyles.title}>Set up your account</Text>
-                    <Text style={createProfilePageStyles.subtitle}>Tell us about yourself</Text>
+                    <Text style={createProfilePageStyles.title}>Edit your profile</Text>
                 </View>
-                <CreateProfileInput
-                    title={"Choose your username"}
-                    onChangeText={onUserNameChange}
-                    placeholder={"Username"}
-                    maxLength={20}
-                    keyboardType={"default"}
-                    errorMsg={usernameError}
-                />
                 <ProfilePictureImagePicker onSelectImage={userProfilePictureChange} />
-                <CreateProfileInput
+                <EditProfileInput
                     title={"What's your first name?"}
                     onChangeText={onUserFirstNameChange}
-                    placeholder={"Name"}
+                    value={userData.firstname}
                     maxLength={20}
                     keyboardType={"default"}
                 />
-                <CreateProfileInput
+                <EditProfileInput
                     title={"Where are you from?"}
                     onChangeText={onUserOriginChange}
-                    placeholder={"Place of origin"}
+                    value={userData.place_of_origin}
                     maxLength={30}
                     keyboardType={"default"}
                 />
-                <CreateProfileInput
+                <EditProfileInput
                     title={"Which city is your favourite?"}
                     onChangeText={onUserFavouriteCityChange}
-                    placeholder={"City's name"}
+                    value={userData.favourite_city}
                     maxLength={30}
                     keyboardType={"default"}
                 />
-                {/*<CreateProfileInput*/}
+                {/*<EditProfileInput*/}
                 {/*    title={"Do you have instagram?"}*/}
                 {/*    onChangeText={onUserInstagramChange}*/}
-                {/*    placeholder={"Username on instagram"}*/}
+                {/*    value={userData.instagram}*/}
                 {/*    maxLength={30}*/}
                 {/*    keyboardType={"default"}*/}
                 {/*/>*/}
@@ -178,23 +130,26 @@ const CreateProfilePage = ({navigation, route}) => {
                     userBirthdate={userBirthdate}
                 />
                 <View>
-                    <RegisterItemList
+                    <EditProfileItemList
                         title={"What are your hobbies?"}
                         items={Object.values(Hobby).sort()}
+                        value={userData.hobbies}
                         onChoice={onHobbyChoice}
                     />
-                    <RegisterItemList
+                    <EditProfileItemList
                         title={"Choose your spoken languages"}
                         items={Object.values(Language).sort()}
+                        value={userData.languages}
                         onChoice={onLanguageChoice}
                     />
-                    <RegisterItemList
+                    <EditProfileItemList
                         title={"Where have you been already?"}
                         items={Object.values(Country).sort()}
+                        value={userData.countries}
                         onChoice={onCountryChoice}
                     />
                 </View>
-                <UserBioInput onChangeText={onBioChange}/>
+                <EditProfileBio onChangeText={onBioChange} value={userData.bio}/>
                 <View style={createProfilePageStyles.buttonContainer}>
                     <RegisterButton title={"Finish"} onPress={onSubmit} />
                 </View>
@@ -203,4 +158,4 @@ const CreateProfilePage = ({navigation, route}) => {
     );
 }
 
-export default CreateProfilePage;
+export default EditProfilePage;

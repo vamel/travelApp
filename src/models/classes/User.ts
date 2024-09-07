@@ -13,6 +13,7 @@ export class User {
                 email: string,
                 birthdate: string,
                 instagram: string,
+                profile_picture_url: string,
                 hobbies: Hobby[],
                 languages: Language[],
                 countries: Country[],
@@ -27,6 +28,7 @@ export class User {
         this.email = email;
         this.birthdate = birthdate;
         this.instagram = instagram;
+        this.profile_picture_url = profile_picture_url;
         this.hobbies = hobbies;
         this.languages = languages;
         this.countries = countries;
@@ -43,6 +45,7 @@ export class User {
     email: string;
     birthdate: string;
     instagram: string;
+    profile_picture_url: string;
     hobbies: Hobby[];
     languages: Language[];
     countries: Country[];

@@ -8,16 +8,28 @@ import * as SplashScreen from 'expo-splash-screen';
 import {User} from "../models/classes/User";
 import {parseUserData} from "../firebase/parseUserData";
 import ProfileOptionsDashboard from "../components/userprofile/ProfileOptionsDashboard";
+import {getDownloadURL, ref} from "firebase/storage";
+import {storage} from "../firebase/config";
 
 SplashScreen.preventAutoHideAsync();
 
 const UserPage = ({navigation}) => {
     const [userData, setUserData] = useState<User>(null);
+    const [imageUrl, setImageUrl] = useState<string>("");
     const authCtx = useContext(AuthContext);
 
     useEffect(() => {
         setUserData(parseUserData(authCtx.user));
-    }, [])
+
+        const getImage = async () => {
+            const gsReference = ref(storage, (authCtx.user.profile_picture_url));
+            await getDownloadURL(gsReference).then(result => setImageUrl(() => result));
+        }
+
+        if (authCtx.user.profile_picture_url) {
+            getImage();
+        }
+    }, [authCtx.user]);
 
     const onLayoutRootView = useCallback(async () => {
         if (userData) {
@@ -33,7 +45,10 @@ const UserPage = ({navigation}) => {
         <SafeAreaView style={userPageStyles.container} onLayout={onLayoutRootView}>
             <ScrollView>
                 <View style={userPageStyles.mainInfoContainer}>
-                    <Image source={require("../assets/images/user-placeholder.png")} style={userPageStyles.profilePicture} />
+                    <Image
+                        source={imageUrl ? {uri: imageUrl} : require("../assets/images/user-placeholder.png")}
+                        style={userPageStyles.profilePicture}
+                    />
                     <UserDashboard username={userData.username}/>
                 </View>
                 <UserInfo userInfo={userData} />

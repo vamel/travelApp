@@ -3,9 +3,13 @@ import {userPageStyles} from "../../styles/pages/userPageStyles";
 import ProfileButton from "./ProfileButton";
 
 const ProfileOptionsDashboard = (props) => {
+    const handleEditProfileButton = () => {
+        props.navigation.navigate("EditProfilePage");
+    }
+
     const handleSignOutButton = () => {
-        props.authCtx.logout();
         props.navigation.navigate("SignInPage");
+        props.authCtx.logout();
     }
 
     return(
@@ -13,7 +17,7 @@ const ProfileOptionsDashboard = (props) => {
             <ProfileButton
                 icon={"build-sharp"}
                 color={"orange"}
-                onPress={() => console.log("Edit profile")}
+                onPress={handleEditProfileButton}
                 text={"Edit profile"}
             />
             <ProfileButton

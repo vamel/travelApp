@@ -19,6 +19,7 @@ export const userPageStyles = StyleSheet.create(
             justifyContent: "flex-start"
         },
         profilePicture: {
+            marginLeft: 10,
             width: 190,
             height: 190,
             borderWidth: 5,

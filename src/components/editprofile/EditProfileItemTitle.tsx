@@ -5,13 +5,14 @@ import {useState} from "react";
 import {registerItemTileStyles} from "../../styles/components/register/registerItemTileStyles";
 import {getColorValue} from "../../utils/colorUtils";
 
-interface IRegisterItemTileProps {
+interface IEditProfileItemTitleProps {
     itemText: string,
+    selected: boolean;
     onPress: (string) => void
 }
 
-const RegisterItemTile = (props: IRegisterItemTileProps) => {
-    const [isSelected, setIsSelected] = useState(false);
+const EditProfileItemTitle = (props: IEditProfileItemTitleProps) => {
+    const [isSelected, setIsSelected] = useState(props.selected);
 
     const handleOnPress = (item) => {
         setIsSelected(!isSelected);
@@ -30,4 +31,4 @@ const RegisterItemTile = (props: IRegisterItemTileProps) => {
     );
 }
 
-export default RegisterItemTile;
+export default EditProfileItemTitle;

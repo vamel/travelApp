@@ -1,29 +1,27 @@
 import {Text, TextInput, View} from "react-native";
 import {createProfileInputStyles} from "../../styles/components/register/createProfileInputStyles";
 
-interface ICreateProfileInputProps {
+interface IEditProfileInputProps {
     title: string,
-    placeholder: string,
+    value: string,
     maxLength: number,
     keyboardType: string,
-    errorMsg?: string,
     onChangeText: (string) => void
 }
 
-const CreateProfileInput = (props: ICreateProfileInputProps) => {
+const EditProfileInput = (props: IEditProfileInputProps) => {
     return(
         <View style={createProfileInputStyles.container}>
             <Text style={createProfileInputStyles.title}>{props.title}</Text>
             <TextInput
                 onChangeText={props.onChangeText}
-                placeholder={props.placeholder}
+                value={props.value}
                 maxLength={props.maxLength}
                 keyboardType={props.keyboardType === "default" ? "default" : "numeric"}
                 style={createProfileInputStyles.inputField}
             />
-            {props.errorMsg && <Text style={createProfileInputStyles.errorText}>{props.errorMsg}</Text>}
         </View>
     );
 }
 
-export default CreateProfileInput;
+export default EditProfileInput;

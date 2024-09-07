@@ -1,7 +1,8 @@
 import {InvitationStatus} from "../enums/InvitationStatus";
+import {Coords} from "./Coords";
 
 export class Invitation {
-    constructor(invitee: string, inviter: string, location: string,
+    constructor(invitee: string, inviter: string, location: Coords,
                 date: string, time: string, status: InvitationStatus) {
         this.invitee = invitee;
         this.inviter = inviter;
@@ -13,7 +14,7 @@ export class Invitation {
 
     invitee: string;
     inviter: string;
-    location: string;
+    location: Coords;
     date: string;
     time: string;
     status: InvitationStatus

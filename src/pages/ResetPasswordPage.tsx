@@ -1,16 +1,18 @@
 import {View, Text, TextInput, TouchableWithoutFeedback} from "react-native";
+import {sendPasswordResetEmail} from "firebase/auth";
 import singInPageStyles from "../styles/pages/singInPageStyles";
 import LoginButton from "../components/login/LoginButton";
 import {useState} from "react";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import COLORS from "../styles/utils/Colors";
+import {auth} from "../firebase/config";
 
 const ResetPasswordPage = ({navigation}) => {
     const [emailInput, setEmailInput] = useState("");
     const [isRecoveryClicked, setIsRecoveryClicked] = useState(false);
 
     const handleSendRecoveryRequest = () => {
-        setIsRecoveryClicked(true);
+        sendPasswordResetEmail(auth, emailInput).then(() => setIsRecoveryClicked(true));
     }
 
     const handleReturnToSignInScreen = () => {
@@ -55,7 +57,9 @@ const ResetPasswordPage = ({navigation}) => {
                     placeholder={"Email"}
                     onChangeText={setEmailInput}
                     value={emailInput}
-                    style={singInPageStyles.textInput}/>
+                    autoCapitalize={"none"}
+                    style={singInPageStyles.textInput}
+                />
                 <View style={singInPageStyles.buttonContainers}>
                     <LoginButton
                         onPress={handleSendRecoveryRequest}

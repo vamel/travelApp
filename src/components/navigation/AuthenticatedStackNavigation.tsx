@@ -14,6 +14,7 @@ import InvitationPage from "../../pages/InvitationPage";
 import TabNavigation from "./TabNavigation";
 import FavouritesPage from "../../pages/FavouritesPage";
 import OtherUserPage from "../../pages/OtherUserPage";
+import EditProfilePage from "../../pages/EditProfilePage";
 
 const Stack = createNativeStackNavigator();
 
@@ -54,6 +55,11 @@ const AuthenticatedStackNavigation = () => {
                     name={"ResetPasswordPage"}
                     component={ResetPasswordPage}
                     options={{title: "Reset Password"}}
+                />
+                <Stack.Screen
+                    name={"EditProfilePage"}
+                    component={EditProfilePage}
+                    options={{title: "Edit Profile"}}
                 />
                 <Stack.Screen
                     name={"SignOutPage"}

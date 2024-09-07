@@ -55,6 +55,11 @@ export const registerPageStyles = StyleSheet.create(
             marginLeft: 4,
             color: COLORS.universal.orange500,
             fontWeight: "800"
+        },
+        errorText: {
+            fontSize: 14,
+            textAlign: "center",
+            color: COLORS.universal.red500
         }
     }
 );

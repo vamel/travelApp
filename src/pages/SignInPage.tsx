@@ -1,4 +1,4 @@
-import {Text, TouchableWithoutFeedback, View, Alert} from "react-native";
+import {Text, TouchableWithoutFeedback, View} from "react-native";
 import {useContext, useState} from "react";
 import singInPageStyles from "../styles/pages/singInPageStyles";
 import LoginButton from "../components/login/LoginButton";
@@ -9,8 +9,9 @@ import {handleSignIn} from "../firebase/auth";
 import {AuthContext} from "../store/user/auth-context";
 
 const SignInPage = ({navigation}) => {
-    const [emailInput, setEmailInput] = useState('');
-    const [passwordInput, setPasswordInput] = useState('');
+    const [emailInput, setEmailInput] = useState("");
+    const [passwordInput, setPasswordInput] = useState("");
+    const [errorMsg, setErrorMsg] = useState("");
     const authCtx = useContext(AuthContext);
 
     const handleLoginPress = async () => {
@@ -20,7 +21,7 @@ const SignInPage = ({navigation}) => {
             authCtx.getData(userData.uid);
             navigation.navigate("TabNavigation");
         } catch(err) {
-            Alert.alert("Invalid credentials");
+            setErrorMsg("Invalid credentials");
         }
     }
 
@@ -42,6 +43,7 @@ const SignInPage = ({navigation}) => {
                 <View style={singInPageStyles.inputContainer}>
                     <LoginInput placeholder={"Email"} onTextChange={setEmailInput} value={emailInput} />
                     <PasswordInput placeholder={"Password"} onTextChange={setPasswordInput} value={passwordInput} />
+                    {errorMsg && <Text style={singInPageStyles.errorText}>{errorMsg}</Text>}
                     <View style={singInPageStyles.buttonContainers}>
                         <LoginButton
                             onPress={handleLoginPress}
