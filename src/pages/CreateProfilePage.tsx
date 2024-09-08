@@ -109,7 +109,7 @@ const CreateProfilePage = ({navigation, route}) => {
         setUserData({...userData, bio: bioText});
     }
 
-    const onSubmit = () => {
+    const onSubmit = async () => {
         if (userData.username.length < 5) {
             setUsernameError("Username should be minimum 5 characters long");
         }
@@ -120,7 +120,7 @@ const CreateProfilePage = ({navigation, route}) => {
             favourites: [],
             last_location: "",
             ...userData} as User;
-        const response = putUser(createdUser);
+        const response = await putUser(createdUser);
         if (!response) {
             navigation.navigate("CompleteRegistrationPage");
         }

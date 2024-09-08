@@ -1,13 +1,23 @@
 import {createContext, useState} from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as SecureStore from 'expo-secure-store';
-import {doc, getDoc, updateDoc} from "firebase/firestore";
+import {
+    doc,
+    getDoc,
+    updateDoc,
+    deleteDoc,
+    collection,
+    query,
+    where,
+    documentId,
+    orderBy,
+    getDocs
+} from "firebase/firestore";
 import {db} from "../../firebase/config";
 import {getFullUserData} from "../../firebase/parseUserData";
 import {UserDTO} from "../../models/classes/UserDTO";
 import {getCurrentPositionAsync} from "expo-location";
 import {getCity} from "../../firebase/location";
-import {handleSignOut} from "../../firebase/auth";
 
 export const AuthContext = createContext(
     {
@@ -19,7 +29,8 @@ export const AuthContext = createContext(
         authenticate: (token: string, uid: string) => {},
         setLocationWithoutAuth: () => {Promise<boolean>},
         logout: () => {},
-        getData: (uid: string) => {}
+        getData: (uid: string) => {},
+        deleteAccount: () => {}
     }
 );
 
@@ -59,21 +70,18 @@ const AuthContextProvider = ({children}) => {
                         //@ts-ignore
                         const newLocation = res.results[0].address_components[0].long_name.toLowerCase()
                         setLocation(newLocation);
-                        resolve(true);
                     });
             });
-        });
+        resolve(true)});
     }
 
     const logout = () => {
-        handleSignOut().then(() => {
-            setAuthToken(null);
-            setUserUid("");
-            setUser(null);
-            setLocation("");
-            SecureStore.deleteItemAsync("token");
-            AsyncStorage.removeItem("uid");
-        });
+        setAuthToken(null);
+        setUserUid("");
+        setUser(null);
+        setLocation("");
+        SecureStore.deleteItemAsync("token");
+        AsyncStorage.removeItem("uid");
     }
 
     const getData = async (uid: string) => {
@@ -81,6 +89,26 @@ const AuthContextProvider = ({children}) => {
         const userSnapshot = await getDoc(userRef);
         const userData = userSnapshot.data();
         setUser(getFullUserData({...userData, last_location: location}));
+    }
+
+    const deleteAccount = async () => {
+        const deleteDocument = async (docId) => {
+            await deleteDoc(doc(db, "invitations", docId));
+        }
+
+        let userInvitations;
+        const invRef = collection(db, "invitations");
+        const queryReceived = query(invRef, where(documentId(), "in", user.invitations_received));
+        const querySnapshotReceived = await getDocs(queryReceived);
+        userInvitations = querySnapshotReceived.docs.map((doc) => doc.id);
+        const querySent = query(invRef, where(documentId(), "in", user.invitations_sent));
+        const querySnapshotSent = await getDocs(querySent);
+        userInvitations = [...querySnapshotSent.docs.map((doc) => doc.id), ...userInvitations];
+        console.log(userInvitations);
+        userInvitations.forEach((docId) => deleteDocument(docId));
+        logout();
+        await deleteDoc(doc(db, "users", userUid));
+        await deleteDoc(doc(db, "usernames", user.username));
     }
 
     const value = {
@@ -92,7 +120,8 @@ const AuthContextProvider = ({children}) => {
         authenticate: authenticate,
         setLocationWithoutAuth: setLocationWithoutAuth,
         logout: logout,
-        getData: getData
+        getData: getData,
+        deleteAccount: deleteAccount
     }
 
     //@ts-ignore

@@ -21,7 +21,6 @@ export const putUser = async (userData: User) => {
         } catch(err) {
             return err;
         }
-        return null;
     }
 
     if (userDetails.profile_picture_url) {
@@ -36,6 +35,6 @@ export const putUser = async (userData: User) => {
             });
         });
     } else {
-        sendData(userDetails);
+        await sendData(userDetails);
     }
 }
