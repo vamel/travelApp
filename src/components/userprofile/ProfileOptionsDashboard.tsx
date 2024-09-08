@@ -4,6 +4,7 @@ import ProfileButton from "./ProfileButton";
 import {useContext} from "react";
 import {AuthContext} from "../../store/user/auth-context";
 import {useNavigation} from "@react-navigation/native";
+import {handleSignOut} from "../../firebase/auth";
 
 const ProfileOptionsDashboard = () => {
     const authCtx = useContext(AuthContext);
@@ -14,14 +15,16 @@ const ProfileOptionsDashboard = () => {
         navigation.navigate("EditProfilePage");
     }
 
-    const handleSignOutButton = () => {
+    const handleSignOutButton = async () => {
+        await handleSignOut();
         //@ts-ignore
         navigation.navigate("SignInPage");
         authCtx.logout();
     }
 
     const handleDeleteButton = () => {
-        // props.navigation.navigate("SignInPage");
+        //@ts-ignore
+        navigation.navigate("SignInPage");
         authCtx.deleteAccount();
     }
 

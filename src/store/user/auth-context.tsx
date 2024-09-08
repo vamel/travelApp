@@ -13,7 +13,7 @@ import {
     orderBy,
     getDocs
 } from "firebase/firestore";
-import {db} from "../../firebase/config";
+import {auth, db} from "../../firebase/config";
 import {getFullUserData} from "../../firebase/parseUserData";
 import {UserDTO} from "../../models/classes/UserDTO";
 import {getCurrentPositionAsync} from "expo-location";
@@ -37,7 +37,7 @@ export const AuthContext = createContext(
 const AuthContextProvider = ({children}) => {
     const [authToken, setAuthToken] = useState("");
     const [userUid, setUserUid] = useState("");
-    const [user, setUser] = useState<UserDTO>();
+    const [user, setUser] = useState<UserDTO>(null);
     const [location, setLocation] = useState("");
 
     const authenticate = (token, uid) => {
@@ -96,19 +96,32 @@ const AuthContextProvider = ({children}) => {
             await deleteDoc(doc(db, "invitations", docId));
         }
 
-        let userInvitations;
+        let userInvitations = [];
         const invRef = collection(db, "invitations");
-        const queryReceived = query(invRef, where(documentId(), "in", user.invitations_received));
-        const querySnapshotReceived = await getDocs(queryReceived);
-        userInvitations = querySnapshotReceived.docs.map((doc) => doc.id);
-        const querySent = query(invRef, where(documentId(), "in", user.invitations_sent));
-        const querySnapshotSent = await getDocs(querySent);
-        userInvitations = [...querySnapshotSent.docs.map((doc) => doc.id), ...userInvitations];
-        console.log(userInvitations);
-        userInvitations.forEach((docId) => deleteDocument(docId));
-        logout();
-        await deleteDoc(doc(db, "users", userUid));
-        await deleteDoc(doc(db, "usernames", user.username));
+
+        if (user.invitations_received.length > 0) {
+            const queryReceived = query(invRef, where(documentId(), "in", user.invitations_received));
+            const querySnapshotReceived = await getDocs(queryReceived);
+            userInvitations = [...querySnapshotReceived.docs
+                .map((doc) => doc.id), ...userInvitations];
+        }
+
+        if (user.invitations_sent.length > 0) {
+            const querySent = query(invRef, where(documentId(), "in", user.invitations_sent));
+            const querySnapshotSent = await getDocs(querySent);
+            userInvitations = [...querySnapshotSent.docs.map((doc) => doc.id), ...userInvitations];
+        }
+
+        if (userInvitations.length > 0) {
+            userInvitations.forEach((docId) => deleteDocument(docId));
+        }
+
+        deleteDoc(doc(db, "users", userUid));
+        deleteDoc(doc(db, "usernames", user.username));
+
+        auth.currentUser?.delete().then(() => {
+            logout();
+        });
     }
 
     const value = {

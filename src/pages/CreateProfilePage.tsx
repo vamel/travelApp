@@ -112,19 +112,20 @@ const CreateProfilePage = ({navigation, route}) => {
     const onSubmit = async () => {
         if (userData.username.length < 5) {
             setUsernameError("Username should be minimum 5 characters long");
+        } else {
+            const createdUser: User = {
+                uid: route.params.uid,
+                email: route.params.email,
+                instagram: "",
+                favourites: [],
+                last_location: "",
+                ...userData} as User;
+            const response = await putUser(createdUser);
+            if (!response) {
+                navigation.navigate("CompleteRegistrationPage");
+            }
+            setUsernameError("User with given name already exists");
         }
-        const createdUser: User = {
-            uid: route.params.uid,
-            email: route.params.email,
-            instagram: "",
-            favourites: [],
-            last_location: "",
-            ...userData} as User;
-        const response = await putUser(createdUser);
-        if (!response) {
-            navigation.navigate("CompleteRegistrationPage");
-        }
-        setUsernameError("User with given name already exists");
     }
 
     return(

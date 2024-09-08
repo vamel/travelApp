@@ -9,15 +9,16 @@ export const putUser = async (userData: User) => {
     const sendData = async (userDetails) => {
         const userDataSent = {
             ...userDetails,
-            invitations_sent: ["1"],
-            invitations_received: ["1"],
-            users_blocked: ["1"],
-            blocked_by: ["1"]
+            invitations_sent: [],
+            invitations_received: [],
+            users_blocked: [],
+            blocked_by: []
         };
 
         await setDoc(doc(db, "users", uid), userDataSent);
         try {
-            await setDoc(doc(db, "usernames", userDetails.username), {});
+            //@ts-ignore
+            await setDoc(doc(db, "usernames", userDetails.username), {uid: uid});
         } catch(err) {
             return err;
         }
