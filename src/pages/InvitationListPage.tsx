@@ -56,11 +56,11 @@ const InvitationListPage = () => {
                 <HelplineButton />
                 <Text style={invitationListPageStyles.subtitle}>Invitations received</Text>
                 {invitationsReceived.map((invitation: InvitationDTO) => {
-                    return <InvitationReceivedItem invitation={invitation} key={invitation.inviteeUid+invitation.inviterUid} />
+                    return <InvitationReceivedItem invitation={invitation} key={invitation.inviteeUid+invitation.date.toString()} />
                 })}
                 <Text style={invitationListPageStyles.subtitle}>Invitations sent</Text>
                 {invitationsSent.map((invitation: InvitationDTO) => {
-                    return <InvitationSentItem invitation={invitation} key={invitation.inviteeUid+invitation.inviterUid} />
+                    return <InvitationSentItem invitation={invitation} key={invitation.inviteeUid+invitation.date.toString()} />
                 })}
             </ScrollView>
         </SafeAreaView>

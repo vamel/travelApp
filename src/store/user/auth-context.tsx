@@ -7,6 +7,7 @@ import {getFullUserData} from "../../firebase/parseUserData";
 import {UserDTO} from "../../models/classes/UserDTO";
 import {getCurrentPositionAsync} from "expo-location";
 import {getCity} from "../../firebase/location";
+import {handleSignOut} from "../../firebase/auth";
 
 export const AuthContext = createContext(
     {
@@ -16,6 +17,7 @@ export const AuthContext = createContext(
         user: null,
         location: "",
         authenticate: (token: string, uid: string) => {},
+        setLocationWithoutAuth: () => {Promise<boolean>},
         logout: () => {},
         getData: (uid: string) => {}
     }
@@ -46,16 +48,32 @@ const AuthContextProvider = ({children}) => {
                     });
                 });
         });
+    }
 
+    const setLocationWithoutAuth = async () => {
+        return new Promise((resolve) => {
+            getCurrentPositionAsync().then((res) => {
+                //@ts-ignore
+                getCity(res.coords.latitude, res.coords.longitude)
+                    .then((res) => {
+                        //@ts-ignore
+                        const newLocation = res.results[0].address_components[0].long_name.toLowerCase()
+                        setLocation(newLocation);
+                        resolve(true);
+                    });
+            });
+        });
     }
 
     const logout = () => {
-        setAuthToken(null);
-        setUserUid("");
-        setUser(null);
-        setLocation("");
-        SecureStore.deleteItemAsync("token");
-        AsyncStorage.removeItem("uid");
+        handleSignOut().then(() => {
+            setAuthToken(null);
+            setUserUid("");
+            setUser(null);
+            setLocation("");
+            SecureStore.deleteItemAsync("token");
+            AsyncStorage.removeItem("uid");
+        });
     }
 
     const getData = async (uid: string) => {
@@ -72,6 +90,7 @@ const AuthContextProvider = ({children}) => {
         user: user,
         location: location,
         authenticate: authenticate,
+        setLocationWithoutAuth: setLocationWithoutAuth,
         logout: logout,
         getData: getData
     }

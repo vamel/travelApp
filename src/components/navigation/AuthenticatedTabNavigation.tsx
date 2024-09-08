@@ -1,16 +1,17 @@
-import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
-import COLORS from "../../styles/utils/Colors";
 import WelcomePage from "../../pages/WelcomePage";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import AttractionListPage from "../../pages/AttractionListPage";
 import EventListPage from "../../pages/EventListPage";
-import EmergencyNumbersPage from "../../pages/EmergencyNumbersPage";
+import COLORS from "../../styles/utils/Colors";
+import UserPage from "../../pages/UserPage";
+import UsersNearbyPage from "../../pages/UsersNearbyPage";
 
 const Tab = createBottomTabNavigator();
 
-const TabNavigation = () => {
+const AuthenticatedTabNavigation = () => {
     // @ts-ignore
-    return(
+    return (
         <Tab.Navigator screenOptions={{
             headerShown: false,
             tabBarActiveTintColor: COLORS.navigation.tabNavigator.activeTintColor
@@ -21,6 +22,13 @@ const TabNavigation = () => {
                 options={{
                     title: "Home",
                     tabBarIcon: ({color, size}) => (<MaterialIcons name="home" size={size} color={color} />)}}
+            />
+            <Tab.Screen
+                name={"UsersNearbyPage"}
+                component={UsersNearbyPage}
+                options={{
+                    title: "Users Nearby",
+                    tabBarIcon: ({color, size}) => (<MaterialIcons name="people" size={size} color={color} />)}}
             />
             <Tab.Screen
                 name={"AttractionListPage"}
@@ -37,14 +45,14 @@ const TabNavigation = () => {
                     tabBarIcon: ({color, size}) => (<MaterialIcons name="festival" size={size} color={color} />)}}
             />
             <Tab.Screen
-                name={"EmergencyNumbersPage"}
-                component={EmergencyNumbersPage}
-                options = {{
-                    title: "Alarm numbers",
-                    tabBarIcon: ({color, size}) => (<MaterialIcons name="report-problem" size={size} color={color} />)}}
+                name={"UserPage"}
+                component={UserPage}
+                options={{
+                    title: "Profile",
+                    tabBarIcon: ({color, size}) => (<MaterialIcons name="person" size={size} color={color} />)}}
             />
         </Tab.Navigator>
     );
 }
 
-export default TabNavigation;
+export default AuthenticatedTabNavigation;

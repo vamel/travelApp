@@ -1,7 +1,6 @@
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import SignInPage from "../../pages/SignInPage";
 import ResetPasswordPage from "../../pages/ResetPasswordPage";
-import TabNavigation from "./TabNavigation";
 import WelcomePage from "../../pages/WelcomePage";
 import AttractionPage from "../../pages/AttractionPage";
 import EmergencyNumbersPage from "../../pages/EmergencyNumbersPage";
@@ -9,6 +8,7 @@ import RegisterPage from "../../pages/RegisterPage";
 import EventPage from "../../pages/EventPage";
 import CreateProfilePage from "../../pages/CreateProfilePage";
 import CompleteRegistrationPage from "../../pages/CompleteRegistrationPage";
+import TabNavigation from "./TabNavigation";
 
 const Stack = createNativeStackNavigator();
 

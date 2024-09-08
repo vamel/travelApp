@@ -10,16 +10,15 @@ import {AuthContext} from "../store/user/auth-context";
 import {attractionCardStyles} from "../styles/components/attraction/attractionCardStyles";
 
 const AttractionListPage = ({navigation}) => {
-    const [cityName, setCityName] = useState<string>("");
-    const [searchedCityName, setSearchedCityName] = useState<string>("Warsaw");
-
     const authCtx = useContext(AuthContext);
     const attrCtx = useContext(AttractionContext);
 
+    const [cityName, setCityName] = useState<string>("");
+    const [searchedCityName, setSearchedCityName] = useState<string>(authCtx.location);
+
     useEffect(() => {
-        setCityName(authCtx.location)
-        attrCtx.fetchData(authCtx.location);
-    }, [authCtx.location]);
+        attrCtx.fetchData(cityName);
+    }, [cityName, authCtx.location]);
 
     const onSearchInputChange = (searchedCityName: string) => {
         setSearchedCityName(toTitle(searchedCityName.trim()));

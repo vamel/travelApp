@@ -11,7 +11,7 @@ import EventPage from "../../pages/EventPage";
 import EmergencyNumbersPage from "../../pages/EmergencyNumbersPage";
 import InvitationListPage from "../../pages/InvitationListPage";
 import InvitationPage from "../../pages/InvitationPage";
-import TabNavigation from "./TabNavigation";
+import AuthenticatedTabNavigation from "./AuthenticatedTabNavigation";
 import FavouritesPage from "../../pages/FavouritesPage";
 import OtherUserPage from "../../pages/OtherUserPage";
 import EditProfilePage from "../../pages/EditProfilePage";
@@ -25,8 +25,8 @@ const AuthenticatedStackNavigation = () => {
     return(
             <Stack.Navigator screenOptions={{headerShown: false}}>
                 <Stack.Screen
-                    name={"TabNavigation"}
-                    component={TabNavigation}
+                    name={"AuthenticatedTabNavigation"}
+                    component={AuthenticatedTabNavigation}
                 />
                 <Stack.Screen
                     name={"WelcomePage"}

@@ -19,14 +19,17 @@ const SignInPage = ({navigation}) => {
             const userData = await handleSignIn(emailInput, passwordInput);
             authCtx.authenticate(userData.accessToken, userData.uid)
             authCtx.getData(userData.uid);
-            navigation.navigate("TabNavigation");
+            navigation.navigate("AuthenticatedTabNavigation");
         } catch(err) {
             setErrorMsg("Invalid credentials");
         }
     }
 
     const handleContinueWithoutAccountPress = () => {
-        navigation.navigate("TabNavigation");
+        //@ts-ignore
+        authCtx.setLocationWithoutAuth().then(() => {
+            navigation.navigate("TabNavigation");
+        })
     }
 
     const handleRegisterPress = () => {

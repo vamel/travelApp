@@ -38,7 +38,7 @@ const AttractionPage = ({route}) => {
         }
         getImage();
 
-        if (currentUser.favourites.includes(route.params.attractionData.uid)) {
+        if (authCtx.isAuthenticated && currentUser.favourites.includes(route.params.attractionData.uid)) {
             setIsFavourite(true);
         }
     }, []);
@@ -86,10 +86,12 @@ const AttractionPage = ({route}) => {
                     <Text style={attractionPageStyles.title}>
                         {attraction.name}
                     </Text>
+                    {authCtx.isAuthenticated &&
                     <IconButton
                         onPress={handleFavouritePress}
                         icon={"star"}
-                        color={isFavourite ? "gold" : "grey"}/>
+                        color={isFavourite ? "gold" : "grey"}
+                    />}
                 </View>
                 <View style={attractionPageStyles.imageContainer}>
                     <Image source={{ uri: imageUrl ? imageUrl : undefined }} style={attractionPageStyles.image}/>
