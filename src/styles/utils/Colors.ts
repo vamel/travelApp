@@ -35,6 +35,11 @@ const COLORS = {
     emergency: {
         orange100: "#E3885F",
         orange300: "#e37446"
+    },
+    invitation: {
+        accepted: "#07a82b",
+        pending: "#cbce07",
+        rejected: "#c70428"
     }
 }
 

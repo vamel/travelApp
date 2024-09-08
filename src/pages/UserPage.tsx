@@ -51,7 +51,7 @@ const UserPage = ({navigation}) => {
                     />
                     <UserDashboard username={userData.username}/>
                 </View>
-                <UserInfo userInfo={userData} />
+                <UserInfo userInfo={userData} location={authCtx.location} />
                 <ProfileOptionsDashboard authCtx={authCtx} navigation={navigation} />
             </ScrollView>
         </SafeAreaView>

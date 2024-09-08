@@ -27,7 +27,7 @@ const AttractionContextProvider = ({children}) => {
             return;
         }
         const receivedAttractionList = querySnapshot.docs.map((doc) => {
-            return {id: doc.id, ...doc.data()}
+            return {uid: doc.id, ...doc.data()}
         });
         setAttractionList(receivedAttractionList);
         setLastId(querySnapshot.docs.pop().id);

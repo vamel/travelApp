@@ -32,7 +32,7 @@ const EventListPage = ({navigation}) => {
 
     return(
         <SafeAreaView style={eventListPageStyles.container}>
-            <Text style={eventListPageStyles.titleText}>{`Events in ${toTitle(authCtx.user.last_location)}`}</Text>
+            <Text style={eventListPageStyles.titleText}>{`Events in ${toTitle(authCtx.location)}`}</Text>
             <View style={[eventListPageStyles.items]}>
                 <FlatList
                     initialNumToRender={10}

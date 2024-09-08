@@ -5,8 +5,6 @@ import {useState} from "react";
 import RegisterButton from "../components/register/RegisterButton";
 import {handleSingUp} from "../firebase/auth";
 import { passwordStrength } from 'check-password-strength'
-import {Simulate} from "react-dom/test-utils";
-import error = Simulate.error;
 
 const RegisterPage = ({navigation}) => {
     const [enteredEmailAddress, setEnteredEmailAddress] = useState("");

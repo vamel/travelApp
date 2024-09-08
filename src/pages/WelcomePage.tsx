@@ -21,7 +21,7 @@ const WelcomePage = () => {
     useEffect(() => {
         const getData = async () => {
             //@ts-ignore
-            const last_location = authCtx.user ? authCtx.user.last_location : "warsaw"
+            const last_location = authCtx.location ? authCtx.location : "warsaw"
             const docRef = doc(db, "cities", last_location);
             const docSnap = await getDoc(docRef);
             const cityData = docSnap.data();

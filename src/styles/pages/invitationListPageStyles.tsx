@@ -16,6 +16,13 @@ export const invitationListPageStyles = StyleSheet.create(
             fontWeight: "bold",
             textAlign: "center",
             color: COLORS.universal.orange500
+        },
+        subtitle: {
+            marginBottom: 10,
+            fontSize: 20,
+            fontWeight: "bold",
+            textAlign: "center",
+            color: COLORS.universal.orange500
         }
     }
 );

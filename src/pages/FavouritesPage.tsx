@@ -1,5 +1,5 @@
 import {FlatList, Pressable, SafeAreaView, Text, View} from "react-native";
-import {useCallback, useContext, useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../store/user/auth-context";
 import ProfileButton from "../components/userprofile/ProfileButton";
 import {useNavigation} from "@react-navigation/native";
@@ -53,7 +53,7 @@ const FavouritesPage = () => {
         setLastId(querySnapshot.docs.pop().id);
     }
 
-    const checkIfFavourites = () => {
+    const checkIfFavourite = () => {
         if (favouriteAttractions) {
             return(
                 <FlatList
@@ -107,7 +107,7 @@ const FavouritesPage = () => {
                 />
             </View>
             <View style={attractionListPageStyles.items}>
-                {checkIfFavourites()}
+                {checkIfFavourite()}
             </View>
         </SafeAreaView>
     );

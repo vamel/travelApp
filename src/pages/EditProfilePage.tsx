@@ -8,7 +8,6 @@ import RegisterDatePicker from "../components/register/RegisterDatePicker";
 import {Hobby} from "../models/enums/Hobby";
 import {Language} from "../models/enums/Language";
 import {Country} from "../models/enums/Country";
-import UserBioInput from "../components/register/UserBioInput";
 import RegisterButton from "../components/register/RegisterButton";
 import {AuthContext} from "../store/user/auth-context";
 import EditProfileInput from "../components/editprofile/EditProfileInput";

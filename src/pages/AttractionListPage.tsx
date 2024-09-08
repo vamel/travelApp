@@ -7,7 +7,6 @@ import AttractionSearchBar from "../components/attraction/AttractionSearchBar";
 import {toTitle} from "../utils/stringUtils";
 import {AttractionContext} from "../store/attractions/attracion-context";
 import {AuthContext} from "../store/user/auth-context";
-import {UserDTO} from "../models/classes/UserDTO";
 import {attractionCardStyles} from "../styles/components/attraction/attractionCardStyles";
 
 const AttractionListPage = ({navigation}) => {
@@ -16,12 +15,11 @@ const AttractionListPage = ({navigation}) => {
 
     const authCtx = useContext(AuthContext);
     const attrCtx = useContext(AttractionContext);
-    const currentUser: UserDTO = authCtx.user!
 
     useEffect(() => {
-        setCityName(currentUser.last_location)
-        attrCtx.fetchData(currentUser.last_location);
-    }, []);
+        setCityName(authCtx.location)
+        attrCtx.fetchData(authCtx.location);
+    }, [authCtx.location]);
 
     const onSearchInputChange = (searchedCityName: string) => {
         setSearchedCityName(toTitle(searchedCityName.trim()));

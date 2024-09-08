@@ -15,6 +15,8 @@ import TabNavigation from "./TabNavigation";
 import FavouritesPage from "../../pages/FavouritesPage";
 import OtherUserPage from "../../pages/OtherUserPage";
 import EditProfilePage from "../../pages/EditProfilePage";
+import CreateInvitationPage from "../../pages/CreateInvitationPage";
+import MapPage from "../../pages/MapPage";
 
 const Stack = createNativeStackNavigator();
 
@@ -97,6 +99,19 @@ const AuthenticatedStackNavigation = () => {
                     name={"InvitationPage"}
                     component={InvitationPage}
                     options={{title: "Invitation Page"}}
+                />
+                <Stack.Screen
+                    name={"CreateInvitationPage"}
+                    component={CreateInvitationPage}
+                />
+                <Stack.Screen
+                    name={"MapPage"}
+                    component={MapPage}
+                    options={{
+                        headerShown: true,
+                        headerBackVisible: false,
+                        title: "Pick location"
+                }}
                 />
             </Stack.Navigator>
     );

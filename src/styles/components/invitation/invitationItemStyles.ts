@@ -27,6 +27,8 @@ export const invitationItemStyles = StyleSheet.create(
             width: 100,
             height: 100,
             borderRadius: 50,
+            borderWidth: 2,
+            borderColor: COLORS.universal.black,
             backgroundColor: COLORS.universal.white
         },
         detailsContainer: {
@@ -39,6 +41,9 @@ export const invitationItemStyles = StyleSheet.create(
             fontSize: 20,
             fontWeight: "bold",
             textAlign: "center"
+        },
+        statusText: {
+
         },
         locationText: {
             color: COLORS.universal.green500,

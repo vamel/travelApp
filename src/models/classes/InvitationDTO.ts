@@ -1,9 +1,12 @@
-import {InvitationStatus} from "../enums/InvitationStatus";
 import {Coords} from "./Coords";
+import {InvitationStatus} from "../enums/InvitationStatus";
 
-export class Invitation {
-    constructor(inviteeUid: string, inviteeName: string, inviteePictureUrl: string, inviterUid: string, inviterName: string,
-                inviterPictureUrl: string, location: Coords, date: Date, message: string, status: InvitationStatus) {
+export class InvitationDTO {
+    constructor(uid: string, inviteeUid: string, inviteeName: string,
+                inviteePictureUrl: string, inviterUid: string, inviterName: string,
+                inviterPictureUrl: string, location: Coords, date: Date,
+                message: string, status: InvitationStatus) {
+        this.uid = uid;
         this.inviteeUid = inviteeUid;
         this.inviteeName = inviteeName;
         this.inviteePictureUrl = inviteePictureUrl;
@@ -15,7 +18,7 @@ export class Invitation {
         this.message = message;
         this.status = status;
     }
-
+    uid: string;
     inviteeUid: string;
     inviteeName: string;
     inviteePictureUrl: string;

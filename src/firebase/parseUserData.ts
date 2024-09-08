@@ -21,7 +21,6 @@ export const getFullUserData = (userData)  => {
             userData.profile_picture_url, userData.invitations_received, userData.invitations_sent,
             userData.users_blocked, userData.blocked_by);
     } catch(err) {
-        console.log(err);
         return null as UserDTO;
     }
 }

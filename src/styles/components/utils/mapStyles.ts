@@ -23,8 +23,8 @@ export const mapStyles = StyleSheet.create(
             borderRadius: 4
         },
         image: {
-            width: "100%",
-            height: "100%",
+            width: 325,
+            height: 200,
             borderRadius: 4,
         },
         addressText: {

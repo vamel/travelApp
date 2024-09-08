@@ -16,12 +16,11 @@ const UsersNearbyPage = ({navigation}) => {
     const [userList, setUserList] = useState([]);
     const [finishFetch, setFinishFetch] = useState(false);
     const authCtx = useContext(AuthContext);
-    const currentUser: UserDTO = authCtx.user!;
 
     useEffect(() => {
         const getData = async () => {
             const userRef = collection(db, "users");
-            const q = query(userRef, where("last_location", "==", currentUser.last_location),
+            const q = query(userRef, where("last_location", "==", authCtx.location),
                 where(documentId(), "!=", authCtx.uid), limit(5), orderBy(documentId()));
             const querySnapshot = await getDocs(q);
             const receivedUsers = querySnapshot.docs.map((doc) => {
@@ -67,7 +66,7 @@ const UsersNearbyPage = ({navigation}) => {
     return(
         <SafeAreaView style={nearbyUsersPageStyles.container} onLayout={onLayoutRootView}>
             <View>
-                <Text style={nearbyUsersPageStyles.titleText}>Users in {toTitle(currentUser.last_location)}</Text>
+                <Text style={nearbyUsersPageStyles.titleText}>Users in {toTitle(authCtx.location)}</Text>
                 <FlatList
                     initialNumToRender={10}
                     data={userList}

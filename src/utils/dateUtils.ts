@@ -22,8 +22,20 @@ export const getDateElements = (date) => {
     return [day, month, year];
 }
 
+export const getTimeElements = (date) => {
+    const displayDate = date.toDate();
+    const hour = displayDate.getHours();
+    const minutes = displayDate.getMinutes();
+
+    return [hour, minutes];
+}
+
 export const dateToString = (day, month, year) => {
     return `${month} ${getDayOrdinalSuffix(day)} ${year}`;
+}
+
+export const dateToTime = (hour, minutes) => {
+    return `${hour}:${minutes}`;
 }
 
 export const calculateAge = (birthdate: string) => {
