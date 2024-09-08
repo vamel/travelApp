@@ -1,22 +1,26 @@
 import {View, Text, FlatList, SafeAreaView} from "react-native";
-import {useContext} from "react";
+import {useContext, useEffect, useState} from "react";
 import EventCard from "../components/event/EventCard";
 import {eventListPageStyles} from "../styles/pages/eventListPageStyles";
-import {IEvent} from "../models/interfaces/IEvent";
 import {EventContext} from "../store/events/event-context";
 import {AuthContext} from "../store/user/auth-context";
 import {toTitle} from "../utils/stringUtils";
+import {Event} from "../models/classes/Event";
 
 const EventListPage = ({navigation}) => {
+    const [cityName, setCityName] = useState<string>("");
     const evtCtx = useContext(EventContext);
     const authCtx = useContext(AuthContext);
 
-    const handleCardPress = (event: IEvent) => {
+    useEffect(() => {
+        setCityName(authCtx.location)
+        evtCtx.fetchData(authCtx.location);
+    }, [authCtx.location]);
+
+    const handleCardPress = (event: Event) => {
         navigation.navigate("EventPage",
             {
-                name: event.name,
-                description: event.description,
-                date: event.date,
+                eventData: event
             }
         )};
 
@@ -32,7 +36,7 @@ const EventListPage = ({navigation}) => {
 
     return(
         <SafeAreaView style={eventListPageStyles.container}>
-            <Text style={eventListPageStyles.titleText}>{`Events in ${toTitle(authCtx.location)}`}</Text>
+            <Text style={eventListPageStyles.titleText}>Events in {toTitle(cityName)}</Text>
             <View style={[eventListPageStyles.items]}>
                 <FlatList
                     initialNumToRender={10}

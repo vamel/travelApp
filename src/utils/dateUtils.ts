@@ -35,6 +35,12 @@ export const dateToString = (day, month, year) => {
 }
 
 export const dateToTime = (hour, minutes) => {
+    if (hour < 10) {
+        hour = "0" + hour;
+    }
+    if (minutes < 10) {
+        minutes = "0" + minutes;
+    }
     return `${hour}:${minutes}`;
 }
 
