@@ -1,10 +1,10 @@
 import {View, Text, Pressable} from "react-native";
 import EventDateCard from "./EventDateCard";
 import {eventCardStyles} from "../../styles/components/event/eventCardStyles";
-import {IEvent} from "../../models/interfaces/IEvent";
+import {Event} from "../../models/classes/Event";
 
 interface IEventCardProps {
-    eventData: IEvent,
+    eventData: Event,
     onPress: (event: any) => void
 }
 

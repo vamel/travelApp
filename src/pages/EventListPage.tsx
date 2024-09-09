@@ -42,7 +42,7 @@ const EventListPage = ({navigation}) => {
         }
     }
 
-    const renderEventCard = (event) => {
+    const renderEventCard = (event: Event) => {
         return (
             <EventCard eventData={event} onPress={handleCardPress}/>
         );
