@@ -1,6 +1,6 @@
 import {useContext, useState} from "react";
 import {User} from "../models/classes/User";
-import {putUser} from "../firebase/createUser";
+import {putUser, updateUser} from "../firebase/createUser";
 import {SafeAreaView, ScrollView, Text, View} from "react-native";
 import {createProfilePageStyles} from "../styles/pages/createProfilePageStyles";
 import ProfilePictureImagePicker from "../components/register/ProfilePictureImagePicker";
@@ -84,7 +84,7 @@ const EditProfilePage = ({navigation}) => {
             ...userData,
             uid: authCtx.uid,
             instagram: ""} as User;
-        putUser(createdUser).then(() => authCtx.getData(authCtx.uid)).then(() => navigation.navigate("UserPage"));
+        updateUser(createdUser).then(() => authCtx.getData(authCtx.uid)).then(() => navigation.navigate("UserPage"));
     }
 
     return(

@@ -13,8 +13,8 @@ const AttractionListPage = ({navigation}) => {
     const authCtx = useContext(AuthContext);
     const attrCtx = useContext(AttractionContext);
 
-    const [cityName, setCityName] = useState<string>("");
-    const [searchedCityName, setSearchedCityName] = useState<string>(authCtx.location);
+    const [cityName, setCityName] = useState<string>(authCtx.location);
+    const [searchedCityName, setSearchedCityName] = useState<string>("");
 
     useEffect(() => {
         attrCtx.fetchData(cityName);
@@ -25,7 +25,11 @@ const AttractionListPage = ({navigation}) => {
     }
 
     const handleSearchButtonPress = () => {
-        setCityName(searchedCityName);
+        if (!searchedCityName) {
+            setCityName(authCtx.location);
+        } else {
+            setCityName(searchedCityName);
+        }
     }
 
     const fetchMoreData = () => {

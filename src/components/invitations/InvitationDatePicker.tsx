@@ -2,6 +2,7 @@ import {Text, TextInput, View} from "react-native";
 import ProfileButton from "../userprofile/ProfileButton";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import {invitationDatePickerStyles} from "../../styles/components/invitation/invitationDatePickerStyles";
+import {dateToTime} from "../../utils/dateUtils";
 
 interface IInvitationDatePickerProps {
     onDateButtonPress: () => void,
@@ -45,7 +46,7 @@ const InvitationDatePicker = (props: IInvitationDatePickerProps) => {
                     text={"Pick time"}
                 />
                 <TextInput
-                    placeholder={`${props.invitationDate.getHours().toString()}:${props.invitationDate.getMinutes().toString()}`}
+                    placeholder={dateToTime(props.invitationDate.getHours(), props.invitationDate.getMinutes())}
                     editable={false}
                     style={invitationDatePickerStyles.dateInput}
                 />

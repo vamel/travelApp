@@ -24,6 +24,8 @@ const AttractionContextProvider = ({children}) => {
             limit(10), orderBy(documentId()));
         const querySnapshot = await getDocs(q);
         if (querySnapshot.empty) {
+            setAttractionList([]);
+            setLastId("0");
             return;
         }
         const receivedAttractionList = querySnapshot.docs.map((doc) => {

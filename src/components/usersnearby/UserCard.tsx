@@ -9,23 +9,25 @@ interface IUserCard {
     username: string,
 }
 
-const UserCard = (props: IUserCard, {route}) => {
+const UserCard = (props: IUserCard) => {
     const [imageUrl, setImageUrl] = useState('');
 
-    // useEffect(() => {
-        // const getImage = async () => {
-        //     const gsReference = ref(storage, props.imageUrl);
-        //     await getDownloadURL(gsReference).then(result => setImageUrl(() => result));
-        // }
-        // getImage();
-    // }, []);
+    useEffect(() => {
+        const getImage = async () => {
+            const gsReference = ref(storage, props.imageUrl);
+            await getDownloadURL(gsReference).then(result => setImageUrl(() => result));
+        }
+
+        if (props.imageUrl) {
+            getImage();
+        }
+    }, []);
 
     return(
         <View style={userCardStyles.userCard}>
             <View style={userCardStyles.imageContainer}>
                 <Image
-                    // source={{ uri: imageUrl !== "" ? imageUrl : require("../../assets/images/user-placeholder.png")}}
-                    source={require("../../assets/images/user-placeholder.png")}
+                    source={imageUrl ? {uri: imageUrl} : require("../../assets/images/user-placeholder.png")}
                     style={userCardStyles.image}
                 />
             </View>

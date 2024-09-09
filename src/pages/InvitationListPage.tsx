@@ -10,6 +10,7 @@ import {Coords} from "../models/classes/Coords";
 import InvitationReceivedItem from "../components/invitations/InvitationReceivedItem";
 import InvitationSentItem from "../components/invitations/InvitationSentItem";
 import {InvitationDTO} from "../models/classes/InvitationDTO";
+import {request} from "axios";
 
 const InvitationListPage = () => {
     const [invitationsSent, setInvitationsSent] = useState([]);
@@ -18,8 +19,8 @@ const InvitationListPage = () => {
     const currentUser: UserDTO = authCtx.user!;
 
     useEffect(() => {
-        const invRef = collection(db, "invitations");
         const getInvitationsReceived = async () => {
+            const invRef = collection(db, "invitations");
             const q = query(invRef, where(documentId(), "in", currentUser.invitations_received),
                 orderBy(documentId()));
             const querySnapshot = await getDocs(q);
@@ -33,6 +34,7 @@ const InvitationListPage = () => {
         }
 
         const getInvitationsSent = async () => {
+            const invRef = collection(db, "invitations");
             const q = query(invRef, where(documentId(), "in", currentUser.invitations_sent),
                 orderBy(documentId()));
             const querySnapshot = await getDocs(q);
@@ -45,8 +47,14 @@ const InvitationListPage = () => {
             setInvitationsSent(sentInvitations);
         }
 
-        getInvitationsReceived();
-        getInvitationsSent();
+        if (currentUser.invitations_received.length > 0) {
+            getInvitationsReceived();
+        }
+
+        if (currentUser.invitations_sent.length > 0) {
+            getInvitationsSent();
+        }
+
     }, [currentUser.invitations_sent, currentUser.invitations_received]);
 
     return(

@@ -57,7 +57,7 @@ const UsersNearbyPage = ({navigation}) => {
                     android_ripple={nearbyUsersPageStyles.rippleAndroid}
                     style={({pressed}) => pressed ? nearbyUsersPageStyles.buttonPressed : null}
                 >
-                    <UserCard imageUrl={""} username={user.username} />
+                    <UserCard imageUrl={user.profile_picture_url} username={user.username} />
                 </Pressable>
             </View>
         );

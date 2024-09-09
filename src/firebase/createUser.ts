@@ -1,7 +1,7 @@
-import {db, storage} from "./config";
+import {auth, db, storage} from "./config";
 import {User} from "../models/classes/User";
 import {uploadBytes, ref} from "firebase/storage";
-import {doc, setDoc} from "firebase/firestore";
+import {doc, setDoc, updateDoc} from "firebase/firestore";
 
 export const putUser = async (userData: User) => {
     let {uid, ...userDetails} = userData;
@@ -38,4 +38,19 @@ export const putUser = async (userData: User) => {
     } else {
         await sendData(userDetails);
     }
+}
+
+export const updateUser = async (userData: User) => {
+    let {uid, ...userDetails} = userData;
+
+    const userRef = doc(db, "users", uid);
+    await updateDoc(userRef, {
+        bio: userDetails.bio,
+        birthdate: userDetails.birthdate,
+        countries: userDetails.countries,
+        favourite_city: userDetails.favourite_city,
+        hobbies: userDetails.hobbies,
+        languages: userDetails.languages,
+        place_of_origin: userDetails.place_of_origin
+    });
 }

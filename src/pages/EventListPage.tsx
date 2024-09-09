@@ -6,16 +6,18 @@ import {EventContext} from "../store/events/event-context";
 import {AuthContext} from "../store/user/auth-context";
 import {toTitle} from "../utils/stringUtils";
 import {Event} from "../models/classes/Event";
+import AttractionSearchBar from "../components/attraction/AttractionSearchBar";
 
 const EventListPage = ({navigation}) => {
-    const [cityName, setCityName] = useState<string>("");
-    const evtCtx = useContext(EventContext);
     const authCtx = useContext(AuthContext);
+    const evtCtx = useContext(EventContext);
+
+    const [cityName, setCityName] = useState<string>(authCtx.location);
+    const [searchedCityName, setSearchedCityName] = useState<string>();
 
     useEffect(() => {
-        setCityName(authCtx.location)
-        evtCtx.fetchData(authCtx.location);
-    }, [authCtx.location]);
+        evtCtx.fetchData(cityName);
+    }, [cityName, authCtx.location]);
 
     const handleCardPress = (event: Event) => {
         navigation.navigate("EventPage",
@@ -28,6 +30,18 @@ const EventListPage = ({navigation}) => {
         evtCtx.fetchMore();
     }
 
+    const onSearchInputChange = (searchedCityName: string) => {
+        setSearchedCityName(toTitle(searchedCityName.trim()));
+    }
+
+    const handleSearchButtonPress = () => {
+        if (!searchedCityName) {
+            setCityName(authCtx.location);
+        } else {
+            setCityName(searchedCityName);
+        }
+    }
+
     const renderEventCard = (event) => {
         return (
             <EventCard eventData={event} onPress={handleCardPress}/>
@@ -37,6 +51,7 @@ const EventListPage = ({navigation}) => {
     return(
         <SafeAreaView style={eventListPageStyles.container}>
             <Text style={eventListPageStyles.titleText}>Events in {toTitle(cityName)}</Text>
+            <AttractionSearchBar onPress={handleSearchButtonPress} onChangeText={onSearchInputChange} />
             <View style={[eventListPageStyles.items]}>
                 <FlatList
                     initialNumToRender={10}
