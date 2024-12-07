@@ -1,5 +1,5 @@
 import {View, Text} from "react-native";
-import ItemTile from "../main/ItemTile";
+import ItemTile from "../icons/ItemTile";
 import {userItemListStyles} from "../../styles/components/userprofile/userItemListStyles";
 
 interface IUserItemListProps {

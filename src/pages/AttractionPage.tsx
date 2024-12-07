@@ -3,7 +3,7 @@ import {useEffect, useState, useContext, useCallback} from "react";
 import {getDownloadURL, ref} from "firebase/storage";
 import {doc, updateDoc, arrayUnion, arrayRemove} from "firebase/firestore";
 import {db, storage} from "../firebase/config";
-import IconButton from "../components/main/IconButton";
+import IconButton from "../components/icons/IconButton";
 import {attractionPageStyles} from "../styles/pages/attractionPageStyles";
 import {AuthContext} from "../store/user/auth-context";
 import {UserDTO} from "../models/classes/UserDTO";

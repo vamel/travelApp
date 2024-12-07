@@ -5,9 +5,9 @@ const COLORS = {
         black: "black",
         orange500: "#E3885F",
         purple500: "#A763EB",
-        gray500: "#dbe0e1",
-        red500: "#c70428",
-        green500: "#07a82b"
+        gray500: "#DBE0E1",
+        red500: "#C70428",
+        green500: "#07A82B"
     },
     navigation: {
         tabNavigator: {
