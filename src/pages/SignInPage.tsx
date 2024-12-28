@@ -7,7 +7,6 @@ import PasswordInput from "../components/login/PasswordInput";
 import COLORS from "../styles/utils/Colors";
 import {handleSignIn} from "../firebase/auth";
 import {AuthContext} from "../store/user/auth-context";
-import {signInWithEmailAndPassword} from "firebase/auth";
 
 const SignInPage = ({navigation}) => {
     const [emailInput, setEmailInput] = useState("");

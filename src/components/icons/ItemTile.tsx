@@ -1,6 +1,5 @@
 import {View, Text} from "react-native";
 import {itemTileStyles} from "../../styles/components/userprofile/itemTileStyles";
-import COLORS from "../../styles/utils/Colors";
 import {toTitle} from "../../utils/stringUtils";
 
 interface IItemTileProps {

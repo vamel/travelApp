@@ -1,5 +1,4 @@
 import {Pressable, Text} from "react-native";
-import COLORS from "../../styles/utils/Colors";
 import {toTitle} from "../../utils/stringUtils";
 import {useState} from "react";
 import {registerItemTileStyles} from "../../styles/components/register/registerItemTileStyles";

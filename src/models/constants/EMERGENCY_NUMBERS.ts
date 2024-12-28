@@ -1030,8 +1030,8 @@ export const EMERGENCY_NUMBERS: ICountryEmergencyNumber = {
         },
     "PL": {
             countryName: "Poland",
-            ambulance: "998",
-            fire: "999",
+            fire: "998",
+            ambulance: "999",
             police: "997"
         },
     "PT": {

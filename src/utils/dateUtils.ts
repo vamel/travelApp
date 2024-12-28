@@ -1,15 +1,17 @@
 import moment from "moment";
 
-export const getDayOrdinalSuffix = (day) => {
-    switch (day) {
-        case [1, 21, 31].includes(day):
-            return day + 'st'
-        case [2, 22].includes(day):
-            return day + 'nd'
-        case [3, 23].includes(day):
-            return day + 'rd'
-        default:
-            return day + 'th'
+export const getDayOrdinalSuffix = (day: number) => {
+    if ([1, 21, 31].includes(day)) {
+        return day + 'st';
+    }
+    else if ([2, 22].includes(day)) {
+        return day + 'nd';
+    }
+    else if ([3, 23].includes(day)) {
+        return day + 'rd';
+    }
+    else {
+        return day + 'th';
     }
 }
 

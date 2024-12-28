@@ -2,36 +2,31 @@ import {render} from "@testing-library/react-native";
 import TicketPricesInfo from "../../components/attraction/TicketPricesInfo";
 import {TicketPrices} from "../../models/classes/TicketPrices";
 
-describe("TicketPricesInfo", () => {
-    const ticketPrices: TicketPrices = new TicketPrices("20.00", "15.00", "10.00", "12.00", "zł")
+describe("TicketPricesInfo tests", () => {
+    const ticketPrices: TicketPrices = new TicketPrices("20.00", "15.00", "10.00", "12.00", "zł");
 
-    test("renders correctly", () => {
+    test("Should be rendered", () => {
         const { getByText } = render(<TicketPricesInfo ticketPrices={ticketPrices} />);
-
         getByText("Ticket prices:");
     });
 
-    test("shows regular ticket prices", () => {
+    test("Should show regular ticket prices", () => {
         const { getByText } = render(<TicketPricesInfo ticketPrices={ticketPrices} />);
-
         getByText("Regular ticket: 20.00 zł");
     });
 
-    test("shows reduced ticket prices", () => {
+    test("Should show reduced ticket prices", () => {
         const { getByText } = render(<TicketPricesInfo ticketPrices={ticketPrices} />);
-
         getByText("Reduced ticket: 15.00 zł");
     });
 
-    test("shows student ticket prices", () => {
+    test("Should show student ticket prices", () => {
         const { getByText } = render(<TicketPricesInfo ticketPrices={ticketPrices} />);
-
         getByText("Student ticket: 10.00 zł");
     });
 
-    test("shows group ticket prices", () => {
+    test("Should show group ticket prices", () => {
         const { getByText } = render(<TicketPricesInfo ticketPrices={ticketPrices} />);
-
         getByText("Group ticket: 12.00 zł");
     });
 })

@@ -10,13 +10,12 @@ import {
     query,
     where,
     documentId,
-    orderBy,
     getDocs
 } from "firebase/firestore";
 import {auth, db} from "../../firebase/config";
 import {getFullUserData} from "../../firebase/parseUserData";
 import {UserDTO} from "../../models/classes/UserDTO";
-import {getCurrentPositionAsync} from "expo-location";
+import {getCurrentPositionAsync, requestForegroundPermissionsAsync} from "expo-location";
 import {getCity} from "../../firebase/location";
 
 export const AuthContext = createContext(
@@ -27,7 +26,7 @@ export const AuthContext = createContext(
         user: null,
         location: "",
         authenticate: (token: string, uid: string) => {},
-        setLocationWithoutAuth: () => {Promise<boolean>},
+        setLocationWithoutAuth: () => {},
         logout: () => {},
         getData: (uid: string) => {},
         deleteAccount: () => {}
@@ -40,39 +39,55 @@ const AuthContextProvider = ({children}) => {
     const [user, setUser] = useState<UserDTO>(null);
     const [location, setLocation] = useState("");
 
+    const getUserLocation = async (uid: string) => {
+        const {status} = await requestForegroundPermissionsAsync();
+         if (status === "granted") {
+             getCurrentPositionAsync().then((res) => {
+                 //@ts-ignore
+                 getCity(res.coords.latitude, res.coords.longitude)
+                     .then((res) => {
+                         let newLocation: string;
+                         if (res.results.length === 0) {
+                             newLocation = res.plus_code.compound_code.split(' ')[1].replace(',', '');
+                         } else {
+                             newLocation = res.results[0].address_components[0].long_name.toLowerCase();
+                         }
+                         setLocation(newLocation);
+                         const userRef = doc(db, "users", uid);
+                         //@ts-ignore
+                         updateDoc(userRef, {
+                             last_location: newLocation
+                         });
+                     });
+             });
+         }
+    }
+
     const authenticate = (token, uid) => {
         AsyncStorage.setItem("uid", uid);
         SecureStore.setItemAsync("token", token);
         setAuthToken(token);
         setUserUid(uid);
-        getCurrentPositionAsync().then((res) => {
-            //@ts-ignore
-            getCity(res.coords.latitude, res.coords.longitude)
-                .then((res) => {
-                    //@ts-ignore
-                    const newLocation = res.results[0].address_components[0].long_name.toLowerCase()
-                    setLocation(newLocation);
-                    const userRef = doc(db, "users", uid);
-                    //@ts-ignore
-                    updateDoc(userRef, {
-                        last_location: newLocation
-                    });
-                });
-        });
+        getUserLocation(uid);
     }
 
     const setLocationWithoutAuth = async () => {
-        return new Promise((resolve) => {
+        const {status} = await requestForegroundPermissionsAsync();
+        if (status === "granted") {
             getCurrentPositionAsync().then((res) => {
                 //@ts-ignore
                 getCity(res.coords.latitude, res.coords.longitude)
                     .then((res) => {
-                        //@ts-ignore
-                        const newLocation = res.results[0].address_components[0].long_name.toLowerCase()
+                        let newLocation: string;
+                        if (res.results.length === 0) {
+                            newLocation = res.plus_code.compound_code.split(' ')[1].replace(',', '');
+                        } else {
+                            newLocation = res.results[0].address_components[0].long_name.toLowerCase();
+                        }
                         setLocation(newLocation);
                     });
             });
-        resolve(true)});
+        }
     }
 
     const logout = () => {

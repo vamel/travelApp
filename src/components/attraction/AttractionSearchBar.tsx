@@ -8,6 +8,7 @@ interface IAttractionSearchBarProps {
 }
 
 const AttractionSearchBar = (props: IAttractionSearchBarProps) => {
+
     return(
         <View style={attractionSearchBarStyles.container}>
             <TextInput

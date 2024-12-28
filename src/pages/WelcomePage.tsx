@@ -21,7 +21,7 @@ const WelcomePage = () => {
     useEffect(() => {
         const getData = async () => {
             //@ts-ignore
-            const last_location = authCtx.location ? authCtx.location : "warsaw"
+            const last_location = authCtx.location ? authCtx.location : "Nowhere";
             const docRef = doc(db, "cities", last_location);
             const docSnap = await getDoc(docRef);
             const cityData = docSnap.data();
@@ -33,9 +33,11 @@ const WelcomePage = () => {
                 //@ts-ignore
                 const city = new City(cityData.name, result, cityData.trivia);
                 setCityData(city);
-            });
+            })
         }
-        getData();
+        getData().catch(error => {
+            setCityData(new City(authCtx.location, null, null));
+        });
     }, [authCtx.user]);
 
     const onLayoutRootView = useCallback(async () => {
@@ -51,13 +53,19 @@ const WelcomePage = () => {
     return(
         <View style={welcomePageStyles.container} onLayout={onLayoutRootView}>
             <Text style={welcomePageStyles.title}>
-                Currently exploring <Text style={welcomePageStyles.cityName}>{cityData.name}</Text>!
+                Currently exploring <Text style={welcomePageStyles.cityName}>{authCtx.location}</Text>!
             </Text>
+            {cityData.imageUri &&
             <View style={welcomePageStyles.imageContainer}>
                 <Image source={{uri: cityData.imageUri ? cityData.imageUri : undefined}} style={welcomePageStyles.image} />
             </View>
-            <Text style={welcomePageStyles.triviaTitle}>Did you know?</Text>
-            <Text style={welcomePageStyles.triviaText}>{cityData.trivia}</Text>
+            }
+            {cityData.trivia &&
+            <>
+                <Text style={welcomePageStyles.triviaTitle}>Did you know?</Text>
+                <Text style={welcomePageStyles.triviaText}>{cityData.trivia}</Text>
+            </>
+            }
         </View>
     );
 }

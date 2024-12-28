@@ -22,7 +22,7 @@ const EventCard = (props: IEventCardProps) => {
                     </View>
                     <View style={eventCardStyles.textContainer}>
                         <Text style={eventCardStyles.titleText}>{props.eventData.name}</Text>
-                        <Text style={eventCardStyles.locationText}>at POLIN museum</Text>
+                        <Text style={eventCardStyles.locationText}>{`at ${props.eventData.organiser}`}</Text>
                     </View>
                 </View>
             </Pressable>

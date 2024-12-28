@@ -1,3 +1,5 @@
 export const toTitle = (text) => {
-    return text.charAt(0).toUpperCase() + text.substring(1).toLowerCase();
+    return text.toLowerCase().split(' ').map((word) => {
+        return word.charAt(0).toUpperCase() + word.substring(1).toLowerCase()
+    }).join(' ');
 }
