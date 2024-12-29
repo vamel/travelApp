@@ -1,5 +1,6 @@
-import { Pressable, StyleSheet } from "react-native";
+import { Pressable } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import {iconButtonStyles} from "../../styles/components/icons/iconButtonStyles";
 
 interface IIconButton {
     icon: string,
@@ -17,14 +18,3 @@ const IconButton = (props: IIconButton) => {
 }
 
 export default IconButton;
-
-const iconButtonStyles = StyleSheet.create(
-    {
-        container: {
-            marginBottom: 20,
-        },
-        pressed: {
-            opacity: 0.7
-        }
-    }
-);

@@ -1,5 +1,5 @@
 import {View, Text} from "react-native";
-import {itemTileStyles} from "../../styles/components/userprofile/itemTileStyles";
+import {itemTileStyles} from "../../styles/components/icons/itemTileStyles";
 import {toTitle} from "../../utils/stringUtils";
 
 interface IItemTileProps {

@@ -17,7 +17,7 @@ const UserInfo = (props: IUserInfoProps) => {
             <Text style={userInfoStyles.userBio}>{props.userInfo.bio}</Text>
             <UserInfoField text={"Name"} value={props.userInfo.firstname} />
             <UserInfoField text={"From"} value={props.userInfo.place_of_origin} />
-            <UserInfoField text={"Age"} value={`${calculateAge(props.userInfo.birthdate)}`} />
+            <UserInfoField text={"Age"} value={`${isNaN(calculateAge(props.userInfo.birthdate)) ? "" : calculateAge(props.userInfo.birthdate).toString()}`} />
             <UserInfoField text={"Favourite city"} value={props.userInfo.favourite_city} />
             <UserInfoField text={"Last seen in"} value={toTitle(props.location)} />
             <UserInfoField text={"Facebook"} value={""} />

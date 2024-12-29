@@ -17,6 +17,6 @@ describe("EventCard tests", () => {
    test("Should be rendered", () => {
        const eventCard = render(
            <EventCard eventData={eventData} onPress={() => {}}/>);
-       expect(screen.getByText("Event")).toBeDefined();
+       expect(screen.getByText("at Jest")).toBeDefined();
    });
 });
