@@ -24,7 +24,7 @@ const RegisterDatePicker = (props: IRegisterDatePickerProps) => {
                     text={"Pick date"}
                 />
                 <TextInput
-                    placeholder={props.userBirthdate.toLocaleDateString()}
+                    placeholder={props.userBirthdate.toLocaleDateString("en-GB")}
                     editable={false}
                     style={registerDatePickerStyles.dateInput}
                 />
