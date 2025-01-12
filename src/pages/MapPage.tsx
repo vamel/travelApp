@@ -32,11 +32,28 @@ const MapPage = ({navigation, route}) => {
             return;
         }
 
-        navigation.navigate("CreateInvitationPage", {
-            ...route.params,
-            pickedLat: selectedLocation.lat,
-            pickedLon: selectedLocation.lon
-        });
+        if (route.params.navigateTo === "CreateInvitationPage") {
+            navigation.navigate("CreateInvitationPage", {
+                ...route.params,
+                pickedLat: selectedLocation.lat,
+                pickedLon: selectedLocation.lon
+            });
+        }
+        else if (route.params.navigateTo === "AddEventPage") {
+            navigation.navigate("AddEventPage", {
+                ...route.params,
+                pickedLat: selectedLocation.lat,
+                pickedLon: selectedLocation.lon
+            });
+        }
+        else if (route.params.navigateTo === "AddAttractionPage") {
+            navigation.navigate("AddAttractionPage", {
+                ...route.params,
+                pickedLat: selectedLocation.lat,
+                pickedLon: selectedLocation.lon
+            });
+        }
+
     }, [navigation, selectedLocation]);
 
     useLayoutEffect(() => {

@@ -6,7 +6,8 @@ import {EventContext} from "../store/events/event-context";
 import {AuthContext} from "../store/user/auth-context";
 import {toTitle} from "../utils/stringUtils";
 import {Event} from "../models/classes/Event";
-import AttractionSearchBar from "../components/attraction/AttractionSearchBar";
+import SearchBar from "../components/utils/SearchBar";
+import AddNewButton from "../components/utils/AddNewButton";
 
 const EventListPage = ({navigation}) => {
     const authCtx = useContext(AuthContext);
@@ -25,6 +26,10 @@ const EventListPage = ({navigation}) => {
                 eventData: event
             }
         )};
+
+    const handleAddNewButtonPress = () => {
+        navigation.navigate("AddEventPage");
+    }
 
     const fetchMoreData = () => {
         evtCtx.fetchMore();
@@ -51,7 +56,20 @@ const EventListPage = ({navigation}) => {
     return(
         <SafeAreaView style={eventListPageStyles.container}>
             <Text style={eventListPageStyles.titleText}>Events in {toTitle(cityName)}</Text>
-            <AttractionSearchBar onPress={handleSearchButtonPress} onChangeText={onSearchInputChange} />
+            <View style={eventListPageStyles.searchContainer}>
+                <SearchBar
+                    onPress={handleSearchButtonPress}
+                    onChangeText={onSearchInputChange}
+                    placeholderText={"Enter city name"}
+                    width={authCtx.isAuthenticated ? 230 : 350}
+                />
+                {authCtx.isAuthenticated &&
+                    <AddNewButton
+                        icon={"add"}
+                        onPress={handleAddNewButtonPress}
+                        text={"Add new"}/>
+                }
+            </View>
             <View style={[eventListPageStyles.items]}>
                 <FlatList
                     initialNumToRender={10}

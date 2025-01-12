@@ -17,6 +17,8 @@ import OtherUserPage from "../../pages/OtherUserPage";
 import EditProfilePage from "../../pages/EditProfilePage";
 import CreateInvitationPage from "../../pages/CreateInvitationPage";
 import MapPage from "../../pages/MapPage";
+import AddAttractionPage from "../../pages/AddAttractionPage";
+import AddEventPage from "../../pages/AddEventPage";
 
 const Stack = createNativeStackNavigator();
 
@@ -77,8 +79,18 @@ const AuthenticatedStackNavigation = () => {
                     component={AttractionPage}
                 />
                 <Stack.Screen
+                    name={"AddAttractionPage"}
+                    component={AddAttractionPage}
+                    options={{title: "Add new attraction"}}
+                />
+                <Stack.Screen
                     name={"EventPage"}
                     component={EventPage}
+                />
+                <Stack.Screen
+                    name={"AddEventPage"}
+                    component={AddEventPage}
+                    options={{title: "Create new event"}}
                 />
                 <Stack.Screen
                     name={"EmergencyNumbersPage"}

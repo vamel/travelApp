@@ -1,7 +1,7 @@
 import {StyleSheet} from "react-native";
 import COLORS from "../../utils/Colors";
 
-export const createProfileInputStyles = StyleSheet.create(
+export const inputFieldStyles = StyleSheet.create(
     {
         container: {
             marginTop: 20,

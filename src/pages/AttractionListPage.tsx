@@ -3,11 +3,12 @@ import {FlatList, Pressable, SafeAreaView, Text, View} from "react-native";
 import {Attraction} from "../models/classes/Attraction";
 import AttractionCard from "../components/attraction/AttractionCard";
 import attractionListPageStyles from "../styles/pages/attractionListPageStyles";
-import AttractionSearchBar from "../components/attraction/AttractionSearchBar";
+import SearchBar from "../components/utils/SearchBar";
 import {toTitle} from "../utils/stringUtils";
 import {AttractionContext} from "../store/attractions/attracion-context";
 import {AuthContext} from "../store/user/auth-context";
 import {attractionCardStyles} from "../styles/components/attraction/attractionCardStyles";
+import AddNewButton from "../components/utils/AddNewButton";
 
 const AttractionListPage = ({navigation}) => {
     const authCtx = useContext(AuthContext);
@@ -30,6 +31,10 @@ const AttractionListPage = ({navigation}) => {
         } else {
             setCityName(searchedCityName);
         }
+    }
+
+    const handleAddNewButtonPress = () => {
+        navigation.navigate("AddAttractionPage");
     }
 
     const fetchMoreData = () => {
@@ -63,7 +68,20 @@ const AttractionListPage = ({navigation}) => {
     return (
         <SafeAreaView style={attractionListPageStyles.container}>
             <Text style={attractionListPageStyles.titleText}>Attractions in {toTitle(cityName)}</Text>
-            <AttractionSearchBar onPress={handleSearchButtonPress} onChangeText={onSearchInputChange} />
+            <View style={attractionListPageStyles.searchContainer}>
+                <SearchBar
+                    onPress={handleSearchButtonPress}
+                    onChangeText={onSearchInputChange}
+                    placeholderText={"Enter city name"}
+                    width={authCtx.isAuthenticated ? 230 : 350}
+                />
+                {authCtx.isAuthenticated &&
+                    <AddNewButton
+                        icon={"add"}
+                        onPress={handleAddNewButtonPress}
+                        text={"Add new"}/>
+                }
+            </View>
             <View style={attractionListPageStyles.items}>
                 <FlatList
                     initialNumToRender={10}

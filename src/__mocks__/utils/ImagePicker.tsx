@@ -5,9 +5,10 @@ import {profilePictureImagePickerStyles} from "../../styles/components/register/
 
 interface IProfilePictureImagePickerProps {
     onSelectImage: (uri: string) => void;
+    buttonText: string;
 }
 
-const ProfilePictureImagePicker = (props: IProfilePictureImagePickerProps) => {
+const ImagePicker = (props: IProfilePictureImagePickerProps) => {
     const [pickedImageUri, setPickedImageUri] = useState("");
 
     async function handlePickImageButton() {
@@ -20,11 +21,11 @@ const ProfilePictureImagePicker = (props: IProfilePictureImagePickerProps) => {
                 icon={"image-sharp"}
                 color={"orange"}
                 onPress={handlePickImageButton}
-                text={"Select avatar"}
+                text={props.buttonText}
             />
             {pickedImageUri && <Image source={{uri: pickedImageUri}} style={profilePictureImagePickerStyles.profilePicture} />}
         </View>
     );
 }
 
-export default ProfilePictureImagePicker;
+export default ImagePicker;

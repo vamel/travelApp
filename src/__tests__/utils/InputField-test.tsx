@@ -1,10 +1,10 @@
 import { render, screen } from "@testing-library/react-native";
-import EditProfileInput from "../../components/editprofile/EditProfileInput";
+import InputField from "../../components/utils/InputField";
 
-describe("EditProfileInput tests", () => {
+describe("InputField tests", () => {
     test("Should be rendered", () => {
         const userProfileInput = render(
-            <EditProfileInput title={"Change your name"} value={"User"} maxLength={20} keyboardType={"default"} onChangeText={() => {}} />);
+            <InputField title={"Change your name"} value={"User"} maxLength={20} keyboardType={"default"} onChangeText={() => {}} />);
         expect(userProfileInput).toBeDefined();
         screen.getByText("Change your name");
         screen.getByDisplayValue("User");

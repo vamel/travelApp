@@ -19,6 +19,11 @@ export const eventListPageStyles = StyleSheet.create(
             textAlign: "center",
             color: COLORS.attraction.orange300
         },
+        searchContainer: {
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
+        },
         listContainer: {
             paddingTop: 10,
             paddingBottom: 40

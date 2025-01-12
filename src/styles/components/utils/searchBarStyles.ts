@@ -1,10 +1,9 @@
 import {StyleSheet} from "react-native";
 import COLORS from "../../utils/Colors";
 
-export const attractionSearchBarStyles = StyleSheet.create(
+export const searchBarStyles = StyleSheet.create(
     {
         container: {
-            width: 350,
             height: 50,
             marginTop: 10,
             padding: 5,
@@ -16,7 +15,7 @@ export const attractionSearchBarStyles = StyleSheet.create(
         },
         searchInput: {
             height: 40,
-            width: 280,
+            width: 170,
             paddingLeft: 5,
             borderRadius: 5,
             backgroundColor: COLORS.attraction.orange100,

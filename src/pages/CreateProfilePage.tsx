@@ -11,7 +11,7 @@ import RegisterDatePicker from "../components/register/RegisterDatePicker";
 import {User} from "../models/classes/User";
 import {putUser} from "../firebase/createUser";
 import {Country} from "../models/enums/Country";
-import ProfilePictureImagePicker from "../components/register/ProfilePictureImagePicker";
+import ImagePicker from "../components/utils/ImagePicker";
 
 interface IRegisterData {
     bio: string;
@@ -143,7 +143,7 @@ const CreateProfilePage = ({navigation, route}) => {
                     keyboardType={"default"}
                     errorMsg={usernameError}
                 />
-                <ProfilePictureImagePicker onSelectImage={userProfilePictureChange} />
+                <ImagePicker onSelectImage={userProfilePictureChange} buttonText={"Select avatar"} />
                 <CreateProfileInput
                     title={"What's your first name?"}
                     onChangeText={onUserFirstNameChange}

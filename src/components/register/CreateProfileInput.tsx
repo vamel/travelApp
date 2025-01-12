@@ -1,5 +1,5 @@
 import {Text, TextInput, View} from "react-native";
-import {createProfileInputStyles} from "../../styles/components/register/createProfileInputStyles";
+import {inputFieldStyles} from "../../styles/components/utils/inputFieldStyles";
 
 interface ICreateProfileInputProps {
     title: string,
@@ -12,16 +12,16 @@ interface ICreateProfileInputProps {
 
 const CreateProfileInput = (props: ICreateProfileInputProps) => {
     return(
-        <View style={createProfileInputStyles.container}>
-            <Text style={createProfileInputStyles.title}>{props.title}</Text>
+        <View style={inputFieldStyles.container}>
+            <Text style={inputFieldStyles.title}>{props.title}</Text>
             <TextInput
                 onChangeText={props.onChangeText}
                 placeholder={props.placeholder}
                 maxLength={props.maxLength}
                 keyboardType={props.keyboardType === "default" ? "default" : "numeric"}
-                style={createProfileInputStyles.inputField}
+                style={inputFieldStyles.inputField}
             />
-            {props.errorMsg && <Text style={createProfileInputStyles.errorText}>{props.errorMsg}</Text>}
+            {props.errorMsg && <Text style={inputFieldStyles.errorText}>{props.errorMsg}</Text>}
         </View>
     );
 }

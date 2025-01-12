@@ -33,6 +33,7 @@ export class User {
         this.languages = languages;
         this.countries = countries;
         this.last_location = last_location;
+        this.is_admin = false;
     }
 
     uid: string;
@@ -50,4 +51,5 @@ export class User {
     languages: Language[];
     countries: Country[];
     last_location: string;
+    is_admin: boolean;
 }

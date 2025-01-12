@@ -1,5 +1,5 @@
 import {Text, TextInput, View} from "react-native";
-import {createProfileInputStyles} from "../../styles/components/register/createProfileInputStyles";
+import {inputFieldStyles} from "../../styles/components/utils/inputFieldStyles";
 
 interface IEditProfileInputProps {
     title: string,
@@ -9,19 +9,19 @@ interface IEditProfileInputProps {
     onChangeText: (string) => void
 }
 
-const EditProfileInput = (props: IEditProfileInputProps) => {
+const InputField = (props: IEditProfileInputProps) => {
     return(
-        <View style={createProfileInputStyles.container}>
-            <Text style={createProfileInputStyles.title}>{props.title}</Text>
+        <View style={inputFieldStyles.container}>
+            <Text style={inputFieldStyles.title}>{props.title}</Text>
             <TextInput
                 onChangeText={props.onChangeText}
                 value={props.value}
                 maxLength={props.maxLength}
                 keyboardType={props.keyboardType === "default" ? "default" : "numeric"}
-                style={createProfileInputStyles.inputField}
+                style={inputFieldStyles.inputField}
             />
         </View>
     );
 }
 
-export default EditProfileInput;
+export default InputField;

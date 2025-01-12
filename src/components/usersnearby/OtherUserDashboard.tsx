@@ -17,7 +17,8 @@ const OtherUserDashboard = (props: IOtherUserDashboardProps) => {
         navigation.navigate("CreateInvitationPage", {
             invitee: props.uid,
             username: props.username,
-            pictureUrl: props.pictureUrl
+            pictureUrl: props.pictureUrl,
+            navigateTo: "CreateInvitationPage"
         });
     }
 

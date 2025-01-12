@@ -44,7 +44,6 @@ const CreateInvitationPage = ({route, navigation}) => {
 
     const checkIfValid = () => {
         return (route.params.pickedLat && route.params.pickedLon && message && selectedDate);
-
     }
 
     const onSubmit = () => {
@@ -74,7 +73,7 @@ const CreateInvitationPage = ({route, navigation}) => {
                 onInvitationTimeChange={onTimeChange}
             />
             <InvitationMessageInput onChangeText={onMessageChange} />
-            <InvitationLocationPicker />
+            <InvitationLocationPicker navigateTo={"CreateInvitationPage"} />
             <ProfileButton icon={"paper-plane"} color={"orange"} onPress={onSubmit} text={"Send"} />
             {errorMsg && <Text style={createInvitationPageStyles.errorText}>{errorMsg}</Text>}
         </View>

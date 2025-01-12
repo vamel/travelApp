@@ -2,7 +2,7 @@ import {Text, TextInput, View} from "react-native";
 import ProfileButton from "../userprofile/ProfileButton";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import {registerDatePickerStyles} from "../../styles/components/register/registerDatePickerStyles";
-import {createProfileInputStyles} from "../../styles/components/register/createProfileInputStyles";
+import {inputFieldStyles} from "../../styles/components/utils/inputFieldStyles";
 import {dateToString, getDateElements} from "../../utils/dateUtils";
 
 interface IRegisterDatePickerProps {

@@ -14,6 +14,11 @@ const attractionListPageStyles = StyleSheet.create(
             alignItems: 'center',
             textAlign: 'center',
         },
+        searchContainer: {
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
+        },
         titleText: {
             fontSize: 24,
             fontWeight: "bold",

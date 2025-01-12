@@ -13,6 +13,7 @@ import {parseAttractionData, parseCoords, parseOpeningHours, parseTicketPrices} 
 import * as SplashScreen from "expo-splash-screen";
 import TicketPricesInfo from "../components/attraction/TicketPricesInfo";
 import Map from "../components/utils/Map";
+import RegisterButton from "../components/register/RegisterButton";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -71,8 +72,8 @@ const AttractionPage = ({route}) => {
 
     const getAvailability = () => {
         const availabilityText = attraction.is_accessible_for_disabled ?
-            "Accessible for disabled people." :
-            "Not accessible for disabled people."
+            "Accessible for people with disabilities." :
+            "Not accessible for disabled people with disabilities."
         const styles = attraction.is_accessible_for_disabled ? attractionPageStyles.availableText : attractionPageStyles.notAvailableText;
         return <Text style={styles}>{availabilityText}</Text>
     }
@@ -106,6 +107,10 @@ const AttractionPage = ({route}) => {
                 <OpeningHoursInfo openingHours={parseOpeningHours(attraction.opening_hours)} />
                 <TicketPricesInfo ticketPrices={parseTicketPrices(attraction.ticket_prices)} />
                 <Map coordinates={parseCoords(attraction.coords)} />
+                {authCtx.isAuthenticated && authCtx.user.is_admin && <RegisterButton
+                    title={"Delete"}
+                    onPress={() => console.log("remove")}
+                />}
             </ScrollView>
         </SafeAreaView>
     );

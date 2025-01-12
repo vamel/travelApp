@@ -1,16 +1,16 @@
 import {useContext, useState} from "react";
 import {User} from "../models/classes/User";
-import {putUser, updateUser} from "../firebase/createUser";
+import {updateUser} from "../firebase/createUser";
 import {SafeAreaView, ScrollView, Text, View} from "react-native";
 import {createProfilePageStyles} from "../styles/pages/createProfilePageStyles";
-import ProfilePictureImagePicker from "../components/register/ProfilePictureImagePicker";
+import ImagePicker from "../components/utils/ImagePicker";
 import RegisterDatePicker from "../components/register/RegisterDatePicker";
 import {Hobby} from "../models/enums/Hobby";
 import {Language} from "../models/enums/Language";
 import {Country} from "../models/enums/Country";
 import RegisterButton from "../components/register/RegisterButton";
 import {AuthContext} from "../store/user/auth-context";
-import EditProfileInput from "../components/editprofile/EditProfileInput";
+import InputField from "../components/utils/InputField";
 import EditProfileItemList from "../components/editprofile/EditProfileItemList";
 import EditProfileBio from "../components/editprofile/EditProfileBio";
 
@@ -93,29 +93,29 @@ const EditProfilePage = ({navigation}) => {
                 <View style={createProfilePageStyles.titleContainer}>
                     <Text style={createProfilePageStyles.title}>Edit your profile</Text>
                 </View>
-                <ProfilePictureImagePicker onSelectImage={userProfilePictureChange} />
-                <EditProfileInput
+                <ImagePicker onSelectImage={userProfilePictureChange} buttonText={"Select avatar"} />
+                <InputField
                     title={"What's your first name?"}
                     onChangeText={onUserFirstNameChange}
                     value={userData.firstname}
                     maxLength={20}
                     keyboardType={"default"}
                 />
-                <EditProfileInput
+                <InputField
                     title={"Where are you from?"}
                     onChangeText={onUserOriginChange}
                     value={userData.place_of_origin}
                     maxLength={30}
                     keyboardType={"default"}
                 />
-                <EditProfileInput
+                <InputField
                     title={"Which city is your favourite?"}
                     onChangeText={onUserFavouriteCityChange}
                     value={userData.favourite_city}
                     maxLength={30}
                     keyboardType={"default"}
                 />
-                {/*<EditProfileInput*/}
+                {/*<InputField*/}
                 {/*    title={"Do you have instagram?"}*/}
                 {/*    onChangeText={onUserInstagramChange}*/}
                 {/*    value={userData.instagram}*/}
@@ -150,7 +150,7 @@ const EditProfilePage = ({navigation}) => {
                 </View>
                 <EditProfileBio onChangeText={onBioChange} value={userData.bio}/>
                 <View style={createProfilePageStyles.buttonContainer}>
-                    <RegisterButton title={"Finish"} onPress={onSubmit} />
+                    <RegisterButton title={"Submit"} onPress={onSubmit} />
                 </View>
             </ScrollView>
         </SafeAreaView>

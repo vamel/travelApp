@@ -33,7 +33,7 @@ const WelcomePage = () => {
                 //@ts-ignore
                 const city = new City(cityData.name, result, cityData.trivia);
                 setCityData(city);
-            })
+            });
         }
         getData().catch(error => {
             setCityData(new City(authCtx.location, null, null));

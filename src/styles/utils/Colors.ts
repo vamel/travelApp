@@ -31,6 +31,7 @@ const COLORS = {
         orange100: "#E3885F",
         orange300: "#e37446",
         blue700: "#0844af",
+        gray500: ""
     },
     emergency: {
         orange100: "#E3885F",

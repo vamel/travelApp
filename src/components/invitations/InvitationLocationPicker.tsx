@@ -6,7 +6,11 @@ import {View, Text, Image} from "react-native";
 import ProfileButton from "../userprofile/ProfileButton";
 import {invitationLocationPickerStyles} from "../../styles/components/invitation/invitationLocationPickerStyles";
 
-const InvitationLocationPicker = () => {
+interface IInvitationLocationPickerProps {
+    navigateTo: string;
+}
+
+const InvitationLocationPicker = (props: IInvitationLocationPickerProps) => {
     const [pickedLocation, setPickedLocation] = useState(null);
     const [initialLocation, setInitialLocation] = useState(null);
     const navigation = useNavigation();
@@ -16,7 +20,7 @@ const InvitationLocationPicker = () => {
 
     useEffect(() => {
         //@ts-ignore
-        if (isFocused && route.params.pickedLat && route.params.pickedLon) {
+        if (isFocused && route.params?.pickedLat && route.params?.pickedLon) {
             //@ts-ignore
             setPickedLocation({
                 lat: route.params.pickedLat,
@@ -42,6 +46,7 @@ const InvitationLocationPicker = () => {
         //@ts-ignore
         navigation.navigate("MapPage", {
             ...route.params,
+            navigateTo: props.navigateTo,
             initialLat: initialLocation.initialLat,
             initialLon: initialLocation.initialLon
         });

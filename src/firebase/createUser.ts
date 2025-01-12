@@ -12,7 +12,8 @@ export const putUser = async (userData: User) => {
             invitations_sent: [],
             invitations_received: [],
             users_blocked: [],
-            blocked_by: []
+            blocked_by: [],
+            is_admin: false
         };
 
         await setDoc(doc(db, "users", uid), userDataSent);
