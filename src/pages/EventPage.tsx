@@ -8,13 +8,16 @@ import {parseCoords} from "../firebase/parseAttractionData";
 import Map from "../components/utils/Map";
 import RegisterButton from "../components/register/RegisterButton";
 import {AuthContext} from "../store/user/auth-context";
+import {deleteEvent} from "../firebase/manageEvent";
+import {EventContext} from "../store/events/event-context";
 
 SplashScreen.preventAutoHideAsync();
 
-const EventPage = ({route}) => {
+const EventPage = ({route, navigation}) => {
     const [eventData, setEventData] = useState<Event>(null);
 
     const authCtx = useContext(AuthContext);
+    const eventCtx = useContext(EventContext);
 
     useEffect(() => {
         const receivedData = route.params.eventData;
@@ -29,6 +32,12 @@ const EventPage = ({route}) => {
 
     if (!eventData) {
         return null;
+    }
+
+    const onDeleteEvent = () => {
+        eventCtx.deleteEvent(eventData.id);
+        navigation.goBack();
+        deleteEvent(authCtx.user, eventData);
     }
 
     return(
@@ -53,7 +62,7 @@ const EventPage = ({route}) => {
                 <Map coordinates={parseCoords(eventData.coords)} />
                 {authCtx.isAuthenticated && authCtx.user.is_admin && <RegisterButton
                     title={"Delete"}
-                    onPress={() => console.log("remove")}
+                    onPress={onDeleteEvent}
                 />}
             </View>
         </SafeAreaView>

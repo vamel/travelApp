@@ -14,21 +14,26 @@ import * as SplashScreen from "expo-splash-screen";
 import TicketPricesInfo from "../components/attraction/TicketPricesInfo";
 import Map from "../components/utils/Map";
 import RegisterButton from "../components/register/RegisterButton";
+import {AttractionContext} from "../store/attractions/attracion-context";
+import {deleteAttraction} from "../firebase/manageAttraction";
 
 SplashScreen.preventAutoHideAsync();
 
-const AttractionPage = ({route}) => {
+const AttractionPage = ({route, navigation}) => {
     const [attraction, setAttraction] = useState<Attraction>(null);
     const [imageUrl, setImageUrl] = useState('');
     const [isFavourite, setIsFavourite] = useState(false);
+    const [currentId, setCurrentId] = useState("");
 
     const authCtx = useContext(AuthContext);
+    const attrCtx = useContext(AttractionContext);
     const currentUser: UserDTO = authCtx.user!;
 
     useEffect(() => {
         const getAttraction = () => {
             const receivedData = route.params.attractionData;
             const data: Attraction = parseAttractionData(receivedData);
+            setCurrentId(receivedData.id);
             setAttraction(data);
         }
         getAttraction();
@@ -78,6 +83,12 @@ const AttractionPage = ({route}) => {
         return <Text style={styles}>{availabilityText}</Text>
     }
 
+    const onDeleteAttraction = () => {
+        attrCtx.deleteAttraction(currentId);
+        navigation.goBack();
+        deleteAttraction(authCtx.user, currentId);
+    }
+
     return(
         <SafeAreaView style={attractionPageStyles.attractionPage} onLayout={onLayoutRootView}>
             <ScrollView
@@ -109,7 +120,7 @@ const AttractionPage = ({route}) => {
                 <Map coordinates={parseCoords(attraction.coords)} />
                 {authCtx.isAuthenticated && authCtx.user.is_admin && <RegisterButton
                     title={"Delete"}
-                    onPress={() => console.log("remove")}
+                    onPress={onDeleteAttraction}
                 />}
             </ScrollView>
         </SafeAreaView>

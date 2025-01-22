@@ -7,7 +7,8 @@ export const EventContext = createContext(
         currentCity: "",
         eventList: [],
         fetchData: (location: string) => {},
-        fetchMore: () => {}
+        fetchMore: () => {},
+        deleteEvent: (id: string) => {}
     }
 );
 
@@ -28,8 +29,10 @@ const EventContextProvider = ({children}) => {
             setLastId("0");
             return;
         }
-        const receivedAttractionList = querySnapshot.docs.map(doc => doc.data());
-        setEventList(receivedAttractionList);
+        const receivedEventList = querySnapshot.docs.map(doc => {
+            return {id: doc.id, ...doc.data()};
+        });
+        setEventList(receivedEventList);
         setLastId(querySnapshot.docs.pop().id);
     }
 
@@ -42,16 +45,23 @@ const EventContextProvider = ({children}) => {
         if (querySnapshot.empty) {
             return;
         }
-        const receivedEventList = querySnapshot.docs.map(doc => doc.data());
+        const receivedEventList = querySnapshot.docs.map(doc => {
+            return {id: doc.id, ...doc.data()};
+        });
         setEventList((eventList) => [...eventList, ...receivedEventList]);
         setLastId(querySnapshot.docs.pop().id);
+    }
+
+    const deleteEvent = (id: string) => {
+        setEventList(eventList => eventList.filter(event => event.id !== id));
     }
 
     const value = {
         currentCity: currentCity,
         eventList: eventList,
         fetchData: fetchData,
-        fetchMore: fetchMore
+        fetchMore: fetchMore,
+        deleteEvent: deleteEvent
     }
 
     //@ts-ignore

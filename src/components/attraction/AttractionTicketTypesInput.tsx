@@ -2,13 +2,17 @@ import {View, Text, TextInput} from "react-native";
 import {attractionTicketTypesInputStyles} from "../../styles/components/attraction/attractionTicketTypesInputStyles";
 
 interface IAttractionTicketTypesInputProps {
-    onPriceChange: (string, string) => {}
+    onPriceChange: (string, string) => void
 }
 
 const AttractionTicketTypesInput = (props: IAttractionTicketTypesInputProps) => {
 
+    const onCurrencyChange = (currency: string) => {
+        props.onPriceChange("currency", currency);
+    }
+
     const onRegularTicketPriceChange = (price: string) => {
-        props.onPriceChange("normal", price);
+        props.onPriceChange("regular", price);
     }
 
     const onReducedTicketPriceChange = (price: string) => {
@@ -28,15 +32,14 @@ const AttractionTicketTypesInput = (props: IAttractionTicketTypesInputProps) => 
             <View style={attractionTicketTypesInputStyles.subtitleContainer}>
                 <Text style={attractionTicketTypesInputStyles.ticketTypeText}>Currency used</Text>
                 <TextInput
-                    maxLength={8}
+                    maxLength={3}
                     keyboardType={"default"}
-                    onChangeText={() => {}}
+                    onChangeText={onCurrencyChange}
                     style={attractionTicketTypesInputStyles.priceInput}
                 />
-                {/*Dropdown will be used here*/}
             </View>
             <View style={attractionTicketTypesInputStyles.subtitleContainer}>
-                <Text style={attractionTicketTypesInputStyles.ticketTypeText}>Normal ticket</Text>
+                <Text style={attractionTicketTypesInputStyles.ticketTypeText}>Regular ticket</Text>
                 <TextInput
                     maxLength={8}
                     keyboardType={"numeric"}
