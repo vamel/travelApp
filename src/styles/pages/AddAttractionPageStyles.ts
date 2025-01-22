@@ -30,8 +30,10 @@ export const addAttractionPageStyles = StyleSheet.create({
         alignItems: "center"
     },
     buttonContainer: {
+        marginTop: 16,
+        justifyContent: "center",
+        alignItems: "center",
         flexDirection: "column",
-        justifyContent: "space-around",
         marginBottom: 20
     },
     errorText: {

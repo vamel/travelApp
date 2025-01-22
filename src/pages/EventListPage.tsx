@@ -74,7 +74,7 @@ const EventListPage = ({navigation}) => {
                 <FlatList
                     initialNumToRender={10}
                     data={evtCtx.eventList}
-                    keyExtractor={(item) => item.name}
+                    keyExtractor={(item) => item.id}
                     renderItem={({ item }: {item}) => renderEventCard(item)}
                     contentContainerStyle={eventListPageStyles.listContainer}
                     onEndReachedThreshold={0.35}

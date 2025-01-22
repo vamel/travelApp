@@ -86,7 +86,7 @@ const AttractionListPage = ({navigation}) => {
                 <FlatList
                     initialNumToRender={10}
                     data={attrCtx.attractionList}
-                    keyExtractor={(item: Attraction) => item.name}
+                    keyExtractor={(item: Attraction) => item.id}
                     renderItem={(item) => renderAttractionCard(item.item)}
                     contentContainerStyle={attractionListPageStyles.listContainer}
                     onEndReachedThreshold={0.35}

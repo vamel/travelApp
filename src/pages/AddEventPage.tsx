@@ -1,5 +1,5 @@
 import {SafeAreaView, ScrollView, Text, View} from "react-native";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {Event} from "../models/classes/Event";
 import {Coords} from "../models/classes/Coords";
 import {addEventPageStyles} from "../styles/pages/addEventPageStyles";
@@ -7,8 +7,10 @@ import InputField from "../components/utils/InputField";
 import InvitationDatePicker from "../components/invitations/InvitationDatePicker";
 import InvitationLocationPicker from "../components/invitations/InvitationLocationPicker";
 import ProfileButton from "../components/userprofile/ProfileButton";
+import {createEvent} from "../firebase/manageEvent";
+import {EventContext} from "../store/events/event-context";
 
-const AddEventPage = ({route}) => {
+const AddEventPage = ({route, navigation}) => {
     const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
     const [isTimePickerOpen, setIsTimePickerOpen] = useState(false);
     const [selectedDate, setSelectedDate] = useState(new Date());
@@ -21,6 +23,8 @@ const AddEventPage = ({route}) => {
         name: "",
         organiser: ""
     });
+
+    const eventCtx = useContext(EventContext);
 
     const onEventNameChange = (name: string) => {
         setEventData({...eventData, name: name});
@@ -67,8 +71,10 @@ const AddEventPage = ({route}) => {
             return;
         }
         eventData.date = selectedDate;
-        eventData.coords = new Coords(route.params.pickedLat, route.params.pickedLon);
-        console.log(eventData);
+        eventData.coords = {lat: route.params.pickedLat, lon: route.params.pickedLon};
+        createEvent(eventData);
+        eventCtx.fetchMore();
+        navigation.goBack();
     }
 
     return(

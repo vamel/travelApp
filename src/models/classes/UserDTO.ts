@@ -21,7 +21,8 @@ export class UserDTO {
                 invitations_received: string[],
                 invitations_sent: string[],
                 users_blocked: string[],
-                blocked_by: string[]) {
+                blocked_by: string[],
+                is_admin: boolean) {
         this.uid = uid;
         this.username = username;
         this.bio = bio;
@@ -41,7 +42,7 @@ export class UserDTO {
         this.invitations_sent = invitations_sent;
         this.users_blocked = users_blocked;
         this.blocked_by = blocked_by;
-        this.is_admin = false;
+        this.is_admin = is_admin;
     }
 
     uid: string;

@@ -7,7 +7,8 @@ export const AttractionContext = createContext(
         currentCity: "",
         attractionList: [],
         fetchData: (location: string) => {},
-        fetchMore: () => {}
+        fetchMore: () => {},
+        deleteAttraction: (id: string) => {}
     }
 );
 
@@ -28,8 +29,8 @@ const AttractionContextProvider = ({children}) => {
             setLastId("0");
             return;
         }
-        const receivedAttractionList = querySnapshot.docs.map((doc) => {
-            return {uid: doc.id, ...doc.data()}
+        const receivedAttractionList = querySnapshot.docs.map(doc => {
+            return {id: doc.id, ...doc.data()}
         });
         setAttractionList(receivedAttractionList);
         setLastId(querySnapshot.docs.pop().id);
@@ -44,16 +45,23 @@ const AttractionContextProvider = ({children}) => {
         if (querySnapshot.empty) {
             return;
         }
-        const receivedAttractionList = querySnapshot.docs.map(doc => doc.data());
+        const receivedAttractionList = querySnapshot.docs.map(doc => {
+            return {id: doc.id, ...doc.data()}
+        });
         setAttractionList((attractionList) => [...attractionList, ...receivedAttractionList]);
         setLastId(querySnapshot.docs.pop().id);
+    }
+
+    const deleteAttraction = (id: string) => {
+        setAttractionList(attractionList => attractionList.filter(attr => attr.id !== id));
     }
 
     const value = {
         currentCity: currentCity,
         attractionList: attractionList,
         fetchData: fetchData,
-        fetchMore: fetchMore
+        fetchMore: fetchMore,
+        deleteAttraction: deleteAttraction
     }
 
     //@ts-ignore
