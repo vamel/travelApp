@@ -9,6 +9,7 @@ import * as SplashScreen from "expo-splash-screen";
 import {AttractionContext} from "../store/attractions/attracion-context";
 import {EventContext} from "../store/events/event-context";
 import {AuthContext} from "../store/user/auth-context";
+import {toTitle} from "../utils/stringUtils";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -53,7 +54,7 @@ const WelcomePage = () => {
     return(
         <View style={welcomePageStyles.container} onLayout={onLayoutRootView}>
             <Text style={welcomePageStyles.title}>
-                Currently exploring <Text style={welcomePageStyles.cityName}>{authCtx.location}</Text>!
+                Currently exploring <Text style={welcomePageStyles.cityName}>{toTitle(authCtx.location)}</Text>!
             </Text>
             {cityData.imageUri &&
             <View style={welcomePageStyles.imageContainer}>

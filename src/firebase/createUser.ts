@@ -13,6 +13,7 @@ export const putUser = async (userData: User) => {
             invitations_received: [],
             users_blocked: [],
             blocked_by: [],
+            favourites: [],
             is_admin: false
         };
 

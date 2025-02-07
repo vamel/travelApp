@@ -32,6 +32,7 @@ const FavouritesPage = () => {
             });
             setFavouriteAttractions(receivedAttractions);
             setLastId(querySnapshot.docs.pop().id);
+            console.log(lastId);
         }
         getFavourites();
     }, [])
@@ -75,7 +76,7 @@ const FavouritesPage = () => {
             //@ts-ignore
             navigation.navigate("AttractionPage",
                 {
-                    attractionData: attraction,
+                    attractionData: attraction
                 });
         }
 

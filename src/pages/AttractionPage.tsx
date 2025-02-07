@@ -33,7 +33,7 @@ const AttractionPage = ({route, navigation}) => {
         const getAttraction = () => {
             const receivedData = route.params.attractionData;
             const data: Attraction = parseAttractionData(receivedData);
-            setCurrentId(receivedData.id);
+            setCurrentId(receivedData.id ? receivedData.id : receivedData.uid);
             setAttraction(data);
         }
         getAttraction();
@@ -63,14 +63,14 @@ const AttractionPage = ({route, navigation}) => {
         const userRef = doc(db, "users", authCtx.uid);
         setIsFavourite((isFavourite) => !isFavourite);
         if (isFavourite) {
-            currentUser.favourites = currentUser.favourites.filter((id) => id !== route.params.attractionData.uid);
+            currentUser.favourites = currentUser.favourites.filter((id) => id !== currentId);
             await updateDoc(userRef, {
-                favourites: arrayRemove(route.params.attractionData.id)
+                favourites: arrayRemove(currentId)
             });
         } else {
-            currentUser.favourites.push(route.params.attractionData.uid);
+            currentUser.favourites.push(currentId);
             await updateDoc(userRef, {
-                favourites: arrayUnion(route.params.attractionData.uid)
+                favourites: arrayUnion(currentId)
             });
         }
     }

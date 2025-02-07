@@ -72,6 +72,7 @@ const AddEventPage = ({route, navigation}) => {
         }
         eventData.date = selectedDate;
         eventData.coords = {lat: route.params.pickedLat, lon: route.params.pickedLon};
+        eventData.city = eventData.city.toLowerCase();
         createEvent(eventData);
         eventCtx.fetchMore();
         navigation.goBack();
